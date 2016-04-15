@@ -1,0 +1,33 @@
+<document>
+    <globalFontSize>40</globalFontSize>
+    <liveResultFontSize>0</liveResultFontSize>
+    <headLineFontSize>0</headLineFontSize>
+    <explanationFontSize>0</explanationFontSize>
+    <questionFontSize>0</questionFontSize>
+    <chartFontSize>0</chartFontSize>
+    <legendFontSize>0</legendFontSize>
+    <timerSize>0</timerSize>
+    <resultFontSize>0</resultFontSize>
+    <matrixX>0</matrixX>
+    <matrixY>0</matrixY>
+    <timerX>0</timerX>
+    <timerY>0</timerY>
+    <legendX>0</legendX>
+    <legendY>0</legendY>
+    <explanationX>0</explanationX>
+    <explanationY>0</explanationY>
+    <headlineX>0</headlineX>
+    <headlineY>0</headlineY>
+    <questionX>0</questionX>
+    <questionY>0</questionY>
+    <top10chartAssesmentX>0</top10chartAssesmentX>
+    <top10chartAssesmentY>0</top10chartAssesmentY>
+    <top10chartQuizX>0</top10chartQuizX>
+    <top10chartQuizY>0</top10chartQuizY>
+    <scene>
+        <file>quiz.xml</file>
+    </scene>
+    <scene>
+        <file>otherquix.xml</file>
+    </scene>
+</document>

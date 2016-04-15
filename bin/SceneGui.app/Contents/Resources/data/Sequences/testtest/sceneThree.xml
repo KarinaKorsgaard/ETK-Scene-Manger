@@ -1,0 +1,68 @@
+<document>
+    <quiz>
+        <globalTime>53</globalTime>
+        <explanation>THREE</explanation>
+        <explanation></explanation>
+        <question>
+            <headline>headline</headline>
+            <secTime>0</secTime>
+            <q></q>
+            <a>initial value
+                <color>0</color>
+            </a>
+        </question>
+        <rightAnswers>
+            <a>0</a>
+            <a></a>
+            <a></a>
+            <a></a>
+            <a></a>
+            <a></a>
+        </rightAnswers>
+        <question>
+            <headline>headline</headline>
+            <secTime>0</secTime>
+            <q></q>
+            <a>initial value
+                <color>0</color>
+            </a>
+        </question>
+        <rightAnswers></rightAnswers>
+        <question>
+            <headline>headline</headline>
+            <secTime>0</secTime>
+            <q></q>
+            <a>initial value
+                <color>0</color>
+            </a>
+        </question>
+        <rightAnswers></rightAnswers>
+        <question>
+            <headline>headline</headline>
+            <secTime>0</secTime>
+            <q></q>
+            <a>initial value
+                <color>0</color>
+            </a>
+        </question>
+        <rightAnswers></rightAnswers>
+        <question>
+            <headline>headline</headline>
+            <secTime>0</secTime>
+            <q></q>
+            <a>initial value
+                <color>0</color>
+            </a>
+        </question>
+        <rightAnswers></rightAnswers>
+        <question>
+            <headline>headline</headline>
+            <secTime>0</secTime>
+            <q></q>
+            <a>initial value
+                <color>0</color>
+            </a>
+        </question>
+        <rightAnswers></rightAnswers>
+    </quiz>
+</document>

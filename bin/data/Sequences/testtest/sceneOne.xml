@@ -1,0 +1,17 @@
+<document>
+    <vote>
+        <globalTime>32767</globalTime>
+        <explanation>TWO</explanation>
+        <explanation></explanation>
+        <weighed></weighed>
+        <headline>HEAD EDIT</headline>
+        <question>
+            <secTime>0</secTime>
+            <q></q>
+            <a>initial value
+                <color>2834666</color>
+                <img>3</img>
+            </a>
+        </question>
+    </vote>
+</document>

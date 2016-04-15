@@ -1,6 +1,6 @@
 <document>
     <quiz>
-        <globalTime>33</globalTime>
+        <globalTime>36</globalTime>
         <explanation>SHIT</explanation>
         <explanation></explanation>
         <question>
@@ -8,13 +8,11 @@
             <secTime>40</secTime>
             <q></q>
             <a>initial value
-                <color>0</color>
-                <img>0</img>
+                <color>3080372</color>
             </a>
         </question>
         <rightAnswers>
-            <a>0</a>
-            <a></a>
+            <a>3</a>
             <a></a>
             <a></a>
             <a></a>
@@ -24,8 +22,7 @@
             <secTime>40</secTime>
             <q></q>
             <a>initial value
-                <color>0</color>
-                <img>0</img>
+                <color>3080372</color>
             </a>
         </question>
         <rightAnswers></rightAnswers>
@@ -34,8 +31,7 @@
             <secTime>40</secTime>
             <q></q>
             <a>initial value
-                <color>0</color>
-                <img>0</img>
+                <color>3080372</color>
             </a>
         </question>
         <rightAnswers></rightAnswers>
@@ -44,18 +40,13 @@
             <secTime>40</secTime>
             <q></q>
             <a>initial value
-                <color>0</color>
-                <img>0</img>
+                <color>3080372</color>
             </a>
-        </question>
-        <rightAnswers></rightAnswers>
-        <question>
-            <headline>headline</headline>
-            <secTime>40</secTime>
-            <q></q>
             <a>initial value
-                <color>0</color>
-                <img>0</img>
+                <color>3456224</color>
+            </a>
+            <a>initial value
+                <color>40300</color>
             </a>
         </question>
         <rightAnswers></rightAnswers>

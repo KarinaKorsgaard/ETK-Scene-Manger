@@ -1,0 +1,41 @@
+<document>
+    <quiz>
+        <globalTime>32767</globalTime>
+        <explanation>explanation</explanation>
+        <explanation></explanation>
+        <question>
+            <headline>headline</headline>
+            <secTime>0</secTime>
+            <q></q>
+            <a>initial value
+                <color>16777215</color>
+                <img>0</img>
+            </a>
+        </question>
+        <rightAnswers>
+            <a>0</a>
+            <a></a>
+            <a></a>
+        </rightAnswers>
+        <question>
+            <headline>headline</headline>
+            <secTime>0</secTime>
+            <q></q>
+            <a>initial value
+                <color>16777215</color>
+                <img>0</img>
+            </a>
+        </question>
+        <rightAnswers></rightAnswers>
+        <question>
+            <headline>headline</headline>
+            <secTime>0</secTime>
+            <q></q>
+            <a>initial value
+                <color>16777215</color>
+                <img>0</img>
+            </a>
+        </question>
+        <rightAnswers></rightAnswers>
+    </quiz>
+</document>
