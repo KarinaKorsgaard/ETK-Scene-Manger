@@ -8,11 +8,12 @@
             <secTime>40</secTime>
             <q></q>
             <a>initial value
-                <color>0x8A0808</color>
+                <color>0</color>
+                <img>0</img>
             </a>
         </question>
         <rightAnswers>
-            <a>1</a>
+            <a>0</a>
             <a></a>
             <a></a>
             <a></a>
@@ -23,7 +24,8 @@
             <secTime>40</secTime>
             <q></q>
             <a>initial value
-                <color>0x8A0808</color>
+                <color>0</color>
+                <img>0</img>
             </a>
         </question>
         <rightAnswers></rightAnswers>
@@ -32,7 +34,8 @@
             <secTime>40</secTime>
             <q></q>
             <a>initial value
-                <color>0x8A0808</color>
+                <color>0</color>
+                <img>0</img>
             </a>
         </question>
         <rightAnswers></rightAnswers>
@@ -41,7 +44,8 @@
             <secTime>40</secTime>
             <q></q>
             <a>initial value
-                <color>0x8A0808</color>
+                <color>0</color>
+                <img>0</img>
             </a>
         </question>
         <rightAnswers></rightAnswers>
@@ -50,7 +54,8 @@
             <secTime>40</secTime>
             <q></q>
             <a>initial value
-                <color>0x8A0808</color>
+                <color>0</color>
+                <img>0</img>
             </a>
         </question>
         <rightAnswers></rightAnswers>

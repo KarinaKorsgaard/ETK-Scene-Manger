@@ -19,11 +19,15 @@
     <headlineX>0</headlineX>
     <headlineY>4</headlineY>
     <questionX>709</questionX>
+    <collumWidth1>0</collumWidth1>
+    <collumWidth2>0</collumWidth2>
+    <collumWidth3>0</collumWidth3>
     <questionY>0</questionY>
     <top10chartAssesmentX>0</top10chartAssesmentX>
     <top10chartAssesmentY>0</top10chartAssesmentY>
     <top10chartQuizX>0</top10chartQuizX>
     <top10chartQuizY>668</top10chartQuizY>
+    <tableNames>TABLW 1//ta//Laud 3//wr//afs//Laud 6//afs//Laud 8//af//Laud 10//Laud 11//Laud 12</tableNames>
     <scene>
         <file>vote.xml</file>
     </scene>

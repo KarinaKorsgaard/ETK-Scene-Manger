@@ -37,6 +37,11 @@ class ofApp : public ofBaseApp{
     void saveToXml();
     void loadFromXml();
     
+    vector<int>retardedCounters;
+    
+    ofxDatGuiTheme* enabled;
+    ofxDatGuiTheme* disabled;
+    
     ofxXmlSettings xml;
     string dataFolder;
     void updateSubScene(SubScene* s);
@@ -104,11 +109,12 @@ class ofApp : public ofBaseApp{
     ofxDatGui* imageSelector; //there are 10, top ones are used first. - applies for SUBSCENE? - only visible if useImages!
     ofxDatGui* subsceneTextEditorGui;
 
-    ofxDatGuiTheme* enabled;
-    ofxDatGuiTheme* disabled;
+
     
     ofxDatGui* DatSub;
+    ofxDatGui* DatScene;
     
+    vector<bool>toggleScene;
     bool showSome = false; //showing subsceneGui
     bool globalAlignerToggle = true;
     //ofxPanel subSceneGui1;

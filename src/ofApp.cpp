@@ -43,6 +43,7 @@ void ofApp::setup(){
     tableNamesGui->addHeader("tableNames");
     for (int i = 0; i<12; i++) {
         tableNamesGui->addTextInput("TAB_NAME"+ofToString(i+1),"Laud "+ofToString(i+1));
+        tableNames.push_back("Laud " +ofToString(i+1));
     }
     tableNamesGui->addFooter();
     tableNamesGui->onTextInputEvent(this, &ofApp::onTextInputEvent);
@@ -71,10 +72,10 @@ void ofApp::setup(){
         cout << "loaded " + dataFolder+"/img/"+s.back()<< endl;
     }
     
-    ofLogVerbose();
-    for(int i = 0 ; i<scenes.size();i++){
-        cout<<"scene subs" + ofToString(scenes[i].subs.size())<<endl;
-    }
+//    ofLogVerbose();
+//    for(int i = 0 ; i<scenes.size();i++){
+//        cout<<"scene subs" + ofToString(scenes[i].subs.size())<<endl;
+//    }
     
 
 //    for(int i = 0; i<scenes.size();i++){
@@ -84,13 +85,12 @@ void ofApp::setup(){
 //        main.add(editExisting[i]);
 //    }
     
-    
-    
+    disabled = new ofxDatGuiThemeMidnight();
+    enabled = new ofxDatGuiThemeWireframe();
     
     //scene Guis ...
     
     ofParameterGroup commons;
-    commons.add(amountOfSubs.set("amount of subscenes",0,0,MAX_SUB));
     
     //gui1.add(addVote.set("add subscene",false)); //do need a count of amount of subs!
    // commons.add(amountOfSubs.set("amount of subscenes",0,10,1));
@@ -123,12 +123,14 @@ void ofApp::setup(){
     //mode1.add(commonsSub);
     
     ofParameterGroup mode2;
+    mode2.add(amountOfSubs.set("amount of subscenes",0,1,MAX_SUB));
     mode2.setName("mode2");
     mode2.add(commons);
     //mode2.add(commonsSub);
     
     ofParameterGroup mode3;
     mode3.setName("mode1");
+    mode3.add(amountOfSubs.set("amount of subscenes",0,1,MAX_SUB));
     mode3.add(totalPoints.set("totalPoints",0,0,200));
     mode3.add(substractive.set("substractive",false));
     mode3.add(commons);
@@ -136,11 +138,11 @@ void ofApp::setup(){
     
     sceneGui1.setup(mode1);
     sceneGui2.setup(mode2);
-    sceneGui3.setup(mode2);
+    sceneGui3.setup(mode3);
     
     ofParameterGroup subCommons;
     subCommons.setName("subsceneEditor");
-    subCommons.add(amountAnswerOptions.set("Amount of Answers",0,0,MAX_SUB_ANSWER));
+    subCommons.add(amountAnswerOptions.set("Amount of Answers",0,2,MAX_SUB_ANSWER));
     subCommons.add(useImages.set("Use Images", false));
     subCommons.add(useGlobalTimer.set("Use Global Timer", true));
     subCommons.add(localTimer.set("Timer for This Sub", 0,0,100)); //secTime
@@ -238,6 +240,9 @@ void ofApp::setup(){
     sceneTextEditorGui->setWidth(sceneGui1.getWidth());
     subsceneTextEditorGui->setWidth(sceneGui1.getWidth());
     
+    sceneGui1.loadFont("Verdana.ttf",8);
+    sceneGui1.setUseTTF(true);
+    
     sceneGui1.setPosition(mainGui.getWidth()+20,mainGui.getPosition().y);
     sceneGui2.setPosition(mainGui.getWidth()+20,mainGui.getPosition().y);
     sceneGui3.setPosition(mainGui.getWidth()+20,mainGui.getPosition().y);
@@ -252,7 +257,7 @@ void ofApp::setup(){
 
     colorSelector->setPosition(DatSub->getPosition().x, DatSub->getPosition().y+DatSub->getHeight()+20);
     imageSelector->setPosition(subsceneTextEditorGui->getPosition().x, subsceneTextEditorGui->getPosition().y +subsceneTextEditorGui->getHeight()+20 );
-    tableNamesGui->setPosition(mainGui.getPosition().x, mainGui.getHeight()+20);
+    tableNamesGui->setPosition(mainGui.getPosition().x, ofGetHeight()-(tableNamesGui->getHeight()+40));
     
     colorSelector->setWidth(300);
     imageSelector->setWidth(300);
@@ -263,6 +268,10 @@ void ofApp::setup(){
         updateGuiToSceneAligners(scenes[0]);
         setGuiToSceneValues(0);
         setSubGuiToSubValues(0);
+    }
+    for(int i = 0; i<tableNames.size();i++){
+        tableNamesGui->getTextInput("TAB_NAME"+ofToString(i+1))->setText(tableNames[i]);
+ 
     }
 
 }
@@ -282,6 +291,7 @@ void ofApp::update(){
         string clipboardContent = ofxClipboard::paste(); //<<<<<<<<<<<<<<<<<
         addVote = false;
         addNewScene(0,clipboardContent);
+        retardedCounters.push_back(0);
     }
     if(addQuiz){
         string newClipboardContent = ofSystemTextBoxDialog("Name of Quiz");
@@ -289,6 +299,7 @@ void ofApp::update(){
         string clipboardContent = ofxClipboard::paste(); //<<<<<<<<<<<<<<<<<
         addQuiz = false;
         addNewScene(1,clipboardContent);
+        retardedCounters.push_back(0);
     }
     if(addAssesment){
         string newClipboardContent = ofSystemTextBoxDialog("Name of Assesment");
@@ -296,77 +307,68 @@ void ofApp::update(){
         string clipboardContent = ofxClipboard::paste(); //<<<<<<<<<<<<<<<<<
         addAssesment = false;
         addNewScene(2,clipboardContent);
+        retardedCounters.push_back(0);
     }
     
     showSome = false;
     int previousValue = whichScene;
-    for(int i = 0 ; i < editExisting.size();i++){
-        
-        if(editExisting[i]){
-            showSome = true;
-            sceneTextEditorGui->setVisible(true);
-            subsceneTextEditorGui->setVisible(true);
-            colorSelector->setVisible(true);
-            tableNamesGui->setVisible(true);
-            imageSelector->setVisible(true);
-            
-            whichScene = i;
-
-            
-            if(scenes[i].mode == 0){
-                b_sceneGui1 = true;
-                b_sceneGui2 = false;
-                b_sceneGui3 = false;
-            }
-            else if(scenes[i].mode == 1){
-                b_sceneGui1 = false;
-                b_sceneGui2 = true;
-                b_sceneGui3 = false;
-            }
-            else if(scenes[i].mode == 2){
-                b_sceneGui1 = false;
-                b_sceneGui2 = false;
-                b_sceneGui3 = true;
-            }
+    bool somethingChanged=false;
+    int whichChanged=0;
+    for(int i = 0; i<editExisting.size();i++){
+        int tog=0;
+        if(toggleScene[i])tog=1;
+        int edi =0;
+        if(editExisting[i])edi=1;
+        if(tog!=edi && edi == 1){
+            somethingChanged=true;
+            whichChanged=i;
         }
-        if(!showSome){
-            b_sceneGui1 = false;
+    }
+    if(somethingChanged){
+        whichScene=whichChanged;
+        if(scenes[whichScene].mode == 0){
+            b_sceneGui1 = true;
             b_sceneGui2 = false;
             b_sceneGui3 = false;
-            subsceneTextEditorGui->setVisible(false);
-            sceneTextEditorGui->setVisible(false);
-            colorSelector->setVisible(false);
-            tableNamesGui->setVisible(false);
-            imageSelector->setVisible(false);
-        }
-        if(showSome && previousValue!=whichScene){
-            updateGuiToSceneAligners(scenes[i]);
-            setGuiToSceneValues(whichScene);
+            imageSelector->setVisible(true);
+            sceneTextEditorGui->setVisible(true);
+            subsceneTextEditorGui->setVisible(true);
             
         }
-        previousValue=whichScene;
+        else if(scenes[whichScene].mode == 1){
+            b_sceneGui1 = false;
+            b_sceneGui2 = true;
+            b_sceneGui3 = false;
+            imageSelector->setVisible(true);
+            sceneTextEditorGui->setVisible(true);
+            subsceneTextEditorGui->setVisible(true);
+            
+        }
+        else if(scenes[whichScene].mode == 2){
+            b_sceneGui1 = false;
+            b_sceneGui2 = false;
+            b_sceneGui3 = true;
+            sceneTextEditorGui->setVisible(true);
+            subsceneTextEditorGui->setVisible(true);
+        }
+
+        whichSub=0;
+        updateGuiToSceneAligners(scenes[whichScene]);
+        setGuiToSceneValues(whichScene);
+        setSubGuiToSubValues(whichSub);
     }
+        //previousValue=whichScene;
     
+    for(int i = 0; i<editExisting.size();i++){
+        if(i!=whichScene)editExisting[i]=false;
+        toggleScene[i]=editExisting[i];
+    }
+
+
     if(whichScene<scenes.size())
     {
         updateScene(&scenes[whichScene]);
         updateSubScene(&scenes[whichScene].subs[whichSub]);
-    }
-    
-
-    
-
-    for(int s = 0; s<scenes.size();s++){
-        if(scenes[s].mode == 0){
-            scenes[s].amountOfSubs = 1;
-           // amountOfSubs= 1;
-        }
-        if(scenes[s].mode == 2){ //assesment has not answer options...
-            for(int i = 0 ; i< scenes[s].subs.size();i++){
-                scenes[s].subs[i].amountAnswerOptions = 0;
-            //    amountAnswerOptions=0;
-            }
-        }
     }
     
     if(!globalAlignerToggle && useGlobalAligners){
@@ -383,15 +385,13 @@ void ofApp::update(){
 void ofApp::draw(){
     ofBackground(0, 0, 50);
     mainGui.draw();
+    subSceneGui.setName("sub "+ofToString(whichSub+1));
+    subSceneGui.draw();
+    globalAligners.draw();
     if(b_sceneGui1){
         sceneGui1.setName(scenes[whichScene].name);
         sceneGui1.draw();
         ofSetColor(0);
-        globalAligners.draw();
-        subSceneGui.draw();
-        
-
-        
         //float h = 18*(MAX_SUB-scenes[whichScene].amountOfSubs);
         //ofDrawRectangle(sceneGui1.getPosition().x, 18*MAX_SUB-(sceneGui1.getPosition().y+h)+50, sceneGui1.getWidth(), h+50);
         
@@ -399,23 +399,23 @@ void ofApp::draw(){
     if(b_sceneGui2){
         sceneGui2.setName(scenes[whichScene].name);
         sceneGui2.draw();
-        globalAligners.draw();
-        subSceneGui.draw();
-        
     }
     if(b_sceneGui3){
         sceneGui3.setName(scenes[whichScene].name);
         sceneGui3.draw();
-        globalAligners.draw();
-        subSceneGui.draw();
-        
     }
 //    ofSetColor(0, 0, 50);
 //    ofDrawRectangle(sceneGui1.getPosition().x-1, sceneGui1.getPosition().y + 18*7 +18*amountOfSubs, sceneGui1.getWidth()+2, 19*(MAX_SUB-amountOfSubs)+3);
 //    
     ofSetColor(255);
-    ofDrawBitmapString("editing" +ofToString(whichScene) + " "+ofToString(whichSub), 10, ofGetHeight()-40);
+    ofDrawBitmapString("editing" +ofToString(whichScene+1) + " "+ofToString(whichSub+1), 10, ofGetHeight()-20);
     
+    
+    for(int i = 0 ; i<MAX_SUB;i++){
+        if(i!=whichSub)DatSub->getButton("subscene: "+ofToString(i+1))->setTheme(disabled);
+        if(i==whichSub)DatSub->getButton("subscene: "+ofToString(i+1))->setTheme(enabled);
+    }
+
     // subsceens...
 }
 //--------------------------------------------------------------
@@ -448,8 +448,10 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e)
     //editing all things with scene
     int previousValue = whichSub;
     for(int i = 0 ; i<MAX_SUB;i++){
+        e.target->setTheme(disabled);
         if(e.target->getLabel()=="subscene: "+ofToString(i+1)){
             whichSub = i;
+            
             if(previousValue!=whichSub)setSubGuiToSubValues(whichSub);
         }
     }
@@ -495,7 +497,7 @@ void ofApp::setGuiToSceneValues(int scene){
     sceneTextEditorGui->getTextInput("E")->setText( scenes[whichScene].explanation );
     
     setSubGuiToSubValues(whichSub); // setting colors
-    for (int i = 0; i<scenes[i].colors.size(); i++) {
+    for (int i = 0; i<MAX_SUB_ANSWER; i++) {
         colorSelector->getColorPicker("C"+ofToString(i+1))->setColor(scenes[scene].colors[i]);
        // scenes[scene].colors[i].set(colorSelector->getColorPicker("C"+ofToString(i+1))->getColor());
     }
@@ -525,7 +527,8 @@ void ofApp::setSubGuiToSubValues(int sub){
 }
 
 void ofApp::updateScene(Scene* s){
-    
+    if(s->mode==0)amountOfSubs=1;
+    if(s->mode!=1)rightAnswer=0;
     s->amountOfSubs = amountOfSubs;
     s->globalTimer = globalTimer;
     s->useNumbers = useNumbers;
@@ -560,14 +563,23 @@ void ofApp::updateScene(Scene* s){
         if(i<amountOfSubs)DatSub->getButton("subscene: "+ofToString(i+1))->setVisible(true);
         if(i>=amountOfSubs)DatSub->getButton("subscene: "+ofToString(i+1))->setVisible(false);
     }
+    for(int i = 0; i<MAX_SUB_ANSWER;i++){
+        if(i<amountOfSubs)colorSelector->getColorPicker("C"+ofToString(i+1))->setVisible(true);
+        if(i>=amountOfSubs)colorSelector->getColorPicker("C"+ofToString(i+1))->setVisible(false);
+    }
 }
 
 void ofApp::updateSubScene(SubScene* s){
+    if(s->mode==2)amountAnswerOptions=0;
     s->amountAnswerOptions = amountAnswerOptions;
+    if(s->mode==1&&rightAnswer>amountAnswerOptions)rightAnswer=amountAnswerOptions;
     s->rightAnswer = rightAnswer;
     for(int i = 0; i<MAX_SUB_ANSWER;i++){
         if(i<amountAnswerOptions)subsceneTextEditorGui->getTextInput(ofToString(i+1)+"A")->setVisible(true);
         if(i>=amountAnswerOptions)subsceneTextEditorGui->getTextInput(ofToString(i+1)+"A")->setVisible(false);
+        
+        if(i<amountAnswerOptions)imageSelector->getDropdown("I"+ofToString(i+1))->setVisible(true);
+        if(i>=amountAnswerOptions)imageSelector->getDropdown("I"+ofToString(i+1))->setVisible(false);
     }
     
     if(useGlobalTimer){
@@ -588,6 +600,7 @@ void ofApp::addNewScene(int mode, string name){
     ofParameter<bool> b;
     b.set("scene: "+ofToString(editExisting.size()+1),false);
     editExisting.push_back(b);
+    toggleScene.push_back(false);
     mainGui.add(editExisting.back());
 }
 
@@ -611,9 +624,10 @@ void ofApp::saveToXml(){
     
     string table;
     for(int i= 0; i<tableNames.size();i++){
-        if(i<tableNames.size()-1)table.append(tableNames[i]+"//");
-        else table.append(tableNames[i]);
+        if(i<tableNames.size()-1){table.append(tableNames[i]+"//");}
+        else {table.append(tableNames[i]);}
     }
+    cout<<table<<endl;
     xml.addTag("tableNames");
     xml.setValue("tableNames", table);
     
@@ -790,8 +804,10 @@ void ofApp::loadFromXml(){
 //        cout<<"images "+ ofToString(xml.getNumTags("img"))<<endl;
 //        imagesString.push_back(xml.getValue("img", "",i));
 //    }
-    if(xml.tagExists("tableNames")){
-        tableNames = ofSplitString(xml.getValue("tableNames", ""), "//");
+    
+    vector<string> tab= ofSplitString(xml.getValue("tableNames", ""), "//");
+    for(int i = 0; i<12;i++){
+        if(i<tab.size())tableNames[i]=(ofSplitString(xml.getValue("tableNames", ""), "//")[i]);
     }
     xml.popTag();
 

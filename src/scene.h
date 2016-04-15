@@ -76,6 +76,8 @@ class Scene{
     int collumWidth2;
     int collumWidth3;
     
+
+    
     
     void setup(int _mode, string n){
         mode = _mode;
