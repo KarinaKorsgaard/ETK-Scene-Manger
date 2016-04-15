@@ -21,4 +21,7 @@ class ofApp : public ofBaseApp{
     bool isSetup;
     void onDropdownEvent(ofxDatGuiDropdownEvent e);
     void onButtonEvent(ofxDatGuiButtonEvent e);
+    void keyPressed(int key);
+    void keyReleased(int key);
+    bool cmd;
 };

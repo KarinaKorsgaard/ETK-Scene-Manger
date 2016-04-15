@@ -33,7 +33,19 @@ void ofApp::update(){
         myApp.update();
     }
 }
-
+void ofApp::keyPressed(int key){
+    if(isSetup){
+        if(key == OF_KEY_COMMAND)cmd=true;
+ 
+        if(key=='s' && cmd){
+            myApp.saveToXml();
+            cout<<"saved"<<endl;
+        }
+    }
+}
+void ofApp::keyReleased(int key){
+    if(key == OF_KEY_COMMAND)cmd=false;
+}
 //--------------------------------------------------------------
 void ofApp::draw(){
     if(isSetup){

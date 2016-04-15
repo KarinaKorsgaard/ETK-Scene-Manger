@@ -1,0 +1,16 @@
+<document>
+    <vote>
+        <globalTime>30</globalTime>
+        <explanation>explanation</explanation>
+        <explanation></explanation>
+        <weighed></weighed>
+        <headline>headline</headline>
+        <question>
+            <secTime>0</secTime>
+            <q></q>
+            <a>initial value
+                <color>16777215</color>
+            </a>
+        </question>
+    </vote>
+</document>

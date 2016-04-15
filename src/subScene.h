@@ -29,7 +29,7 @@ public:
     
     void setup(string q, vector<string>a, vector<int>img){
         question = q;
-        
+        headline="headline";
         answerOptions.resize(MAX_SUB_ANSWER);
         for(int i = 0; i<a.size();i++){
             setAnswerOption(a[i],i);

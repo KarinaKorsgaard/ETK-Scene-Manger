@@ -1,33 +1,45 @@
 <document>
     <globalFontSize>40</globalFontSize>
-    <liveResultFontSize>0</liveResultFontSize>
-    <headLineFontSize>0</headLineFontSize>
-    <explanationFontSize>0</explanationFontSize>
-    <questionFontSize>0</questionFontSize>
-    <chartFontSize>0</chartFontSize>
-    <legendFontSize>0</legendFontSize>
-    <timerSize>0</timerSize>
-    <resultFontSize>0</resultFontSize>
-    <matrixX>0</matrixX>
+    <timerSize>74</timerSize>
+    <legendFontSize>65</legendFontSize>
+    <headLineFontSize>58</headLineFontSize>
+    <explanationFontSize>70</explanationFontSize>
+    <questionFontSize>70</questionFontSize>
+    <resultFontSize>68</resultFontSize>
+    <chartFontSize>68</chartFontSize>
+    <liveResultFontSize>68</liveResultFontSize>
+    <matrixX>68</matrixX>
     <matrixY>0</matrixY>
     <timerX>0</timerX>
     <timerY>0</timerY>
+    <liveResultX>0</liveResultX>
+    <liveResultY>0</liveResultY>
     <legendX>0</legendX>
     <legendY>0</legendY>
-    <explanationX>0</explanationX>
-    <explanationY>0</explanationY>
     <headlineX>0</headlineX>
     <headlineY>0</headlineY>
+    <collumWidth1>0</collumWidth1>
+    <explanationX>0</explanationX>
+    <explanationY>0</explanationY>
+    <collumWidth2>0</collumWidth2>
     <questionX>0</questionX>
     <questionY>0</questionY>
+    <collumWidth3>0</collumWidth3>
     <top10chartAssesmentX>0</top10chartAssesmentX>
     <top10chartAssesmentY>0</top10chartAssesmentY>
-    <top10chartQuizX>0</top10chartQuizX>
-    <top10chartQuizY>0</top10chartQuizY>
-    <scene>
-        <file>quiz.xml</file>
-    </scene>
+    <top10chartQuizX>3480</top10chartQuizX>
+    <top10chartQuizY>80</top10chartQuizY>
+    <tableNames>Table 1//Laud 2//Laud 3//Laud 4//Laud 5//Laud 6//Laud 7//Laud 8//Laud 9//Laud 10//Laud 11//Laud 12</tableNames>
     <scene>
         <file>otherquix.xml</file>
+    </scene>
+    <scene>
+        <file>voe.xml</file>
+    </scene>
+    <scene>
+        <file>vote.xml</file>
+    </scene>
+    <scene>
+        <file>vote.xml</file>
     </scene>
 </document>

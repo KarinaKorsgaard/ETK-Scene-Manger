@@ -31,6 +31,38 @@ void myofApp::setup(){
         imagesString.push_back(s.back());
     }
     //if(imageString.size())
+    alignerStrings.push_back("timerSize");
+    alignerStrings.push_back("legendFontSize");
+    alignerStrings.push_back("headLineFontSize");
+    alignerStrings.push_back("explanationFontSize");
+    alignerStrings.push_back("questionFontSize");
+    alignerStrings.push_back("resultFontSize");
+    alignerStrings.push_back("chartFontSize");
+    alignerStrings.push_back("liveResultFontSize");
+    alignerStrings.push_back("matrixX");
+    alignerStrings.push_back("matrixY");
+    alignerStrings.push_back("timerX");
+    alignerStrings.push_back("timerY");
+    alignerStrings.push_back("liveResultX");
+    alignerStrings.push_back("liveResultY");
+    alignerStrings.push_back("legendX");
+    alignerStrings.push_back("legendY");
+    alignerStrings.push_back("headlineX");
+    alignerStrings.push_back("headlineY");
+    alignerStrings.push_back("collumWidth1");
+    alignerStrings.push_back("explanationX");
+    alignerStrings.push_back("explanationY");
+    alignerStrings.push_back("collumWidth2");
+    alignerStrings.push_back("questionX");
+    alignerStrings.push_back("questionY");
+    alignerStrings.push_back("collumWidth3");
+    alignerStrings.push_back("top10chartAssesmentX");
+    alignerStrings.push_back("top10chartAssesmentY");
+    alignerStrings.push_back("top10chartQuizX");
+    alignerStrings.push_back("top10chartQuizY");
+    
+    
+    alignerInts.resize(alignerStrings.size());
     
     colorSelector = new ofxDatGui;
     imageSelector = new ofxDatGui;
@@ -76,6 +108,7 @@ void myofApp::setup(){
         ofImage img = *new ofImage;
         imgs.push_back(img);
         imgs[i].load(dataFolder+"/img/"+s.back());
+        imageStrings.push_back(dataFolder+"/img/"+s.back());
         cout << "loaded " + dataFolder+"/img/"+s.back()<< endl;
     }
     
@@ -194,91 +227,63 @@ void myofApp::setup(){
     ofParameterGroup fontsizes;
     ofParameterGroup aligners;
     
-    alignerStrings.push_back("timer");
-    alignerStrings.push_back("legendFontSize");
-    alignerStrings.push_back("headLineFontSize");
-    alignerStrings.push_back("explanation");
-    alignerStrings.push_back("questionFontSize");
-    alignerStrings.push_back("resultFontSize");
-    alignerStrings.push_back("chartFont");
-    alignerStrings.push_back("liveResult");
-    alignerStrings.push_back("matrix x");
-    alignerStrings.push_back("matrix y");
-    alignerStrings.push_back("timer x");
-    alignerStrings.push_back("timer y");
-    alignerStrings.push_back("liveResult x");
-    alignerStrings.push_back("liveResult x");
-    alignerStrings.push_back("legend x");
-    alignerStrings.push_back("legend y");
-    alignerStrings.push_back("headline x");
-    alignerStrings.push_back("headline y");
-    alignerStrings.push_back("collum width head");
-    alignerStrings.push_back("explanation x");
-    alignerStrings.push_back("explanation y");
-    alignerStrings.push_back("collum width exp");
-    alignerStrings.push_back("question x");
-    alignerStrings.push_back("question x");
-    alignerStrings.push_back("collum width ques");
-    alignerStrings.push_back("top10chartAssesment x");
-    alignerStrings.push_back("top10chartAssesment y");
-    alignerStrings.push_back("top10chartQuizX");
-    alignerStrings.push_back("top10chartQuizY");
+    DatSlider = new ofxDatGui;
+    DatSlider->addHeader();
+    for(int i = 0; i<alignerStrings.size();i++){
+        if(i<=7)DatSlider->addSlider(alignerStrings[i], 0, 100, 40);
+        else if(i>7) DatSlider->addSlider(alignerStrings[i], 0, RES_W*2, 200);
+       // DatSlider->addSlider(alignerStrings[i+1], 0, RES_W, 100);
+        //if(i>7)DatSlider->addBreak();
+    }
+    DatSlider->onSliderEvent(this, &myofApp::onSliderEvent);
     
-//    DatSlider = new ofxDatGui;
-//    DatSlider->addHeader();
-//    for(int i = 0; i<alignerStrings.size();i+=2){
-//        DatSlider->addSlider(alignerStrings[i], 0, RES_W, 100);
-//        DatSlider->addSlider(alignerStrings[i+1], 0, RES_W, 100);
-//        //if(i>7)DatSlider->addBreak();
-//    }
-    
-    positions.setName("positions");
-    fontsizes.setName("fontSizes");
-    //ALIGNERS: seperate from parameters!
-    positions.add(p_matrixX.set("matrix x",0,0,RES_W));
-    positions.add(p_matrixY.set("matrix y",0,0,RES_W));
-    
-    positions.add(p_timerX.set("timer x",0,0,RES_W));
-    positions.add(p_timerY.set("timer y",0,0,RES_W));
-    
-    fontsizes.add(p_timerSize.set("timer",0,0,100));
-    fontsizes.add(p_liveResultFontSize.set("liveResult",0,0,100));
-    fontsizes.add(p_explanationFontSize.set("explanation",0,0,100));
-    fontsizes.add(p_chartFontSize.set("chartFont",0,0,100));
-    
-    fontsizes.add(p_legendFontSize.set("legendFontSize",0,0,100));
-    fontsizes.add(p_questionFontSize.set("questionFontSize",0,0,100));
-    fontsizes.add(p_resultFontSize.set("resultFontSize",0,0,100));
-    fontsizes.add(p_headLineFontSize.set("headLineFontSize",0,0,100));
-    
-    positions.add(p_liveResultX.set("liveResult x",0,0,RES_W));
-    positions.add(p_liveResultY.set("liveResult x",0,0,RES_W));
-    
-    positions.add(p_legendX.set("legend x",0,0,RES_W));
-    positions.add(p_legendY.set("legend y",0,0,RES_W));
-    
-    positions.add(p_headlineX.set("headline x",0,0,RES_W));
-    positions.add(p_headlineY.set("headline y",0,0,RES_W));
-    positions.add(p_collumWidth1.set("collum width head",0,0,800));
-    
-    positions.add(p_explanationX.set("explanation x",0,0,RES_W));
-    positions.add(p_explanationY.set("explanation y",0,0,RES_W));
-    positions.add(p_collumWidth2.set("collum width exp",0,0,800));
-    
-    positions.add(p_questionX.set("question x",0,0,RES_W));
-    positions.add(p_questionY.set("question x",0,0,RES_W));
-    positions.add(p_collumWidth3.set("collum width ques",0,0,800));
-    
-    positions.add(p_top10chartAssesmentX.set("top10chartAssesment x",0,0,RES_W));
-    positions.add(p_top10chartAssesmentY.set("top10chartAssesment y",0,0,RES_W));
-    
-    positions.add(p_top10chartQuizX.set("top10chartQuizX",0,0,RES_W));
-    positions.add(p_top10chartQuizY.set("top10chartQuizY",0,0,RES_W));
-    
-    aligners.add(fontsizes);
-    aligners.add(positions);
-    globalAligners.setName("");
-    globalAligners.setup(aligners);
+//    positions.setName("positions");
+//    fontsizes.setName("fontSizes");
+//    //ALIGNERS: seperate from parameters!
+//    positions.add(p_matrixX.set("matrix x",0,0,RES_W));
+//    positions.add(p_matrixY.set("matrix y",0,0,RES_W));
+//    
+//    positions.add(p_timerX.set("timer x",0,0,RES_W));
+//    positions.add(p_timerY.set("timer y",0,0,RES_W));
+//    
+//    fontsizes.add(p_timerSize.set("timer",0,0,100));
+//    fontsizes.add(p_liveResultFontSize.set("liveResult",0,0,100));
+//    fontsizes.add(p_explanationFontSize.set("explanation",0,0,100));
+//    fontsizes.add(p_chartFontSize.set("chartFont",0,0,100));
+//    
+//    fontsizes.add(p_legendFontSize.set("legendFontSize",0,0,100));
+//    fontsizes.add(p_questionFontSize.set("questionFontSize",0,0,100));
+//    fontsizes.add(p_resultFontSize.set("resultFontSize",0,0,100));
+//    fontsizes.add(p_headLineFontSize.set("headLineFontSize",0,0,100));
+//    
+//    positions.add(p_liveResultX.set("liveResult x",0,0,RES_W));
+//    positions.add(p_liveResultY.set("liveResult x",0,0,RES_W));
+//    
+//    positions.add(p_legendX.set("legend x",0,0,RES_W));
+//    positions.add(p_legendY.set("legend y",0,0,RES_W));
+//    
+//    positions.add(p_headlineX.set("headline x",0,0,RES_W));
+//    positions.add(p_headlineY.set("headline y",0,0,RES_W));
+//    positions.add(p_collumWidth1.set("collum width head",0,0,800));
+//    
+//    positions.add(p_explanationX.set("explanation x",0,0,RES_W));
+//    positions.add(p_explanationY.set("explanation y",0,0,RES_W));
+//    positions.add(p_collumWidth2.set("collum width exp",0,0,800));
+//    
+//    positions.add(p_questionX.set("question x",0,0,RES_W));
+//    positions.add(p_questionY.set("question x",0,0,RES_W));
+//    positions.add(p_collumWidth3.set("collum width ques",0,0,800));
+//    
+//    positions.add(p_top10chartAssesmentX.set("top10chartAssesment x",0,0,RES_W));
+//    positions.add(p_top10chartAssesmentY.set("top10chartAssesment y",0,0,RES_W));
+//    
+//    positions.add(p_top10chartQuizX.set("top10chartQuizX",0,0,RES_W));
+//    positions.add(p_top10chartQuizY.set("top10chartQuizY",0,0,RES_W));
+//    
+//    aligners.add(fontsizes);
+//    aligners.add(positions);
+//    globalAligners.setName("");
+//    globalAligners.setup(aligners);
     
    // mainGui.setWidthElements(150);
    // globalAligners.setWidthElements(200);
@@ -286,8 +291,8 @@ void myofApp::setup(){
     sceneTextEditorGui->setWidth(sceneGui1.getWidth());
     subsceneTextEditorGui->setWidth(sceneGui1.getWidth());
     
-    sceneGui1.loadFont("Verdana.ttf",8);
-    sceneGui1.setUseTTF(true);
+    //sceneGui1.loadFont("Verdana.ttf",8);
+    //sceneGui1.setUseTTF(true);
     
     sceneGui1.setPosition(mainGui.getWidth()+20,mainGui.getPosition().y);
     sceneGui2.setPosition(mainGui.getWidth()+20,mainGui.getPosition().y);
@@ -299,7 +304,7 @@ void myofApp::setup(){
     DatSub->setPosition(sceneTextEditorGui->getPosition().x,sceneTextEditorGui->getHeight()+sceneTextEditorGui->getPosition().y+20);
     subsceneTextEditorGui->setPosition(subSceneGui.getPosition().x,subSceneGui.getPosition().y+subSceneGui.getHeight()+30);
     
-    globalAligners.setPosition(mainGui.getWidth()+20*3+sceneGui1.getWidth()+subSceneGui.getWidth(),mainGui.getPosition().y);
+    DatSlider->setPosition(mainGui.getWidth()+20*3+sceneGui1.getWidth()+subSceneGui.getWidth(),mainGui.getPosition().y);
 
     colorSelector->setPosition(DatSub->getPosition().x, DatSub->getPosition().y+DatSub->getHeight()+20);
     imageSelector->setPosition(subsceneTextEditorGui->getPosition().x, subsceneTextEditorGui->getPosition().y +subsceneTextEditorGui->getHeight()+20 );
@@ -325,7 +330,7 @@ void myofApp::setup(){
 //--------------------------------------------------------------
 void myofApp::update(){
     
-    ofSetWindowTitle(dataFolder);
+    ofSetWindowTitle(dataFolder + " framerate:" + ofToString(ofGetFrameRate(),0));
     // main gui controls: adding and selecting sceenes;
     if(save){
         saveToXml();
@@ -437,7 +442,8 @@ void myofApp::update(){
 void myofApp::onSliderEvent(ofxDatGuiSliderEvent e){
     for(int i = 0 ; i< alignerStrings.size();i++){
         if(e.target->getLabel()==alignerStrings[i]){
-            scenes[whichScene].aligners[i]=e.target->getValue();
+            if(scenes[whichScene].useGlobalAligners)alignerInts[i]=e.target->getValue();
+            else if(!scenes[whichScene].useGlobalAligners)scenes[whichScene].aligners[i]=e.target->getValue();
             
         }
     }
@@ -492,7 +498,7 @@ void myofApp::onTextInputEvent(ofxDatGuiTextInputEvent e)
     
     if(e.target->getLabel() == "E")scenes[whichScene].explanation =e.target->getText();
     
-    cout << "onTextInputEvent: " << e.target->getLabel() << " " << e.target->getText() << endl;
+  //  cout << "onTextInputEvent: " << e.target->getLabel() << " " << e.target->getText() << endl;
     
     for(int i = 0; i<tableNames.size();i++){
         if(e.target->getLabel()=="TAB_NAME"+ofToString(i+1)){
@@ -528,7 +534,7 @@ void myofApp::onButtonEvent(ofxDatGuiButtonEvent e)
 }
 
 void myofApp::onDropdownEvent(ofxDatGuiDropdownEvent e){
-    cout << e.target->getIndex();
+    //cout << e.target->getIndex();
     for(int u = 0 ; u<imagesString.size();u++){
         if(e.target->getLabel()==imagesString[u]){
             
@@ -585,8 +591,15 @@ void myofApp::setSubGuiToSubValues(int sub){
     for(int i = 0 ; i<scenes[whichScene].subs[sub].answerOptions.size();i++){
         subsceneTextEditorGui->getTextInput(ofToString(1+i)+"A")->setText(scenes[whichScene].subs[sub].answerOptions[i]);
     }
-    for(int i = 0 ; i<scenes[whichScene].subs[sub].answerOptions.size();i++){
-        if(imagesString.size()>0)imageSelector->getDropdown("I"+ofToString(i+1))->setLabel(imagesString[scenes[whichScene].subs[sub].images[i]]);
+    for(int i = 0 ; i<scenes[whichScene].subs[sub].images.size();i++){
+        int thisSubImage = scenes[whichScene].subs[sub].images[i];
+      //  cout <<thisSubImage<<endl;
+      //  cout <<imageStrings.size()<<endl;
+        if(imageStrings.size()>thisSubImage){
+        //cout<<imageSelector->getDropdown("I"+ofToString(i+1))->getChildAt(thisSubImage)<<endl;
+        //imageSelector->getDropdown("I"+ofToString(thisSubImage))->setLabel(imagesString[thisSubImage]);
+            imageSelector->getDropdown("I"+ofToString(thisSubImage+1))->setLabel(imageStrings[thisSubImage]);
+        }
     }
 }
 
@@ -599,29 +612,29 @@ void myofApp::updateScene(Scene* s){
     s->useImages = useImages;
     s->useGlobalAligners = useGlobalAligners;
     
-    if(s->useGlobalAligners){
-        globalAligners.setName("GOBAL ALIGNERS");
-        globalAligners.setPosition(mainGui.getWidth()+20*3+sceneGui1.getWidth()+subSceneGui.getWidth(),mainGui.getPosition().y);
-        globalAligners.setFillColor(ofColor(0,50,0));
-       // globalAligners.setPosition(mainGui.getPosition().x,mainGui.getHeight()+40);
-        updateGlobalAligners();
-    }
-    else if(!s->useGlobalAligners){
-        globalAligners.setName("LOCAL ALIGNERS FOR: ");
-        globalAligners.setPosition(mainGui.getWidth()+20*3+sceneGui1.getWidth()+subSceneGui.getWidth(),mainGui.getPosition().y);
-        globalAligners.setFillColor(ofColor(50,0,0));
-       // globalAligners.setPosition(sceneGui1.getPosition().x,sceneGui1.getHeight()+40);
-        updateLocalAligners(s);
-    }//add headline
+//    if(s->useGlobalAligners){
+//       // DatSlider->setTheme(enabled);
+//        //globalAligners.setPosition(mainGui.getWidth()+20*3+sceneGui1.getWidth()+subSceneGui.getWidth(),mainGui.getPosition().y);
+//        //globalAligners.setFillColor(ofColor(0,50,0));
+//       // globalAligners.setPosition(mainGui.getPosition().x,mainGui.getHeight()+40);
+//        updateGlobalAligners();
+//    }
+//    else if(!s->useGlobalAligners){
+//       // DatSlider->setTheme(disabled);
+//        //globalAligners.setName("LOCAL ALIGNERS FOR: ");
+//        //globalAligners.setPosition(mainGui.getWidth()+20*3+sceneGui1.getWidth()+subSceneGui.getWidth(),mainGui.getPosition().y);
+//        //globalAligners.setFillColor(ofColor(50,0,0));
+//       // globalAligners.setPosition(sceneGui1.getPosition().x,sceneGui1.getHeight()+40);
+//        updateLocalAligners(s);
+//    }//add headline
     
-    if(s->mode == 0){
-        s->weighed = weighed;
-        s->consentual = consentual;
-    }
-    if(s->mode == 2){
-        s->substractive = substractive;
-        s->totalPoints = totalPoints;
-    }
+   
+    s->weighed = weighed;
+    s->consentual = consentual;
+    
+    s->substractive = substractive;
+    s->totalPoints = totalPoints;
+    
     
     for(int i = 0; i<MAX_SUB;i++){
         if(i<amountOfSubs)DatSub->getButton("subscene: "+ofToString(i+1))->setVisible(true);
@@ -658,11 +671,13 @@ void myofApp::updateSubScene(SubScene* s){
 //--------------------------------------------------------------
 void myofApp::addNewScene(int mode, string name){
     Scene s = *new Scene;
-    s.setup(mode,name);
-    for(int i = 0; i<alignerStrings.size();i++){
-        s.aligners.push_back(100);
-    }
     scenes.push_back(s);
+    
+    scenes.back().setup(mode,name);
+    for(int i = 0; i<alignerStrings.size();i++){
+        scenes.back().aligners.push_back(100);
+    }
+
     
     ofParameter<bool> b;
     b.set("scene: "+ofToString(editExisting.size()+1),false);
@@ -673,81 +688,154 @@ void myofApp::addNewScene(int mode, string name){
 
 //--------------------------------------------------------------
 void myofApp::keyPressed(int key){
-    if(key == OF_KEY_COMMAND)cmd=true;
-    
-    if(key=='s' && cmd){
-        saveToXml();
-    }
+//    if(key == OF_KEY_COMMAND){cmd=true;
+//    cout<<"cmd"<<endl;
+//    }
+//    cout <<key<<endl;
+//    if(key=='s' && cmd){
+//        saveToXml();
+//        cout<<"saved"<<endl;
+//    }
 }
 
 void myofApp::preview(Scene s,SubScene sub){
+    int p = 0.5;
     fbo.begin();
     ofClear(0);
+    
+    ofPushMatrix();
+    ofScale(0.5f, 0.5f);
+    
     ofBackground(0, 195, 0);
     //matrix;
-    
-    ofFill();
-    ofPushMatrix();
-    ofTranslate(s.matrixX, s.matrixY);
-    for(int i = 0 ; i<12;i++){
-        for (int u = 0; u<6; u++) {
-            if(sub.amountAnswerOptions>0){
-                int col = (i+u)%sub.amountAnswerOptions;
-                ofSetColor(s.colors[col]);
-                ofDrawRectangle(i*70, u*70, 70, 70);
-                if (sub.useImages && sub.images[col]<imgs.size()) {
-                    imgs[sub.images[col]].draw(0,0,70,70);
+    if(!s.useGlobalAligners){
+        ofFill();
+        ofPushMatrix();
+        ofTranslate(s.aligners[8], s.aligners[9]);
+        for(int i = 0 ; i<12;i++){
+            for (int u = 0; u<6; u++) {
+                if(sub.amountAnswerOptions>0){
+                    int col = (i+u)%sub.amountAnswerOptions;
+                    ofSetColor(s.colors[col]);
+                    ofDrawRectangle(i*70, u*70, 70, 70);
+                    if (sub.useImages && sub.images[col]<imgs.size()) {
+                        imgs[sub.images[col]].draw(i*70, u*70,70,70);
+                    }
                 }
             }
         }
-    }
-    ofPopMatrix();
-    
-    ofSetColor(255);
-    //headline
-    drawColumn(sub.headline, s.headlineX, s.headlineY, s.headLineFontSize, s.collumWidth1);
-    
-    //explanation
-    drawColumn(s.explanation, s.explanationX, s.explanationY, s.explanationFontSize, s.collumWidth2);
-    
-    //question
-     drawColumn(sub.question, s.questionX, s.questionY, s.questionFontSize, s.collumWidth3);
-    
-    //timer
-    font.draw(ofToString(10), s.timerSize, s.timerX, s.timerY);
-    
-    //legend
-    ofPushMatrix();
-    ofTranslate(s.legendX, s.legendY);
-    for(int i = 0 ; i<sub.amountAnswerOptions;i++){
-        ofSetColor(255);
-        font.draw(sub.answerOptions[i], s.legendFontSize, 70, i * 60+25);
-        ofSetColor(s.colors[i]);
-        ofDrawRectangle(0, 0, 60, 60*i);
-    }
-    ofPopMatrix();
-    
-    //result
-    ofSetColor(255);
-    ofRectangle rectt = font.getBBox("result - always in the middle", s.resultFontSize, 0, 0);
-    font.draw("result - always in the middle", s.resultFontSize, (RES_W/2)-(rectt.width/2), RES_H/2-s.resultFontSize);
-    
-    //live results;
-    ofSetColor(255);
-    font.draw("LIVE RESULTS", s.liveResultFontSize, s.legendX, s.legendY+35);
-    
-    ofRectangle name = font.getBBox("RESULT", chartFontSize, 0, 0 );
-    for(int i = 0; i <3;i++){
-            int x = s.legendX;
-            int y = s.legendY+35;
-            ofSetColor(255);
+        ofPopMatrix();
         
-            font.draw("#"+ofToString(i+1), chartFontSize, x, y+(name.height+15)*i);
-            font.draw("RESULT", chartFontSize, x+200, y+(name.height+15)*i);
-            font.draw(ofToString(10), chartFontSize, x+200*2+20+name.width, y+(name.height+15)*i);
+        ofSetColor(255);
+        //headline
+        drawColumn(sub.headline, s.aligners[16], s.aligners[17], s.aligners[2], s.aligners[18]);
+        
+        //explanation
+        drawColumn(s.explanation, s.aligners[19], s.aligners[20], s.aligners[3], s.aligners[21]);
+        
+        //question
+        drawColumn(sub.question, s.aligners[22], s.aligners[23], s.aligners[4], s.aligners[24]);
+        
+        //timer
+        font.draw(ofToString(10), s.aligners[0], s.aligners[10], s.aligners[11]);
+        
+        //legend
+        ofPushMatrix();
+        ofTranslate(s.aligners[16], s.aligners[17]);
+        for(int i = 0 ; i<sub.amountAnswerOptions;i++){
+            ofSetColor(255);
+            font.draw(sub.answerOptions[i], s.aligners[1], 70, i * 60+25);
+            ofSetColor(s.colors[i]);
+            ofDrawRectangle(0, 0, 60, 60*i);
+        }
+        ofPopMatrix();
+        
+        //result
+        ofSetColor(255);
+        ofRectangle rectt = font.getBBox("result - always in the middle", s.aligners[5], 0, 0);
+        font.draw("result - always in the middle", s.aligners[5], (RES_W/2)-(rectt.width/2), RES_H/2-s.aligners[5]);
+        
+        //live results;
+        ofSetColor(255);
+        font.draw("LIVE RESULTS", s.aligners[7], s.aligners[14], s.aligners[15]+35);
+        
+        ofRectangle name = font.getBBox("RESULT", alignerInts[6], 0, 0 );
+        for(int i = 0; i <3;i++){
+            int x = s.aligners[14];
+            int y = s.aligners[15]+35;
+            ofSetColor(255);
+            
+            font.draw("#"+ofToString(i+1), alignerInts[6], x, y+(name.height+15)*i);
+            font.draw("RESULT", alignerInts[6], x+200, y+(name.height+15)*i);
+            font.draw(ofToString(10), alignerInts[6], x+200*2+20+name.width, y+(name.height+15)*i);
+        }
+        
+    }else{
+        
+        ofFill();
+        ofPushMatrix();
+        ofTranslate(alignerInts[8], alignerInts[9]);
+        for(int i = 0 ; i<12;i++){
+            for (int u = 0; u<6; u++) {
+                if(sub.amountAnswerOptions>0){
+                    int col = (i+u)%sub.amountAnswerOptions;
+                    ofSetColor(s.colors[col]);
+                    ofDrawRectangle(i*70, u*70, 70, 70);
+                    if (sub.useImages && sub.images[col]<imgs.size()) {
+                        imgs[sub.images[col]].draw(i*70, u*70,70,70);
+                    }
+                }
+            }
+        }
+        ofPopMatrix();
+        
+        ofSetColor(255);
+        //headline
+        drawColumn(sub.headline, alignerInts[16], alignerInts[17], alignerInts[2], alignerInts[18]);
+        
+        //explanation
+        drawColumn(s.explanation, alignerInts[19], alignerInts[20], alignerInts[3], alignerInts[21]);
+        
+        //question
+        drawColumn(sub.question, alignerInts[22], alignerInts[23], alignerInts[4], alignerInts[24]);
+        
+        //timer
+        font.draw(ofToString(10), alignerInts[0], alignerInts[10], alignerInts[11]);
+        
+        //legend
+        ofPushMatrix();
+        ofTranslate(alignerInts[16], alignerInts[17]);
+        for(int i = 0 ; i<sub.amountAnswerOptions;i++){
+            ofSetColor(255);
+            font.draw(sub.answerOptions[i], alignerInts[1], 70, i * 60+25);
+            ofSetColor(s.colors[i]);
+            ofDrawRectangle(0, 0, 60, 60*i);
+        }
+        ofPopMatrix();
+        
+        //result
+        ofSetColor(255);
+        ofRectangle rectt = font.getBBox("result - always in the middle", alignerInts[5], 0, 0);
+        font.draw("result - always in the middle", alignerInts[5], (RES_W/2)-(rectt.width/2), RES_H/2-s.aligners[5]);
+        
+        //live results;
+        ofSetColor(255);
+        font.draw("LIVE RESULTS", alignerInts[7], alignerInts[14], alignerInts[15]+35);
+        
+        ofRectangle name = font.getBBox("RESULT", alignerInts[6], 0, 0 );
+        for(int i = 0; i <3;i++){
+            int x = s.aligners[14];
+            int y = s.aligners[15]+35;
+            ofSetColor(255);
+            
+            font.draw("#"+ofToString(i+1), alignerInts[6], x, y+(name.height+15)*i);
+            font.draw("RESULT", alignerInts[6], x+200, y+(name.height+15)*i);
+            font.draw(ofToString(10), alignerInts[6], x+200*2+20+name.width, y+(name.height+15)*i);
+        }
     }
+    ofPopMatrix();
     fbo.end();
-    
+        
 }
 
 void myofApp::saveToXml(){
@@ -755,7 +843,7 @@ void myofApp::saveToXml(){
         xml = *new ofxXmlSettings;
         xml.loadFile(dataFolder+"/data.xml");
         //xml.loadFile("Sequences/"+name+".xml");
-        
+    
         xml.clear();
         xml.addTag("document");
         xml.pushTag("document");
@@ -767,13 +855,13 @@ void myofApp::saveToXml(){
         if(i<tableNames.size()-1){table.append(tableNames[i]+"//");}
         else {table.append(tableNames[i]);}
     }
-    cout<<table<<endl;
+    //cout<<table<<endl;
     xml.addTag("tableNames");
     xml.setValue("tableNames", table);
     
     // mising table names, images and wrong image
     
-    cout << ofToString(scenes.size()) + " this many scenes"<<endl;
+  //  cout << ofToString(scenes.size()) + " this many scenes"<<endl;
     for(int i = 0; i<scenes.size(); i++){
             xml.addTag("scene");
             xml.pushTag("scene",i);
@@ -956,213 +1044,241 @@ void myofApp::loadFromXml(){
     for(int i = 0; i<sceneNames.size();i++){
         xml.clear();
         
-        if(xml.loadFile(dataFolder+"/"+sceneNames[i]+".xml"))cout<<"loaded "+ dataFolder+"/"+sceneNames[i]+".xml"<<endl;
-        xml.pushTag("document");
-        
-        if(xml.tagExists("vote")){
-            addNewScene(0,sceneNames[i]);
-            xml.pushTag("vote");
-        }
-        if(xml.tagExists("quiz")){
-            addNewScene(1,sceneNames[i]);
-            xml.pushTag("quiz");
+        if(xml.loadFile(dataFolder+"/"+sceneNames[i]+".xml")){
+            cout<<"loaded "+ dataFolder+"/"+sceneNames[i]+".xml"<<endl;
 
-        }
-        if(xml.tagExists("assesment")){
-            addNewScene(0,sceneNames[2]);
-            xml.pushTag("assesment");
+        if(xml.tagExists("document")){
+            
+            xml.pushTag("document");
+            
 
-        }
-        
-        cout <<"amount of scenes" + ofToString(scenes.size()) <<endl;
-        if(xml.tagExists("globalFontSize"))setSceneAlignersFromXml(&scenes[i],xml);
-        
-        if(xml.tagExists("number"))scenes[i].useNumbers =true;
-        if(xml.tagExists("weighed"))scenes[i].weighed =true;
-        if(xml.tagExists("substractive"))scenes[i].substractive =true;
-        if(xml.tagExists("globalTime"))scenes[i].globalTimer =xml.getValue("globalTime", 0);
-        if(xml.tagExists("totalPoints"))scenes[i].totalPoints =xml.getValue("totalPoints", 0);
-        if(xml.tagExists("explanation")){scenes[i].explanation =xml.getValue("explanation", "");
-            cout<< "loaded explanation  "+ scenes[i].explanation<<endl;}
-        if(xml.tagExists("color")){ //colors for assesment is fucked up..
-            xml.pushTag("color");
-            scenes[i].colors[0].setHex(xml.getValue("c", 0,0));
-            scenes[i].colors[1].setHex(xml.getValue("c", 0,1));
-            xml.popTag();
-        }
-        if (xml.tagExists("headline") && scenes[i].subs.size()>0)scenes[i].subs[0].headline = xml.getValue("headline", ""); //for retarded vote!!!
-        
-        if(xml.tagExists("question"))scenes[i].amountOfSubs = xml.getNumTags("question");
-        for(int u = 0 ; u<xml.getNumTags("question");u++){
-            xml.pushTag("question",u);
-            if (xml.tagExists("headline")&&scenes[i].subs.size()>u)scenes[i].subs[u].headline = xml.getValue("headline", "");
-            if (xml.tagExists("secTime")){scenes[i].subs[u].localTimer = xml.getValue("secTime", 0);
-                scenes[i].subs[u].useGlobalTimer = false;
-            }else{
-                scenes[i].subs[u].useGlobalTimer = true;
+            bool loadThis = false;
+            if(xml.tagExists("vote")){
+                addNewScene(0,sceneNames[i]);
+                xml.pushTag("vote");
+                loadThis=true;
             }
-            
-            if (xml.tagExists("q"))scenes[i].subs[u].question = xml.getValue("q", "");
-            for (int p = 0; p<xml.getNumTags("a"); p++) {
-                scenes[i].subs[u].amountAnswerOptions = xml.getNumTags("a");
-                scenes[i].subs[u].answerOptions[p] = xml.getValue("a", "",p);
-                xml.pushTag("a",p);
-                if (xml.tagExists("color")){
-                    scenes[i].colors[p].setHex(xml.getValue("color", 0));
-                }
-                if (xml.tagExists("img")){
-                    scenes[i].subs[u].images[p] = xml.getValue("img", 0);
-                    scenes[i].subs[u].useImages = true;
-                }else{
-                    scenes[i].subs[u].useImages = false;
-                }
-                xml.popTag();
+            else if(xml.tagExists("quiz")){
+                addNewScene(1,sceneNames[i]);
+                xml.pushTag("quiz");
+                loadThis=true;
+                
             }
-            
-            xml.popTag();
-            if(xml.tagExists("rightAnswers")){
-                xml.pushTag("rightAnswers");
-                for(int u = 0; u<xml.getNumTags("a");u++){
-                    scenes[i].subs[u].rightAnswer = xml.getValue("a", 0,u);
-                }
-                xml.popTag();
+            else if(xml.tagExists("assesment")){
+                addNewScene(0,sceneNames[2]);
+                xml.pushTag("assesment");
+                loadThis=true;
             }
-        }
-        xml.popTag();
+            if(loadThis){
+                cout <<"amount of scenes" + ofToString(scenes.size()) <<endl;
+                if(xml.tagExists("globalFontSize")){setSceneAlignersFromXml(&scenes[i],xml);
+                    scenes[i].useGlobalAligners = false;
+                }
+                
+                if(xml.tagExists("number"))scenes[i].useNumbers =true;
+                if(xml.tagExists("weighed"))scenes[i].weighed =true;
+                if(xml.tagExists("substractive"))scenes[i].substractive =true;
+                if(xml.tagExists("globalTime"))scenes[i].globalTimer =xml.getValue("globalTime", 0);
+                if(xml.tagExists("totalPoints"))scenes[i].totalPoints =xml.getValue("totalPoints", 0);
+                if(xml.tagExists("explanation"))scenes[i].explanation =xml.getValue("explanation", "",0);
+    
+                if(xml.tagExists("color")){ //colors for assesment is fucked up..
+                    xml.pushTag("color");
+                    scenes[i].colors[0].setHex(xml.getValue("c", 0,0));
+                    scenes[i].colors[1].setHex(xml.getValue("c", 0,1));
+                    xml.popTag();
+                }
+                if (xml.tagExists("headline") && scenes[i].subs.size()>0)scenes[i].subs[0].headline = xml.getValue("headline", ""); //for retarded vote!!!
+                
+                if(xml.tagExists("question"))scenes[i].amountOfSubs = xml.getNumTags("question");
+                for(int u = 0 ; u<xml.getNumTags("question");u++){
+                    xml.pushTag("question",u);
+                    if (xml.tagExists("headline")&&scenes[i].subs.size()>u)scenes[i].subs[u].headline = xml.getValue("headline", "",0);
+                    if (xml.tagExists("secTime")){scenes[i].subs[u].localTimer = xml.getValue("secTime", 0);
+                        scenes[i].subs[u].useGlobalTimer = false;
+                    }else{
+                        scenes[i].subs[u].useGlobalTimer = true;
+                    }
+                    
+                    if (xml.tagExists("q"))scenes[i].subs[u].question = xml.getValue("q", "");
+                    for (int p = 0; p<xml.getNumTags("a"); p++) {
+                        scenes[i].subs[u].amountAnswerOptions = xml.getNumTags("a");
+                        scenes[i].subs[u].answerOptions[p] = xml.getValue("a", "",p);
+                        xml.pushTag("a",p);
+                        if (xml.tagExists("color")){
+                            scenes[i].colors[p].setHex(xml.getValue("color", 0));
+                        }
+                        if (xml.tagExists("img")){
+                            scenes[i].subs[u].images[p] = xml.getValue("img", 0);
+                            scenes[i].subs[u].useImages = true;
+                        }else{
+                            scenes[i].subs[u].useImages = false;
+                        }
+                        xml.popTag();
+                    }
+                    
+                    xml.popTag();
+                    if(xml.tagExists("rightAnswers")){
+                        xml.pushTag("rightAnswers");
+                        for(int u = 0; u<xml.getNumTags("a");u++){
+                            scenes[i].subs[u].rightAnswer = xml.getValue("a", 0,u);
+                        }
+                        xml.popTag();
+                    }
+                }
+            } //if scene added
+            xml.popTag(); //document
+        } //if doc exists
+        }// if loaded!! 
     }// for scenes
     
 }
 
 void myofApp::setGlobalAlignersFromXml(ofxXmlSettings xml){
-    if(xml.tagExists("liveResultFontSize"))liveResultFontSize=xml.getValue("liveResultFontSize", 0);
-    cout<<liveResultFontSize<<endl;
-    if(xml.tagExists("headLineFontSize"))headLineFontSize=xml.getValue("headLineFontSize", 0);
-    cout<<headLineFontSize<<endl;
-    if(xml.tagExists("explanationFontSize"))explanationFontSize=xml.getValue("explanationFontSize", 0);
-    cout<<explanationFontSize<<endl;
-    if(xml.tagExists("questionFontSize"))questionFontSize=xml.getValue("questionFontSize", 0);
-    if(xml.tagExists("chartFontSize"))chartFontSize=xml.getValue("chartFontSize", 0);
-    if(xml.tagExists("legendFontSize"))legendFontSize=xml.getValue("legendFontSize", 0);
-    if(xml.tagExists("timerSize"))timerSize=xml.getValue("timerSize", 0);
-    if(xml.tagExists("resultFontSize"))resultFontSize=xml.getValue("resultFontSize", 0);
-    if(xml.tagExists("matrixX"))matrixX=xml.getValue("matrixX", 0);
-    if(xml.tagExists("matrixY"))matrixY=xml.getValue("matrixY", 0);
-    if(xml.tagExists("timerX"))timerX=xml.getValue("timerX", 0);
-    if(xml.tagExists("timerY"))timerY=xml.getValue("timerY", 0);
-    if(xml.tagExists("legendX"))legendX=xml.getValue("legendX", 0);
-    if(xml.tagExists("legendY"))legendY=xml.getValue("legendY", 0);
-    if(xml.tagExists("explanationX"))explanationX=xml.getValue("explanationX", 0);
-    if(xml.tagExists("explanationY"))explanationY=xml.getValue("explanationY", 0);
-    if(xml.tagExists("headlineX"))headlineX=xml.getValue("headlineX", 0);
-    if(xml.tagExists("headlineY"))headlineY=xml.getValue("headlineY", 0);
-    if(xml.tagExists("questionX"))questionX=xml.getValue("questionX", 0);
-    if(xml.tagExists("questionY"))questionY=xml.getValue("questionY", 0);
-    if(xml.tagExists("top10chartAssesmentX"))top10chartAssesmentX=xml.getValue("top10chartAssesmentX", 0);
-    if(xml.tagExists("top10chartAssesmentY"))top10chartAssesmentY=xml.getValue("top10chartAssesmentY", 0);
-    if(xml.tagExists("top10chartQuizX"))top10chartQuizX=xml.getValue("top10chartQuizX", 0);
-    if(xml.tagExists("top10chartQuizY"))top10chartQuizY=xml.getValue("top10chartQuizY", 0);
-    if(xml.tagExists("collumWidth1"))collumWidth1=xml.getValue("collumWidth1", 0);
-    if(xml.tagExists("collumWidth2"))collumWidth2=xml.getValue("collumWidth2", 0);
-    if(xml.tagExists("collumWidth3"))collumWidth3=xml.getValue("collumWidth3", 0);
+    for(int i=0; i<alignerStrings.size();i++){
+        if(xml.tagExists(alignerStrings[i]))alignerInts[i]=xml.getValue(alignerStrings[i], 0);
+    }
+    
+//    if(xml.tagExists("liveResultFontSize"))liveResultFontSize=xml.getValue("liveResultFontSize", 0);
+//    cout<<liveResultFontSize<<endl;
+//    if(xml.tagExists("headLineFontSize"))headLineFontSize=xml.getValue("headLineFontSize", 0);
+//    cout<<headLineFontSize<<endl;
+//    if(xml.tagExists("explanationFontSize"))explanationFontSize=xml.getValue("explanationFontSize", 0);
+//    cout<<explanationFontSize<<endl;
+//    if(xml.tagExists("questionFontSize"))questionFontSize=xml.getValue("questionFontSize", 0);
+//    if(xml.tagExists("chartFontSize"))chartFontSize=xml.getValue("chartFontSize", 0);
+//    if(xml.tagExists("legendFontSize"))legendFontSize=xml.getValue("legendFontSize", 0);
+//    if(xml.tagExists("timerSize"))timerSize=xml.getValue("timerSize", 0);
+//    if(xml.tagExists("resultFontSize"))resultFontSize=xml.getValue("resultFontSize", 0);
+//    if(xml.tagExists("matrixX"))matrixX=xml.getValue("matrixX", 0);
+//    if(xml.tagExists("matrixY"))matrixY=xml.getValue("matrixY", 0);
+//    if(xml.tagExists("timerX"))timerX=xml.getValue("timerX", 0);
+//    if(xml.tagExists("timerY"))timerY=xml.getValue("timerY", 0);
+//    if(xml.tagExists("legendX"))legendX=xml.getValue("legendX", 0);
+//    if(xml.tagExists("legendY"))legendY=xml.getValue("legendY", 0);
+//    if(xml.tagExists("explanationX"))explanationX=xml.getValue("explanationX", 0);
+//    if(xml.tagExists("explanationY"))explanationY=xml.getValue("explanationY", 0);
+//    if(xml.tagExists("headlineX"))headlineX=xml.getValue("headlineX", 0);
+//    if(xml.tagExists("headlineY"))headlineY=xml.getValue("headlineY", 0);
+//    if(xml.tagExists("questionX"))questionX=xml.getValue("questionX", 0);
+//    if(xml.tagExists("questionY"))questionY=xml.getValue("questionY", 0);
+//    if(xml.tagExists("top10chartAssesmentX"))top10chartAssesmentX=xml.getValue("top10chartAssesmentX", 0);
+//    if(xml.tagExists("top10chartAssesmentY"))top10chartAssesmentY=xml.getValue("top10chartAssesmentY", 0);
+//    if(xml.tagExists("top10chartQuizX"))top10chartQuizX=xml.getValue("top10chartQuizX", 0);
+//    if(xml.tagExists("top10chartQuizY"))top10chartQuizY=xml.getValue("top10chartQuizY", 0);
+//    if(xml.tagExists("collumWidth1"))collumWidth1=xml.getValue("collumWidth1", 0);
+//    if(xml.tagExists("collumWidth2"))collumWidth2=xml.getValue("collumWidth2", 0);
+//    if(xml.tagExists("collumWidth3"))collumWidth3=xml.getValue("collumWidth3", 0);
     
     
 
 
 }
 void myofApp::setSceneAlignersFromXml(Scene *s,ofxXmlSettings xml){
-    if(xml.tagExists("liveResultFontSize"))s->liveResultFontSize=xml.getValue("liveResultFontSize", 0);
-    if(xml.tagExists("headLineFontSize"))s->headLineFontSize=xml.getValue("headLineFontSize", 0);
-    if(xml.tagExists("explanationFontSize"))s->explanationFontSize=xml.getValue("explanationFontSize", 0);
-    if(xml.tagExists("questionFontSize"))s->questionFontSize=xml.getValue("questionFontSize", 0);
-    if(xml.tagExists("chartFontSize"))s->chartFontSize=xml.getValue("chartFontSize", 0);
-    if(xml.tagExists("legendFontSize"))s->legendFontSize=xml.getValue("legendFontSize", 0);
-    if(xml.tagExists("timerSize"))s->timerSize=xml.getValue("timerSize", 0);
-    if(xml.tagExists("resultFontSize"))s->resultFontSize=xml.getValue("resultFontSize", 0);
-    if(xml.tagExists("matrixX"))s->matrixX=xml.getValue("matrixX", 0);
-    if(xml.tagExists("matrixY"))s->matrixY=xml.getValue("matrixY", 0);
-    if(xml.tagExists("timerX"))s->timerX=xml.getValue("timerX", 0);
-    if(xml.tagExists("timerY"))s->timerY=xml.getValue("timerY", 0);
-    if(xml.tagExists("legendX"))s->legendX=xml.getValue("legendX", 0);
-    if(xml.tagExists("legendY"))s->legendY=xml.getValue("legendY", 0);
-    if(xml.tagExists("explanationX"))s->explanationX=xml.getValue("explanationX", 0);
-    if(xml.tagExists("explanationY"))s->explanationY=xml.getValue("explanationY", 0);
-    if(xml.tagExists("headlineX"))s->headlineX=xml.getValue("headlineX", 0);
-    if(xml.tagExists("headlineY"))s->headlineY=xml.getValue("headlineY", 0);
-    if(xml.tagExists("questionX"))s->questionX=xml.getValue("questionX", 0);
-    if(xml.tagExists("questionY"))s->questionY=xml.getValue("questionY", 0);
-    if(xml.tagExists("top10chartAssesmentX"))s->top10chartAssesmentX=xml.getValue("top10chartAssesmentX", 0);
-    if(xml.tagExists("top10chartAssesmentY"))s->top10chartAssesmentY=xml.getValue("top10chartAssesmentY", 0);
-    if(xml.tagExists("top10chartQuizX"))s->top10chartQuizX=xml.getValue("top10chartQuizX", 0);
-    if(xml.tagExists("top10chartQuizY"))s->top10chartQuizY=xml.getValue("top10chartQuizY", 0);
-    if(xml.tagExists("collumWidth1"))s->collumWidth1=xml.getValue("collumWidth1", 0);
-    if(xml.tagExists("collumWidth2"))s->collumWidth2=xml.getValue("collumWidth2", 0);
-    if(xml.tagExists("collumWidth3"))s->collumWidth3=xml.getValue("collumWidth3", 0);
+    for(int i = 0; i<alignerStrings.size();i++){
+        if(xml.tagExists(alignerStrings[i]))s->aligners[i]=xml.getValue(alignerStrings[i], 0);
+    }
+    
+//    if(xml.tagExists("liveResultFontSize"))s->liveResultFontSize=xml.getValue("liveResultFontSize", 0);
+//    if(xml.tagExists("headLineFontSize"))s->headLineFontSize=xml.getValue("headLineFontSize", 0);
+//    if(xml.tagExists("explanationFontSize"))s->explanationFontSize=xml.getValue("explanationFontSize", 0);
+//    if(xml.tagExists("questionFontSize"))s->questionFontSize=xml.getValue("questionFontSize", 0);
+//    if(xml.tagExists("chartFontSize"))s->chartFontSize=xml.getValue("chartFontSize", 0);
+//    if(xml.tagExists("legendFontSize"))s->legendFontSize=xml.getValue("legendFontSize", 0);
+//    if(xml.tagExists("timerSize"))s->timerSize=xml.getValue("timerSize", 0);
+//    if(xml.tagExists("resultFontSize"))s->resultFontSize=xml.getValue("resultFontSize", 0);
+//    if(xml.tagExists("matrixX"))s->matrixX=xml.getValue("matrixX", 0);
+//    if(xml.tagExists("matrixY"))s->matrixY=xml.getValue("matrixY", 0);
+//    if(xml.tagExists("timerX"))s->timerX=xml.getValue("timerX", 0);
+//    if(xml.tagExists("timerY"))s->timerY=xml.getValue("timerY", 0);
+//    if(xml.tagExists("legendX"))s->legendX=xml.getValue("legendX", 0);
+//    if(xml.tagExists("legendY"))s->legendY=xml.getValue("legendY", 0);
+//    if(xml.tagExists("explanationX"))s->explanationX=xml.getValue("explanationX", 0);
+//    if(xml.tagExists("explanationY"))s->explanationY=xml.getValue("explanationY", 0);
+//    if(xml.tagExists("headlineX"))s->headlineX=xml.getValue("headlineX", 0);
+//    if(xml.tagExists("headlineY"))s->headlineY=xml.getValue("headlineY", 0);
+//    if(xml.tagExists("questionX"))s->questionX=xml.getValue("questionX", 0);
+//    if(xml.tagExists("questionY"))s->questionY=xml.getValue("questionY", 0);
+//    if(xml.tagExists("top10chartAssesmentX"))s->top10chartAssesmentX=xml.getValue("top10chartAssesmentX", 0);
+//    if(xml.tagExists("top10chartAssesmentY"))s->top10chartAssesmentY=xml.getValue("top10chartAssesmentY", 0);
+//    if(xml.tagExists("top10chartQuizX"))s->top10chartQuizX=xml.getValue("top10chartQuizX", 0);
+//    if(xml.tagExists("top10chartQuizY"))s->top10chartQuizY=xml.getValue("top10chartQuizY", 0);
+//    if(xml.tagExists("collumWidth1"))s->collumWidth1=xml.getValue("collumWidth1", 0);
+//    if(xml.tagExists("collumWidth2"))s->collumWidth2=xml.getValue("collumWidth2", 0);
+//    if(xml.tagExists("collumWidth3"))s->collumWidth3=xml.getValue("collumWidth3", 0);
     
 
     
 }
 void myofApp::setGlobalAlignersToXml(ofxXmlSettings* xml){
     //aligners
+    
     xml->addTag("globalFontSize");
     xml->setValue("globalFontSize",40);
-    
-    xml->addTag("liveResultFontSize");
-    xml->setValue("liveResultFontSize",liveResultFontSize);
-    xml->addTag("headLineFontSize");
-    xml->setValue("headLineFontSize",headLineFontSize);
-    xml->addTag("explanationFontSize");
-    xml->setValue("explanationFontSize",explanationFontSize);
-    xml->addTag("questionFontSize");
-    xml->setValue("questionFontSize",questionFontSize);
-    xml->addTag("chartFontSize");
-    xml->setValue("chartFontSize",chartFontSize);
-    xml->addTag("legendFontSize");
-    xml->setValue("legendFontSize",legendFontSize);
-    xml->addTag("timerSize");
-    xml->setValue("timerSize",timerSize);
-    xml->addTag("resultFontSize");
-    xml->setValue("resultFontSize",resultFontSize);
-    
-    xml->addTag("matrixX");
-    xml->setValue("matrixX",matrixX);
-    xml->addTag("matrixY");
-    xml->setValue("matrixY",matrixY);
-    xml->addTag("timerX");
-    xml->setValue("timerX",timerX);
-    xml->addTag("timerY");
-    xml->setValue("timerY",timerY);
-    xml->addTag("legendX");
-    xml->setValue("legendX",legendX);
-    xml->addTag("legendY");
-    xml->setValue("legendY",legendY);
-    xml->addTag("explanationX");
-    xml->setValue("explanationX",explanationX);
-    xml->addTag("explanationY");
-    xml->setValue("explanationY",explanationY);
-    xml->addTag("headlineX");
-    xml->setValue("headlineX",headlineX);
-    xml->addTag("headlineY");
-    xml->setValue("headlineY",headlineY);
-    xml->addTag("questionX");
-    xml->setValue("questionX",questionX);
-    
-    xml->addTag("collumWidth1");
-    xml->setValue("collumWidth1",collumWidth1);
-    xml->addTag("collumWidth2");
-    xml->setValue("collumWidth2",collumWidth2);
-    xml->addTag("collumWidth3");
-    xml->setValue("collumWidth3",collumWidth3);
-    
-    xml->addTag("questionY");
-    xml->setValue("questionY",questionY);
-    xml->addTag("top10chartAssesmentX");
-    xml->setValue("top10chartAssesmentX",top10chartAssesmentX);
-    xml->addTag("top10chartAssesmentY");
-    xml->setValue("top10chartAssesmentY",top10chartAssesmentY);
-    xml->addTag("top10chartQuizX");
-    xml->setValue("top10chartQuizX",top10chartQuizX);
-    xml->addTag("top10chartQuizY");
-    xml->setValue("top10chartQuizY",top10chartQuizY);
+    for(int i = 0 ; i< alignerStrings.size();i++){
+        xml->addTag(alignerStrings[i]);
+        xml->setValue(alignerStrings[i], alignerInts[i]);
+    }
+//    
+//
+//    
+//    xml->addTag("liveResultFontSize");
+//    xml->setValue("liveResultFontSize",liveResultFontSize);
+//    xml->addTag("headLineFontSize");
+//    xml->setValue("headLineFontSize",headLineFontSize);
+//    xml->addTag("explanationFontSize");
+//    xml->setValue("explanationFontSize",explanationFontSize);
+//    xml->addTag("questionFontSize");
+//    xml->setValue("questionFontSize",questionFontSize);
+//    xml->addTag("chartFontSize");
+//    xml->setValue("chartFontSize",chartFontSize);
+//    xml->addTag("legendFontSize");
+//    xml->setValue("legendFontSize",legendFontSize);
+//    xml->addTag("timerSize");
+//    xml->setValue("timerSize",timerSize);
+//    xml->addTag("resultFontSize");
+//    xml->setValue("resultFontSize",resultFontSize);
+//    
+//    xml->addTag("matrixX");
+//    xml->setValue("matrixX",matrixX);
+//    xml->addTag("matrixY");
+//    xml->setValue("matrixY",matrixY);
+//    xml->addTag("timerX");
+//    xml->setValue("timerX",timerX);
+//    xml->addTag("timerY");
+//    xml->setValue("timerY",timerY);
+//    xml->addTag("legendX");
+//    xml->setValue("legendX",legendX);
+//    xml->addTag("legendY");
+//    xml->setValue("legendY",legendY);
+//    xml->addTag("explanationX");
+//    xml->setValue("explanationX",explanationX);
+//    xml->addTag("explanationY");
+//    xml->setValue("explanationY",explanationY);
+//    xml->addTag("headlineX");
+//    xml->setValue("headlineX",headlineX);
+//    xml->addTag("headlineY");
+//    xml->setValue("headlineY",headlineY);
+//    xml->addTag("questionX");
+//    xml->setValue("questionX",questionX);
+//    
+//    xml->addTag("collumWidth1");
+//    xml->setValue("collumWidth1",collumWidth1);
+//    xml->addTag("collumWidth2");
+//    xml->setValue("collumWidth2",collumWidth2);
+//    xml->addTag("collumWidth3");
+//    xml->setValue("collumWidth3",collumWidth3);
+//    
+//    xml->addTag("questionY");
+//    xml->setValue("questionY",questionY);
+//    xml->addTag("top10chartAssesmentX");
+//    xml->setValue("top10chartAssesmentX",top10chartAssesmentX);
+//    xml->addTag("top10chartAssesmentY");
+//    xml->setValue("top10chartAssesmentY",top10chartAssesmentY);
+//    xml->addTag("top10chartQuizX");
+//    xml->setValue("top10chartQuizX",top10chartQuizX);
+//    xml->addTag("top10chartQuizY");
+//    xml->setValue("top10chartQuizY",top10chartQuizY);
 
 }
 
@@ -1171,250 +1287,266 @@ void myofApp::setSceneAlignersToXml(Scene s, ofxXmlSettings* xml){
     xml->addTag("globalFontSize");
     xml->setValue("globalFontSize",40);
     
-    xml->addTag("liveResultFontSize");
-    xml->setValue("liveResultFontSize",s.liveResultFontSize);
-    xml->addTag("headLineFontSize");
-    xml->setValue("headLineFontSize",s.headLineFontSize);
-    xml->addTag("explanationFontSize");
-    xml->setValue("explanationFontSize",s.explanationFontSize);
-    xml->addTag("questionFontSize");
-    xml->setValue("questionFontSize",s.questionFontSize);
-    xml->addTag("chartFontSize");
-    xml->setValue("chartFontSize",s.chartFontSize);
-    xml->addTag("legendFontSize");
-    xml->setValue("legendFontSize",s.legendFontSize);
-    xml->addTag("timerSize");
-    xml->setValue("timerSize",s.timerSize);
-    xml->addTag("resultFontSize");
-    xml->setValue("resultFontSize",s.resultFontSize);
+    for(int i = 0; i<alignerStrings.size();i++){
+        xml->addTag(alignerStrings[i]);
+        xml->setValue(alignerStrings[i], s.aligners[i]);
+    }
     
-    xml->addTag("matrixX");
-    xml->setValue("matrixX",s.matrixX);
-    xml->addTag("matrixY");
-    xml->setValue("matrixY",s.matrixY);
-    xml->addTag("timerX");
-    xml->setValue("timerX",s.timerX);
-    xml->addTag("timerY");
-    xml->setValue("timerY",s.timerY);
-    xml->addTag("legendX");
-    xml->setValue("legendX",s.legendX);
-    xml->addTag("legendY");
-    xml->setValue("legendY",s.legendY);
-    xml->addTag("explanationX");
-    xml->setValue("explanationX",s.explanationX);
-    xml->addTag("explanationY");
-    xml->setValue("explanationY",s.explanationY);
-    xml->addTag("headlineX");
-    xml->setValue("headlineX",s.headlineX);
-    xml->addTag("headlineY");
-    xml->setValue("headlineY",s.headlineY);
-    xml->addTag("questionX");
-    xml->setValue("questionX",s.questionX);
-    
-    xml->addTag("questionY");
-    xml->setValue("questionY",s.questionY);
-    xml->addTag("top10chartAssesmentX");
-    xml->setValue("top10chartAssesmentX",s.top10chartAssesmentX);
-    xml->addTag("top10chartAssesmentY");
-    xml->setValue("top10chartAssesmentY",s.top10chartAssesmentY);
-    xml->addTag("top10chartQuizX");
-    xml->setValue("top10chartQuizX",s.top10chartQuizX);
-    xml->addTag("top10chartQuizY");
-    xml->setValue("top10chartQuizY",s.top10chartQuizY);
-    
-    xml->addTag("collumWidth1");
-    xml->setValue("collumWidth1",s.collumWidth1);
-    xml->addTag("collumWidth2");
-    xml->setValue("collumWidth2",s.collumWidth2);
-    xml->addTag("collumWidth3");
-    xml->setValue("collumWidth3",s.collumWidth3);
+
+//    
+//    xml->addTag("liveResultFontSize");
+//    xml->setValue("liveResultFontSize",s.liveResultFontSize);
+//    xml->addTag("headLineFontSize");
+//    xml->setValue("headLineFontSize",s.headLineFontSize);
+//    xml->addTag("explanationFontSize");
+//    xml->setValue("explanationFontSize",s.explanationFontSize);
+//    xml->addTag("questionFontSize");
+//    xml->setValue("questionFontSize",s.questionFontSize);
+//    xml->addTag("chartFontSize");
+//    xml->setValue("chartFontSize",s.chartFontSize);
+//    xml->addTag("legendFontSize");
+//    xml->setValue("legendFontSize",s.legendFontSize);
+//    xml->addTag("timerSize");
+//    xml->setValue("timerSize",s.timerSize);
+//    xml->addTag("resultFontSize");
+//    xml->setValue("resultFontSize",s.resultFontSize);
+//    
+//    xml->addTag("matrixX");
+//    xml->setValue("matrixX",s.matrixX);
+//    xml->addTag("matrixY");
+//    xml->setValue("matrixY",s.matrixY);
+//    xml->addTag("timerX");
+//    xml->setValue("timerX",s.timerX);
+//    xml->addTag("timerY");
+//    xml->setValue("timerY",s.timerY);
+//    xml->addTag("legendX");
+//    xml->setValue("legendX",s.legendX);
+//    xml->addTag("legendY");
+//    xml->setValue("legendY",s.legendY);
+//    xml->addTag("explanationX");
+//    xml->setValue("explanationX",s.explanationX);
+//    xml->addTag("explanationY");
+//    xml->setValue("explanationY",s.explanationY);
+//    xml->addTag("headlineX");
+//    xml->setValue("headlineX",s.headlineX);
+//    xml->addTag("headlineY");
+//    xml->setValue("headlineY",s.headlineY);
+//    xml->addTag("questionX");
+//    xml->setValue("questionX",s.questionX);
+//    
+//    xml->addTag("questionY");
+//    xml->setValue("questionY",s.questionY);
+//    xml->addTag("top10chartAssesmentX");
+//    xml->setValue("top10chartAssesmentX",s.top10chartAssesmentX);
+//    xml->addTag("top10chartAssesmentY");
+//    xml->setValue("top10chartAssesmentY",s.top10chartAssesmentY);
+//    xml->addTag("top10chartQuizX");
+//    xml->setValue("top10chartQuizX",s.top10chartQuizX);
+//    xml->addTag("top10chartQuizY");
+//    xml->setValue("top10chartQuizY",s.top10chartQuizY);
+//    
+//    xml->addTag("collumWidth1");
+//    xml->setValue("collumWidth1",s.collumWidth1);
+//    xml->addTag("collumWidth2");
+//    xml->setValue("collumWidth2",s.collumWidth2);
+//    xml->addTag("collumWidth3");
+//    xml->setValue("collumWidth3",s.collumWidth3);
     
 }
 
 // alinger aligning... updateGlobal -> copy p_sliders to int values. , copy p_sliders to scene. Set p_sliders to scene values.
 void myofApp::updateGlobalAligners(){ /// only making global aligners... - these are for all that does not specify othersthings.
-    matrixX = p_matrixX;
-    matrixY= p_matrixY;
-    
-    timerX=p_timerX;
-    timerY=p_timerY;
-    
-    timerSize=p_timerSize;
-    liveResultFontSize=p_liveResultFontSize;
-    explanationFontSize=p_explanationFontSize;
-    chartFontSize=p_chartFontSize;
-    legendFontSize=p_legendFontSize;
-    resultFontSize=p_resultFontSize;
-    questionFontSize=p_questionFontSize;
-    headLineFontSize=p_headLineFontSize;
-    
-    liveResultX=p_liveResultX;
-    liveResultY=p_liveResultY;
-    
-    legendX=p_legendX;
-    legendY=p_legendY;
-    
-    explanationX=p_explanationX; //text2
-    explanationY=p_explanationY;
-    
-    collumWidth1 = p_collumWidth1;
-    collumWidth2 = p_collumWidth2;
-    collumWidth3 = p_collumWidth3;
-    
-    headlineX=p_headlineX; //text1
-    headlineY=p_headlineY;
-    
-    chartFontSize=p_chartFontSize;
-    
-    top10chartAssesmentX=p_top10chartAssesmentX;
-    top10chartAssesmentY=p_top10chartAssesmentY;
-    
-    top10chartQuizX=p_top10chartQuizX;
-    top10chartQuizY=p_top10chartQuizY;
-    
-    questionX=p_questionX;
-    questionY=p_questionY;
+    for(int i = 0; i<alignerStrings.size();i++){
+        alignerInts[i]=DatSlider->getSlider(alignerStrings[i])->getValue();
+    }
+//    
+//    matrixX = p_matrixX;
+//    matrixY= p_matrixY;
+//    
+//    timerX=p_timerX;
+//    timerY=p_timerY;
+//    
+//    timerSize=p_timerSize;
+//    liveResultFontSize=p_liveResultFontSize;
+//    explanationFontSize=p_explanationFontSize;
+//    chartFontSize=p_chartFontSize;
+//    legendFontSize=p_legendFontSize;
+//    resultFontSize=p_resultFontSize;
+//    questionFontSize=p_questionFontSize;
+//    headLineFontSize=p_headLineFontSize;
+//    
+//    liveResultX=p_liveResultX;
+//    liveResultY=p_liveResultY;
+//    
+//    legendX=p_legendX;
+//    legendY=p_legendY;
+//    
+//    explanationX=p_explanationX; //text2
+//    explanationY=p_explanationY;
+//    
+//    collumWidth1 = p_collumWidth1;
+//    collumWidth2 = p_collumWidth2;
+//    collumWidth3 = p_collumWidth3;
+//    
+//    headlineX=p_headlineX; //text1
+//    headlineY=p_headlineY;
+//    
+//    chartFontSize=p_chartFontSize;
+//    
+//    top10chartAssesmentX=p_top10chartAssesmentX;
+//    top10chartAssesmentY=p_top10chartAssesmentY;
+//    
+//    top10chartQuizX=p_top10chartQuizX;
+//    top10chartQuizY=p_top10chartQuizY;
+//    
+//    questionX=p_questionX;
+//    questionY=p_questionY;
 }
 
 void myofApp::updateLocalAligners(Scene* s){
-    s->matrixX = p_matrixX;
-    s->matrixY= p_matrixY;
-    
-    s->timerX=p_timerX;
-    s->timerY=p_timerY;
-    
-    s->timerSize=p_timerSize;
-    s->liveResultFontSize=p_liveResultFontSize;
-    s->explanationFontSize=p_explanationFontSize;
-    s->chartFontSize=p_chartFontSize;
-    s->legendFontSize=p_legendFontSize;
-    s->resultFontSize=p_resultFontSize;
-    s->questionFontSize=p_questionFontSize;
-    s->headLineFontSize=p_headLineFontSize;
-    
-    s->liveResultX=p_liveResultX;
-    s->liveResultY=p_liveResultY;
-    
-    s->legendX=p_legendX;
-    s->legendY=p_legendY;
-    
-    s->explanationX=p_explanationX; //text2
-    s->explanationY=p_explanationY;
-    
-    s->headlineX=p_headlineX; //text1
-    s->headlineY=p_headlineY;
-    
-    s->chartFontSize=p_chartFontSize;
-    
-    s->top10chartAssesmentX=p_top10chartAssesmentX;
-    s->top10chartAssesmentY=p_top10chartAssesmentY;
-    
-    s->top10chartQuizX=p_top10chartQuizX;
-    s->top10chartQuizY=p_top10chartQuizY;
-    
-    s->questionX=p_questionX;
-    s->questionY=p_questionY;
-    
-    s->collumWidth1 = p_collumWidth1;
-    s->collumWidth2 = p_collumWidth2;
-    s->collumWidth3 = p_collumWidth3;
+//    s->matrixX = p_matrixX;
+//    s->matrixY= p_matrixY;
+//    
+//    s->timerX=p_timerX;
+//    s->timerY=p_timerY;
+//    
+//    s->timerSize=p_timerSize;
+//    s->liveResultFontSize=p_liveResultFontSize;
+//    s->explanationFontSize=p_explanationFontSize;
+//    s->chartFontSize=p_chartFontSize;
+//    s->legendFontSize=p_legendFontSize;
+//    s->resultFontSize=p_resultFontSize;
+//    s->questionFontSize=p_questionFontSize;
+//    s->headLineFontSize=p_headLineFontSize;
+//    
+//    s->liveResultX=p_liveResultX;
+//    s->liveResultY=p_liveResultY;
+//    
+//    s->legendX=p_legendX;
+//    s->legendY=p_legendY;
+//    
+//    s->explanationX=p_explanationX; //text2
+//    s->explanationY=p_explanationY;
+//    
+//    s->headlineX=p_headlineX; //text1
+//    s->headlineY=p_headlineY;
+//    
+//    s->chartFontSize=p_chartFontSize;
+//    
+//    s->top10chartAssesmentX=p_top10chartAssesmentX;
+//    s->top10chartAssesmentY=p_top10chartAssesmentY;
+//    
+//    s->top10chartQuizX=p_top10chartQuizX;
+//    s->top10chartQuizY=p_top10chartQuizY;
+//    
+//    s->questionX=p_questionX;
+//    s->questionY=p_questionY;
+//    
+//    s->collumWidth1 = p_collumWidth1;
+//    s->collumWidth2 = p_collumWidth2;
+//    s->collumWidth3 = p_collumWidth3;
 }
 
 void myofApp::updateGuiToSceneAligners(Scene s){
-    if(!s.useGlobalAligners){
-        p_matrixX = s.matrixX;
-        p_matrixY= s.matrixY;
-        
-        p_timerX=s.timerX;
-        p_timerY=s.timerY;
-        
-        p_timerSize=s.timerSize;
-        p_liveResultFontSize=s.liveResultFontSize;
-        p_explanationFontSize=s.explanationFontSize;
-        p_chartFontSize=s.chartFontSize;
-        p_legendFontSize=s.legendFontSize;
-        p_resultFontSize=s.resultFontSize;
-        p_questionFontSize=s.questionFontSize;
-        p_headLineFontSize=s.headLineFontSize;
-        
-        p_liveResultX=s.liveResultX;
-        p_liveResultY=s.liveResultY;
-        
-        p_legendX=s.legendX;
-        p_legendY=s.legendY;
-        
-        p_explanationX=s.explanationX; //text2
-        p_explanationY=s.explanationY;
-        
-        p_collumWidth1 = s.collumWidth1;
-        p_collumWidth2 = s.collumWidth2;
-        p_collumWidth3 = s.collumWidth3;
-        
-        p_headlineX=s.headlineX; //text1
-        p_headlineY=s.headlineY;
-        
-        p_chartFontSize=s.chartFontSize;
-        
-        p_top10chartAssesmentX=s.top10chartAssesmentX;
-        p_top10chartAssesmentY=s.top10chartAssesmentY;
-        
-        p_top10chartQuizX=s.top10chartQuizX;
-        p_top10chartQuizY=s.top10chartQuizY;
-        
-        p_questionX=s.questionX;
-        p_questionY=s.questionY;
+    for(int i = 0; i<alignerStrings.size();i++){
+        if(s.useGlobalAligners && s.aligners.size()>i)DatSlider->getSlider(alignerStrings[i])->setValue(s.aligners[i]);
+        if(!s.useGlobalAligners && s.aligners.size()>i)DatSlider->getSlider(alignerStrings[i])->setValue(alignerInts[i]);
     }
-    else{
-        p_matrixX = matrixX;
-        p_matrixY= matrixY;
-        
-        p_timerX=timerX;
-        p_timerY=timerY;
-        
-        p_timerSize=timerSize;
-        p_liveResultFontSize=liveResultFontSize;
-        p_explanationFontSize=explanationFontSize;
-        p_chartFontSize=chartFontSize;
-        p_legendFontSize=legendFontSize;
-        p_resultFontSize=resultFontSize;
-        p_questionFontSize=questionFontSize;
-        p_headLineFontSize=headLineFontSize;
-        
-        p_liveResultX=liveResultX;
-        p_liveResultY=liveResultY;
-        
-        p_legendX=legendX;
-        p_legendY=legendY;
-        
-        p_explanationX=explanationX; //text2
-        p_explanationY=explanationY;
-        
-        p_collumWidth1 = collumWidth1;
-        p_collumWidth2 = collumWidth2;
-        p_collumWidth3 = collumWidth3;
-        
-        p_headlineX=headlineX; //text1
-        p_headlineY=headlineY;
-        
-        p_chartFontSize=chartFontSize;
-        
-        p_top10chartAssesmentX=top10chartAssesmentX;
-        p_top10chartAssesmentY=top10chartAssesmentY;
-        
-        p_top10chartQuizX=top10chartQuizX;
-        p_top10chartQuizY=top10chartQuizY;
-        
-        p_questionX=questionX;
-        p_questionY=questionY;
-        
-    }
+    
+//    if(!s.useGlobalAligners){
+//        p_matrixX = s.matrixX;
+//        p_matrixY= s.matrixY;
+//        
+//        p_timerX=s.timerX;
+//        p_timerY=s.timerY;
+//        
+//        p_timerSize=s.timerSize;
+//        p_liveResultFontSize=s.liveResultFontSize;
+//        p_explanationFontSize=s.explanationFontSize;
+//        p_chartFontSize=s.chartFontSize;
+//        p_legendFontSize=s.legendFontSize;
+//        p_resultFontSize=s.resultFontSize;
+//        p_questionFontSize=s.questionFontSize;
+//        p_headLineFontSize=s.headLineFontSize;
+//        
+//        p_liveResultX=s.liveResultX;
+//        p_liveResultY=s.liveResultY;
+//        
+//        p_legendX=s.legendX;
+//        p_legendY=s.legendY;
+//        
+//        p_explanationX=s.explanationX; //text2
+//        p_explanationY=s.explanationY;
+//        
+//        p_collumWidth1 = s.collumWidth1;
+//        p_collumWidth2 = s.collumWidth2;
+//        p_collumWidth3 = s.collumWidth3;
+//        
+//        p_headlineX=s.headlineX; //text1
+//        p_headlineY=s.headlineY;
+//        
+//        p_chartFontSize=s.chartFontSize;
+//        
+//        p_top10chartAssesmentX=s.top10chartAssesmentX;
+//        p_top10chartAssesmentY=s.top10chartAssesmentY;
+//        
+//        p_top10chartQuizX=s.top10chartQuizX;
+//        p_top10chartQuizY=s.top10chartQuizY;
+//        
+//        p_questionX=s.questionX;
+//        p_questionY=s.questionY;
+//    }
+//    else{
+//        p_matrixX = matrixX;
+//        p_matrixY= matrixY;
+//        
+//        p_timerX=timerX;
+//        p_timerY=timerY;
+//        
+//        p_timerSize=timerSize;
+//        p_liveResultFontSize=liveResultFontSize;
+//        p_explanationFontSize=explanationFontSize;
+//        p_chartFontSize=chartFontSize;
+//        p_legendFontSize=legendFontSize;
+//        p_resultFontSize=resultFontSize;
+//        p_questionFontSize=questionFontSize;
+//        p_headLineFontSize=headLineFontSize;
+//        
+//        p_liveResultX=liveResultX;
+//        p_liveResultY=liveResultY;
+//        
+//        p_legendX=legendX;
+//        p_legendY=legendY;
+//        
+//        p_explanationX=explanationX; //text2
+//        p_explanationY=explanationY;
+//        
+//        p_collumWidth1 = collumWidth1;
+//        p_collumWidth2 = collumWidth2;
+//        p_collumWidth3 = collumWidth3;
+//        
+//        p_headlineX=headlineX; //text1
+//        p_headlineY=headlineY;
+//        
+//        p_chartFontSize=chartFontSize;
+//        
+//        p_top10chartAssesmentX=top10chartAssesmentX;
+//        p_top10chartAssesmentY=top10chartAssesmentY;
+//        
+//        p_top10chartQuizX=top10chartQuizX;
+//        p_top10chartQuizY=top10chartQuizY;
+//        
+//        p_questionX=questionX;
+//        p_questionY=questionY;
+//        
+//    }
     
 }
 
 
 //--------------------------------------------------------------
 void myofApp::keyReleased(int key){
-    if(key==OF_KEY_COMMAND)cmd=false;
+  //  if(key==OF_KEY_COMMAND)cmd=false;
 }
 
 void myofApp::drawColumn(string s, int x, int y, int fontSize,int width){

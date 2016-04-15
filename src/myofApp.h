@@ -39,7 +39,7 @@ class myofApp : public ofBaseApp{
     void drawColumn(string s, int x, int y, int fontSize,int width);
     int height;
     vector<string>imageStrings;
-    
+    vector<int>alignerInts;
     vector<ofImage>imgs;
     void saveToXml();
     void loadFromXml();
@@ -151,9 +151,9 @@ class myofApp : public ofBaseApp{
     bool b_sceneGui2;
     bool b_sceneGui3;
     
-    bool b_subSceneGui1;
-    bool b_subSceneGui2;
-    bool b_subSceneGui3;
+//    bool b_subSceneGui1;
+//    bool b_subSceneGui2;
+//    bool b_subSceneGui3;
 
     
     vector<Scene> scenes;
@@ -166,85 +166,85 @@ class myofApp : public ofBaseApp{
     
     
     
-    //ALIGNERS: seperate from parameters!
-    int matrixX;
-    int matrixY;
-    
-    int timerX;
-    int timerY;
-    
-    int timerSize;
-    int liveResultFontSize;
-    int headLineFontSize;
-    int explanationFontSize;
-    int legendFontSize;
-    int chartFontSize;
-    int questionFontSize;
-    int resultFontSize;
-    
-    int liveResultX;
-    int liveResultY;
-    
-    int legendX;
-    int legendY;
-    
-    int explanationX; //text2
-    int explanationY;
-    
-    int headlineX; //text1
-    int headlineY;
-    
-    int top10chartAssesmentX;
-    int top10chartAssesmentY;
-    
-    int top10chartQuizX;
-    int top10chartQuizY;
-    
-    int questionX;
-    int questionY;
-    int collumWidth1;
-    int collumWidth2;
-    int collumWidth3;
-    
-    //ALIGNERS: seperate from parameters!
-    ofParameter<int> p_matrixX;
-    ofParameter<int> p_matrixY;
-    
-    ofParameter<int> p_timerX;
-    ofParameter<int> p_timerY;
-    
-    ofParameter<int> p_timerSize;
-    ofParameter<int> p_liveResultFontSize;
-    ofParameter<int> p_explanationFontSize;
-    ofParameter<int> p_legendFontSize;
-    ofParameter<int> p_chartFontSize;
-    ofParameter<int> p_questionFontSize;
-    ofParameter<int> p_resultFontSize;
-    ofParameter<int> p_headLineFontSize;
-    
-    ofParameter<int> p_liveResultX;
-    ofParameter<int> p_liveResultY;
-    
-    ofParameter<int> p_legendX;
-    ofParameter<int> p_legendY;
-    
-    ofParameter<int> p_explanationX; //text2
-    ofParameter<int> p_explanationY;
-    
-    ofParameter<int> p_headlineX; //text1
-    ofParameter<int> p_headlineY;
-    
-    ofParameter<int> p_top10chartAssesmentX;
-    ofParameter<int> p_top10chartAssesmentY;
-    
-    ofParameter<int> p_top10chartQuizX;
-    ofParameter<int> p_top10chartQuizY;
-    
-    ofParameter<int> p_questionX;
-    ofParameter<int> p_questionY;
-    
-    ofParameter<int> p_collumWidth1;
-    ofParameter<int> p_collumWidth2;
-    ofParameter<int> p_collumWidth3;
+//    //ALIGNERS: seperate from parameters!
+//    int matrixX;
+//    int matrixY;
+//    
+//    int timerX;
+//    int timerY;
+//    
+//    int timerSize;
+//    int liveResultFontSize;
+//    int headLineFontSize;
+//    int explanationFontSize;
+//    int legendFontSize;
+//    int chartFontSize;
+//    int questionFontSize;
+//    int resultFontSize;
+//    
+//    int liveResultX;
+//    int liveResultY;
+//    
+//    int legendX;
+//    int legendY;
+//    
+//    int explanationX; //text2
+//    int explanationY;
+//    
+//    int headlineX; //text1
+//    int headlineY;
+//    
+//    int top10chartAssesmentX;
+//    int top10chartAssesmentY;
+//    
+//    int top10chartQuizX;
+//    int top10chartQuizY;
+//    
+//    int questionX;
+//    int questionY;
+//    int collumWidth1;
+//    int collumWidth2;
+//    int collumWidth3;
+//    
+//    //ALIGNERS: seperate from parameters!
+//    ofParameter<int> p_matrixX;
+//    ofParameter<int> p_matrixY;
+//    
+//    ofParameter<int> p_timerX;
+//    ofParameter<int> p_timerY;
+//    
+//    ofParameter<int> p_timerSize;
+//    ofParameter<int> p_liveResultFontSize;
+//    ofParameter<int> p_explanationFontSize;
+//    ofParameter<int> p_legendFontSize;
+//    ofParameter<int> p_chartFontSize;
+//    ofParameter<int> p_questionFontSize;
+//    ofParameter<int> p_resultFontSize;
+//    ofParameter<int> p_headLineFontSize;
+//    
+//    ofParameter<int> p_liveResultX;
+//    ofParameter<int> p_liveResultY;
+//    
+//    ofParameter<int> p_legendX;
+//    ofParameter<int> p_legendY;
+//    
+//    ofParameter<int> p_explanationX; //text2
+//    ofParameter<int> p_explanationY;
+//    
+//    ofParameter<int> p_headlineX; //text1
+//    ofParameter<int> p_headlineY;
+//    
+//    ofParameter<int> p_top10chartAssesmentX;
+//    ofParameter<int> p_top10chartAssesmentY;
+//    
+//    ofParameter<int> p_top10chartQuizX;
+//    ofParameter<int> p_top10chartQuizY;
+//    
+//    ofParameter<int> p_questionX;
+//    ofParameter<int> p_questionY;
+//    
+//    ofParameter<int> p_collumWidth1;
+//    ofParameter<int> p_collumWidth2;
+//    ofParameter<int> p_collumWidth3;
 		
 };

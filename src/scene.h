@@ -14,67 +14,67 @@
 
 class Scene{
     public:
-    int mode;
-    string name;
+    int mode = 0;
+    string name = "";
     vector<SubScene>subs;
     
     string explanation="explanation";
     
     vector<ofColor>colors;
     
-    bool consentual;
-    bool weighed;
-    bool substractive;
-    int totalPoints;
+    bool consentual=false;
+    bool weighed=false;
+    bool substractive=false;
+    int totalPoints=10;
     
-    int amountOfSubs;
-    int globalTimer;
-    bool useGlobalAligners;
-    bool useNumbers;
-    bool useImages;
+    int amountOfSubs =2;
+    int globalTimer =30;
+    bool useGlobalAligners=true;
+    bool useNumbers =false;
+    bool useImages=false;
     
     //aligners;
     //ALIGNERS: seperate from parameters!
-    int matrixX;
-    int matrixY;
-    
-    int timerX;
-    int timerY;
-    
-    int timerSize;
-    int liveResultFontSize;
-    int explanationFontSize;
-    int legendFontSize;
-    int chartFontSize;
-    int questionFontSize;
-    int resultFontSize;
-    int headLineFontSize;
-    
-    int liveResultX;
-    int liveResultY;
-    
-    int legendX;
-    int legendY;
-    
-    int explanationX; //text2
-    int explanationY;
-    
-    int headlineX; //text1
-    int headlineY;
-    
-    
-    int top10chartAssesmentX;
-    int top10chartAssesmentY;
-    
-    int top10chartQuizX;
-    int top10chartQuizY;
-    
-    int questionX;
-    int questionY;
-    
-    int collumWidth1;
-    int collumWidth2;
-    int collumWidth3;
+//    int matrixX;
+//    int matrixY;
+//    
+//    int timerX;
+//    int timerY;
+//    
+//    int timerSize;
+//    int liveResultFontSize;
+//    int explanationFontSize;
+//    int legendFontSize;
+//    int chartFontSize;
+//    int questionFontSize;
+//    int resultFontSize;
+//    int headLineFontSize;
+//    
+//    int liveResultX;
+//    int liveResultY;
+//    
+//    int legendX;
+//    int legendY;
+//    
+//    int explanationX; //text2
+//    int explanationY;
+//    
+//    int headlineX; //text1
+//    int headlineY;
+//    
+//    
+//    int top10chartAssesmentX;
+//    int top10chartAssesmentY;
+//    
+//    int top10chartQuizX;
+//    int top10chartQuizY;
+//    
+//    int questionX;
+//    int questionY;
+//    
+//    int collumWidth1;
+//    int collumWidth2;
+//    int collumWidth3;
     
     vector<int>aligners;
     
@@ -121,9 +121,10 @@ class Scene{
     //only used for setup... 
     void addNewSub(string q, vector<string>a,vector<int>img){
         SubScene sub = *new SubScene;
-        sub.setup(q,a,img);
-        sub.amountAnswerOptions = 1;
         subs.push_back(sub);
+        subs.back().setup(q,a,img);
+        subs.back().amountAnswerOptions = 1;
+        
     }
 };
 
