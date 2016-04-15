@@ -1,0 +1,35 @@
+<document>
+    <assesment>
+        <globalTime>36</globalTime>
+        <explanation>explanation</explanation>
+        <explanation></explanation>
+        <subtractive></subtractive>
+        <number></number>
+        <totalPoints>32767</totalPoints>
+        <color>
+            <c>0x808080</c>
+            <c>0x808080</c>
+        </color>
+        <question>
+            <headline>headline</headline>
+            <secTime>0</secTime>
+            <q></q>
+            <headline></headline>
+            <secTime></secTime>
+            <q></q>
+            <headline></headline>
+            <secTime></secTime>
+            <q></q>
+            <headline></headline>
+            <secTime></secTime>
+            <q></q>
+            <headline></headline>
+            <secTime></secTime>
+            <q></q>
+        </question>
+        <question></question>
+        <question></question>
+        <question></question>
+        <question></question>
+    </assesment>
+</document>

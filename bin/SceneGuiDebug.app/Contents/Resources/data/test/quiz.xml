@@ -1,0 +1,58 @@
+<document>
+    <quiz>
+        <globalTime>33</globalTime>
+        <explanation>SHIT</explanation>
+        <explanation></explanation>
+        <question>
+            <headline>headline</headline>
+            <secTime>40</secTime>
+            <q></q>
+            <a>initial value
+                <color>0x8A0808</color>
+            </a>
+        </question>
+        <rightAnswers>
+            <a>1</a>
+            <a></a>
+            <a></a>
+            <a></a>
+            <a></a>
+        </rightAnswers>
+        <question>
+            <headline>headline</headline>
+            <secTime>40</secTime>
+            <q></q>
+            <a>initial value
+                <color>0x8A0808</color>
+            </a>
+        </question>
+        <rightAnswers></rightAnswers>
+        <question>
+            <headline>headline</headline>
+            <secTime>40</secTime>
+            <q></q>
+            <a>initial value
+                <color>0x8A0808</color>
+            </a>
+        </question>
+        <rightAnswers></rightAnswers>
+        <question>
+            <headline>headline</headline>
+            <secTime>40</secTime>
+            <q></q>
+            <a>initial value
+                <color>0x8A0808</color>
+            </a>
+        </question>
+        <rightAnswers></rightAnswers>
+        <question>
+            <headline>headline</headline>
+            <secTime>40</secTime>
+            <q></q>
+            <a>initial value
+                <color>0x8A0808</color>
+            </a>
+        </question>
+        <rightAnswers></rightAnswers>
+    </quiz>
+</document>

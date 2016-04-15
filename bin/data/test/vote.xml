@@ -1,0 +1,41 @@
+<document>
+    <vote>
+        <globalFontSize>40</globalFontSize>
+        <liveResultFontSize>0</liveResultFontSize>
+        <headLineFontSize>0</headLineFontSize>
+        <explanationFontSize>0</explanationFontSize>
+        <questionFontSize>0</questionFontSize>
+        <chartFontSize>0</chartFontSize>
+        <legendFontSize>4</legendFontSize>
+        <timerSize>0</timerSize>
+        <resultFontSize>71</resultFontSize>
+        <matrixX>0</matrixX>
+        <matrixY>612</matrixY>
+        <timerX>612</timerX>
+        <timerY>0</timerY>
+        <legendX>627</legendX>
+        <legendY>0</legendY>
+        <explanationX>0</explanationX>
+        <explanationY>0</explanationY>
+        <headlineX>0</headlineX>
+        <headlineY>4</headlineY>
+        <questionX>709</questionX>
+        <questionY>0</questionY>
+        <top10chartAssesmentX>0</top10chartAssesmentX>
+        <top10chartAssesmentY>0</top10chartAssesmentY>
+        <top10chartQuizX>0</top10chartQuizX>
+        <top10chartQuizY>668</top10chartQuizY>
+        <globalTime>1076625408</globalTime>
+        <explanation>NEW FUCKING VOTE</explanation>
+        <explanation></explanation>
+        <majority></majority>
+        <headline>headline</headline>
+        <question>
+            <secTime>0</secTime>
+            <q></q>
+            <a>initial value
+                <color>0x8A0808</color>
+            </a>
+        </question>
+    </vote>
+</document>

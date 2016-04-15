@@ -1,0 +1,5 @@
+ofxClipboard
+ofxGui
+ofxOsc
+ofxSyphon
+ofxXmlSettings

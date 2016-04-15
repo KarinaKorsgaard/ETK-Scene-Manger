@@ -1,0 +1,17 @@
+<document>
+    <vote>
+        <globalTime>42</globalTime>
+        <explanation>strawberry</explanation>
+        <explanation></explanation>
+        <majority></majority>
+        <headline>headline</headline>
+        <question>
+            <secTime>796094576</secTime>
+            <q></q>
+            <a>initial value
+                <color>0x8A0808</color>
+                <img>0</img>
+            </a>
+        </question>
+    </vote>
+</document>

@@ -1,0 +1,41 @@
+<document>
+    <vote>
+        <globalFontSize>40</globalFontSize>
+        <liveResultFontSize>45</liveResultFontSize>
+        <headLineFontSize>58</headLineFontSize>
+        <explanationFontSize>40</explanationFontSize>
+        <questionFontSize>60</questionFontSize>
+        <chartFontSize>43</chartFontSize>
+        <legendFontSize>62</legendFontSize>
+        <timerSize>0</timerSize>
+        <resultFontSize>57</resultFontSize>
+        <matrixX>540</matrixX>
+        <matrixY>607</matrixY>
+        <timerX>607</timerX>
+        <timerY>586</timerY>
+        <legendX>750</legendX>
+        <legendY>729</legendY>
+        <explanationX>724</explanationX>
+        <explanationY>724</explanationY>
+        <headlineX>729</headlineX>
+        <headlineY>739</headlineY>
+        <questionX>744</questionX>
+        <questionY>852</questionY>
+        <top10chartAssesmentX>846</top10chartAssesmentX>
+        <top10chartAssesmentY>836</top10chartAssesmentY>
+        <top10chartQuizX>826</top10chartQuizX>
+        <top10chartQuizY>826</top10chartQuizY>
+        <globalTime>32767</globalTime>
+        <explanation>ONE</explanation>
+        <explanation></explanation>
+        <weighed></weighed>
+        <headline>headline</headline>
+        <question>
+            <secTime>0</secTime>
+            <q></q>
+            <a>initial value
+                <color>0x8A0808</color>
+            </a>
+        </question>
+    </vote>
+</document>

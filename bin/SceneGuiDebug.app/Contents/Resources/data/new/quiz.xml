@@ -1,0 +1,68 @@
+<document>
+    <quiz>
+        <globalTime>46</globalTime>
+        <explanation>explanation</explanation>
+        <explanation></explanation>
+        <question>
+            <headline>headline</headline>
+            <q></q>
+            <a>initial value
+                <color>0x8A0808</color>
+            </a>
+            <a>initial value
+                <color>0x8A0808</color>
+            </a>
+            <a>initial value
+                <color>0x8A0808</color>
+            </a>
+            <rightAnswers>
+                <a>4</a>
+            </rightAnswers>
+        </question>
+        <question>
+            <headline>headline</headline>
+            <q></q>
+            <a>initial value
+                <color>0x8A0808</color>
+            </a>
+            <a>initial value
+                <color>0x8A0808</color>
+            </a>
+            <rightAnswers>
+                <a>4</a>
+            </rightAnswers>
+        </question>
+        <question>
+            <headline>headline</headline>
+            <q>æljæl</q>
+            <rightAnswers>
+                <a>0</a>
+            </rightAnswers>
+        </question>
+        <question>
+            <headline>headline</headline>
+            <q></q>
+            <a>initial value
+                <color>0x8A0808</color>
+            </a>
+            <a>initial value
+                <color>0x8A0808</color>
+            </a>
+            <a>initial value
+                <color>0x8A0808</color>
+            </a>
+            <a>initial value
+                <color>0x8A0808</color>
+            </a>
+            <a>initial value
+                <color>0x8A0808</color>
+            </a>
+            <a>initial value
+                <color>0x8A0808</color>
+            </a>
+            <rightAnswers>
+                <a>2</a>
+            </rightAnswers>
+        </question>
+    </quiz>
+</document>
