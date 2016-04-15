@@ -24,6 +24,7 @@ void ofApp::setup(){
         dropDownSize.push_back(s.back());
         imagesString.push_back(s.back());
     }
+    //if(imageString.size())
     
     colorSelector = new ofxDatGui;
     imageSelector = new ofxDatGui;
@@ -519,7 +520,7 @@ void ofApp::setSubGuiToSubValues(int sub){
         subsceneTextEditorGui->getTextInput(ofToString(1+i)+"A")->setText(scenes[whichScene].subs[sub].answerOptions[i]);
     }
     for(int i = 0 ; i<scenes[whichScene].subs[sub].answerOptions.size();i++){
-        imageSelector->getDropdown("I"+ofToString(i+1))->setLabel(imagesString[scenes[whichScene].subs[sub].images[i]]);
+        if(imagesString.size()>0)imageSelector->getDropdown("I"+ofToString(i+1))->setLabel(imagesString[scenes[whichScene].subs[sub].images[i]]);
     }
 }
 
