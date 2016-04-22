@@ -31,7 +31,8 @@ class Scene{
     int globalTimer =30;
     bool useGlobalAligners=true;
     bool useNumbers =false;
-    bool useImages=false;
+    //bool useImages=false;
+    std::map <string, int> alignerMap;
     
     //aligners;
     //ALIGNERS: seperate from parameters!
@@ -124,6 +125,7 @@ class Scene{
         subs.push_back(sub);
         subs.back().setup(q,a,img);
         subs.back().amountAnswerOptions = 1;
+        subs.back().mode = mode;
         
     }
 };

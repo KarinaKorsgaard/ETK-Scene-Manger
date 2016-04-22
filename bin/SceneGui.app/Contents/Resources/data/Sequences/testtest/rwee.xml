@@ -1,0 +1,63 @@
+<document>
+    <quiz>
+        <globalFontSize>40</globalFontSize>
+        <matrixX>987</matrixX>
+        <matrixY>0</matrixY>
+        <resultFontSize>36</resultFontSize>
+        <timerSize>300</timerSize>
+        <timerX>974</timerX>
+        <timerY>219</timerY>
+        <legendFontSize>22</legendFontSize>
+        <legendX>0</legendX>
+        <legendY>1303</legendY>
+        <tekst1FontSize>50</tekst1FontSize>
+        <tekst1X>50</tekst1X>
+        <tekst1Y>80</tekst1Y>
+        <collumWidth1>576</collumWidth1>
+        <tekst2FontSize>30</tekst2FontSize>
+        <tekst2X>200</tekst2X>
+        <tekst2Y>880</tekst2Y>
+        <collumWidth2>400</collumWidth2>
+        <tekst3FontSize>40</tekst3FontSize>
+        <tekst3X>50</tekst3X>
+        <tekst3Y>150</tekst3Y>
+        <collumWidth3>837</collumWidth3>
+        <chartFontSize>36</chartFontSize>
+        <top10chartX>0</top10chartX>
+        <top10chartY>0</top10chartY>
+        <globalTime>30</globalTime>
+        <explanation>Then I was thinking how to have a bit less apps. The option is to either combine controller app and the calculator. Or I can combine the controller and the sceneGenerator. First option is definanlty easiest. - I am not sure if combining all three is smart. If you eg want to only use the calculator you would have to open up the whole scenegenerator…</explanation>
+        <question>
+            <headline>headline1</headline>
+            <secTime>26</secTime>
+            <q></q>
+            <a>initial value
+                <color>14882129</color>
+            </a>
+            <a>initial value
+                <color>11469246</color>
+            </a>
+            <a>initial value
+                <color>16777215</color>
+            </a>
+            <a>initial value
+                <color>16777215</color>
+            </a>
+        </question>
+        <question>
+            <headline>headline2</headline>
+            <secTime>0</secTime>
+            <q>Then I was thinking how to have a bit less apps. The option is to either combine controller app and the calculator. Or I can combine the controller and the sceneGenerator. First option is definanlty easiest. - I am not sure if combining all three is smart. If you eg want to only use the calculator you would have to open up the whole scenegenerator…</q>
+            <a>nothing changes
+                <color>14882129</color>
+            </a>
+            <a>initial value
+                <color>11469246</color>
+            </a>
+        </question>
+        <rightAnswers>
+            <a>3</a>
+            <a>2</a>
+        </rightAnswers>
+    </quiz>
+</document>

@@ -18,7 +18,6 @@ class ofApp : public ofBaseApp{
 
     myofApp myApp;
     ofxDatGui* setupGui;
-    bool isSetup;
     void onDropdownEvent(ofxDatGuiDropdownEvent e);
     void onButtonEvent(ofxDatGuiButtonEvent e);
     void keyPressed(int key);

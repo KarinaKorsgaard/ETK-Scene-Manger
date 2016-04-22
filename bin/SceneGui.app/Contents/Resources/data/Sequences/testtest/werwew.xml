@@ -1,0 +1,77 @@
+<document>
+    <quiz>
+        <globalTime>12</globalTime>
+        <explanation>explanation 2</explanation>
+        <question>
+            <headline>headline</headline>
+            <secTime>65</secTime>
+            <q></q>
+            <a>first
+                <color>5439645</color>
+            </a>
+            <a>second
+                <color>8960728</color>
+            </a>
+            <a>third
+                <color>16586489</color>
+            </a>
+            <a>initial value
+                <color>41536</color>
+            </a>
+        </question>
+        <question>
+            <headline>headline</headline>
+            <secTime>0</secTime>
+            <q></q>
+            <a>initial value
+                <color>5439645</color>
+            </a>
+            <a>initial value
+                <color>8960728</color>
+            </a>
+            <a>initial value
+                <color>16586489</color>
+            </a>
+            <a>initial value
+                <color>41536</color>
+            </a>
+            <a>initial value
+                <color>8741376</color>
+            </a>
+        </question>
+        <question>
+            <headline>headline</headline>
+            <secTime>0</secTime>
+            <q></q>
+            <a>initial value
+                <color>5439645</color>
+            </a>
+            <a>initial value
+                <color>8960728</color>
+            </a>
+        </question>
+        <question>
+            <headline>headline</headline>
+            <secTime>0</secTime>
+            <q></q>
+            <a>initial value
+                <color>5439645</color>
+            </a>
+        </question>
+        <question>
+            <headline>headline</headline>
+            <secTime>0</secTime>
+            <q></q>
+            <a>initial value
+                <color>5439645</color>
+            </a>
+        </question>
+        <rightAnswers>
+            <a>2</a>
+            <a>2</a>
+            <a>2</a>
+            <a>1</a>
+            <a>1</a>
+        </rightAnswers>
+    </quiz>
+</document>

@@ -1,0 +1,22 @@
+<document>
+    <vote>
+        <globalTime>30</globalTime>
+        <explanation>explanation</explanation>
+        <majority></majority>
+        <headline>headline</headline>
+        <question>
+            <headline>headline</headline>
+            <secTime>30</secTime>
+            <q></q>
+            <a>initial value
+                <color>11862141</color>
+            </a>
+            <a>initial value
+                <color>20917</color>
+            </a>
+            <a>initial value
+                <color>6531584</color>
+            </a>
+        </question>
+    </vote>
+</document>

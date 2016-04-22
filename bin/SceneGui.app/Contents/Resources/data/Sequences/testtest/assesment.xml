@@ -1,0 +1,22 @@
+<document>
+    <assesment>
+        <globalTime>30</globalTime>
+        <explanation>explanation</explanation>
+        <number></number>
+        <totalPoints>10</totalPoints>
+        <color>
+            <c>16777215</c>
+            <c>10666752</c>
+        </color>
+        <question>
+            <headline>headline</headline>
+            <secTime>0</secTime>
+            <q></q>
+        </question>
+        <question>
+            <headline>headline</headline>
+            <secTime>0</secTime>
+            <q></q>
+        </question>
+    </assesment>
+</document>

@@ -1,0 +1,44 @@
+<document>
+    <vote>
+        <globalFontSize>40</globalFontSize>
+        <matrixX>1000</matrixX>
+        <matrixY>50</matrixY>
+        <resultFontSize>40</resultFontSize>
+        <timerSize>300</timerSize>
+        <timerX>330</timerX>
+        <timerY>750</timerY>
+        <legendFontSize>40</legendFontSize>
+        <legendX>1001</legendX>
+        <legendY>540</legendY>
+        <tekst1FontSize>50</tekst1FontSize>
+        <tekst1X>50</tekst1X>
+        <tekst1Y>80</tekst1Y>
+        <collumWidth1>400</collumWidth1>
+        <tekst2FontSize>30</tekst2FontSize>
+        <tekst2X>200</tekst2X>
+        <tekst2Y>880</tekst2Y>
+        <collumWidth2>400</collumWidth2>
+        <tekst3FontSize>40</tekst3FontSize>
+        <tekst3X>50</tekst3X>
+        <tekst3Y>150</tekst3Y>
+        <collumWidth3>400</collumWidth3>
+        <chartFontSize>30</chartFontSize>
+        <top10chartX>50</top10chartX>
+        <top10chartY>100</top10chartY>
+        <globalTime>30</globalTime>
+        <explanation>explanation</explanation>
+        <majority></majority>
+        <headline>headline</headline>
+        <question>
+            <headline>headline</headline>
+            <secTime>30</secTime>
+            <q></q>
+            <a>initial value
+                <color>13844602</color>
+            </a>
+            <a>initial value
+                <color>3932598</color>
+            </a>
+        </question>
+    </vote>
+</document>

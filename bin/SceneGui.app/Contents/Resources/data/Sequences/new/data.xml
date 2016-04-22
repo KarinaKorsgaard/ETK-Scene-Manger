@@ -1,14 +1,14 @@
 <document>
     <globalFontSize>40</globalFontSize>
-    <timerSize>0</timerSize>
-    <legendFontSize>0</legendFontSize>
-    <headLineFontSize>10</headLineFontSize>
-    <explanationFontSize>0</explanationFontSize>
-    <questionFontSize>0</questionFontSize>
-    <resultFontSize>0</resultFontSize>
-    <chartFontSize>0</chartFontSize>
-    <liveResultFontSize>0</liveResultFontSize>
-    <matrixX>0</matrixX>
+    <timerSize>74</timerSize>
+    <legendFontSize>65</legendFontSize>
+    <headLineFontSize>58</headLineFontSize>
+    <explanationFontSize>70</explanationFontSize>
+    <questionFontSize>70</questionFontSize>
+    <resultFontSize>68</resultFontSize>
+    <chartFontSize>68</chartFontSize>
+    <liveResultFontSize>68</liveResultFontSize>
+    <matrixX>68</matrixX>
     <matrixY>0</matrixY>
     <timerX>0</timerX>
     <timerY>0</timerY>

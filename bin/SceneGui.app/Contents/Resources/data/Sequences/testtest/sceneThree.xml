@@ -1,68 +1,97 @@
 <document>
     <quiz>
-        <globalTime>53</globalTime>
-        <explanation>THREE</explanation>
-        <explanation></explanation>
+        <globalTime>15</globalTime>
+        <explanation>Then I was thinking how to have a bit less apps. The option is to either combine controller app and the calculator. Or I can combine the controller and the sceneGenerator. First option is definanlty easiest. - I am not sure if combining all three is smart. If you eg want to only use the calculator you would have to open up the whole scenegenerator…</explanation>
         <question>
             <headline>headline</headline>
-            <secTime>0</secTime>
+            <secTime>41</secTime>
+            <q>Then I was thinking how to have a bit less apps. The option is to either combine controller app and the calculator. Or I can combine the controller and the sceneGenerator. First option is definanlty easiest. - I am not sure if combining all three is smart. If you eg want to only use the calculator you would have to open up the whole scenegenerator… z</q>
+            <a>11
+                <color>0</color>
+            </a>
+            <a>12
+                <color>6438064</color>
+            </a>
+            <a>13
+                <color>12714355</color>
+            </a>
+            <a>initial value
+                <color>6826240</color>
+            </a>
+        </question>
+        <question>
+            <headline>headline</headline>
+            <secTime>3</secTime>
             <q></q>
+            <a>11
+                <color>0</color>
+            </a>
+            <a>initial value
+                <color>6438064</color>
+            </a>
+        </question>
+        <question>
+            <headline>headline</headline>
+            <secTime>8</secTime>
+            <q>what???</q>
+            <a>21
+                <color>0</color>
+                <img>3</img>
+            </a>
+            <a>Initial
+                <color>6438064</color>
+                <img>2</img>
+            </a>
+        </question>
+        <question>
+            <headline>headline</headline>
+            <secTime>26</secTime>
+            <q></q>
+            <a>31
+                <color>0</color>
+            </a>
+            <a>32
+                <color>6438064</color>
+            </a>
+            <a>initial value
+                <color>12714355</color>
+            </a>
+        </question>
+        <question>
+            <headline>headline</headline>
+            <secTime>50</secTime>
+            <q>what is a giraffe?</q>
             <a>initial value
                 <color>0</color>
+            </a>
+            <a>initial value
+                <color>6438064</color>
+            </a>
+            <a>initial value
+                <color>12714355</color>
+            </a>
+        </question>
+        <question>
+            <headline>headline</headline>
+            <secTime>14</secTime>
+            <q>what is a banaa</q>
+            <a>initial value
+                <color>0</color>
+            </a>
+            <a>initial value
+                <color>6438064</color>
+            </a>
+            <a>initial value
+                <color>12714355</color>
             </a>
         </question>
         <rightAnswers>
-            <a>0</a>
-            <a></a>
-            <a></a>
-            <a></a>
-            <a></a>
-            <a></a>
+            <a>2</a>
+            <a>1</a>
+            <a>1</a>
+            <a>1</a>
+            <a>1</a>
+            <a>1</a>
         </rightAnswers>
-        <question>
-            <headline>headline</headline>
-            <secTime>0</secTime>
-            <q></q>
-            <a>initial value
-                <color>0</color>
-            </a>
-        </question>
-        <rightAnswers></rightAnswers>
-        <question>
-            <headline>headline</headline>
-            <secTime>0</secTime>
-            <q></q>
-            <a>initial value
-                <color>0</color>
-            </a>
-        </question>
-        <rightAnswers></rightAnswers>
-        <question>
-            <headline>headline</headline>
-            <secTime>0</secTime>
-            <q></q>
-            <a>initial value
-                <color>0</color>
-            </a>
-        </question>
-        <rightAnswers></rightAnswers>
-        <question>
-            <headline>headline</headline>
-            <secTime>0</secTime>
-            <q></q>
-            <a>initial value
-                <color>0</color>
-            </a>
-        </question>
-        <rightAnswers></rightAnswers>
-        <question>
-            <headline>headline</headline>
-            <secTime>0</secTime>
-            <q></q>
-            <a>initial value
-                <color>0</color>
-            </a>
-        </question>
-        <rightAnswers></rightAnswers>
     </quiz>
 </document>

@@ -1,0 +1,22 @@
+<document>
+    <assesment>
+        <globalTime>30</globalTime>
+        <explanation>In the assesment, the text_2 is the text that will be shown in the top 10 charts.</explanation>
+        <number></number>
+        <totalPoints>10</totalPoints>
+        <color>
+            <c>15513292</c>
+            <c>12174308</c>
+        </color>
+        <question>
+            <headline>1st thing to be assesed.</headline>
+            <secTime>30</secTime>
+            <q>some other text...</q>
+        </question>
+        <question>
+            <headline>2nd thing to be assesed</headline>
+            <secTime>30</secTime>
+            <q>....</q>
+        </question>
+    </assesment>
+</document>

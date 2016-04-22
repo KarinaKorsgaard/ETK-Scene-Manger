@@ -1,33 +1,30 @@
 <document>
     <globalFontSize>40</globalFontSize>
-    <liveResultFontSize>0</liveResultFontSize>
-    <headLineFontSize>3</headLineFontSize>
-    <explanationFontSize>0</explanationFontSize>
-    <questionFontSize>3</questionFontSize>
-    <chartFontSize>5</chartFontSize>
-    <legendFontSize>5</legendFontSize>
-    <timerSize>0</timerSize>
-    <resultFontSize>3</resultFontSize>
-    <matrixX>515</matrixX>
-    <matrixY>438</matrixY>
-    <timerX>510</timerX>
-    <timerY>515</timerY>
-    <legendX>642</legendX>
-    <legendY>367</legendY>
-    <explanationX>443</explanationX>
-    <explanationY>443</explanationY>
-    <headlineX>438</headlineX>
-    <headlineY>448</headlineY>
-    <questionX>448</questionX>
-    <collumWidth1>800</collumWidth1>
-    <collumWidth2>628</collumWidth2>
-    <collumWidth3>800</collumWidth3>
-    <questionY>479</questionY>
-    <top10chartAssesmentX>438</top10chartAssesmentX>
-    <top10chartAssesmentY>438</top10chartAssesmentY>
-    <top10chartQuizX>448</top10chartQuizX>
-    <top10chartQuizY>433</top10chartQuizY>
-    <tableNames>TABLE 1</tableNames>
+    <matrixX>0</matrixX>
+    <matrixY>208</matrixY>
+    <resultFontSize>79</resultFontSize>
+    <timerSize>30</timerSize>
+    <timerX>261</timerX>
+    <timerY>316</timerY>
+    <legendFontSize>34</legendFontSize>
+    <legendX>1193</legendX>
+    <legendY>255</legendY>
+    <tekst1FontSize>9</tekst1FontSize>
+    <tekst1X>453</tekst1X>
+    <tekst1Y>201</tekst1Y>
+    <collumWidth1>1083</collumWidth1>
+    <tekst2FontSize>47</tekst2FontSize>
+    <tekst2X>192</tekst2X>
+    <tekst2Y>247</tekst2Y>
+    <collumWidth2>1920</collumWidth2>
+    <tekst3FontSize>300</tekst3FontSize>
+    <tekst3X>384</tekst3X>
+    <tekst3Y>239</tekst3Y>
+    <collumWidth3>768</collumWidth3>
+    <chartFontSize>36</chartFontSize>
+    <top10chartX>603</top10chartX>
+    <top10chartY>147</top10chartY>
+    <tableNames>TABLE 1//table 3 //table 4//iu//sdf//hfd//fgs//ca//fdfd//dfdfddfd//fdfdfdfdfdfdfdf//dfddfdffdfdfd</tableNames>
     <scene>
         <file>sceneOne.xml</file>
     </scene>
@@ -35,6 +32,27 @@
         <file>sceneThree.xml</file>
     </scene>
     <scene>
-        <file>sceneThree.xml</file>
+        <file>twet.xml</file>
+    </scene>
+    <scene>
+        <file>wrew.xml</file>
+    </scene>
+    <scene>
+        <file>rwee.xml</file>
+    </scene>
+    <scene>
+        <file>werwew.xml</file>
+    </scene>
+    <scene>
+        <file>sceneTwo.xml</file>
+    </scene>
+    <scene>
+        <file>fgkdje.xml</file>
+    </scene>
+    <scene>
+        <file>assesment.xml</file>
+    </scene>
+    <scene>
+        <file>quix.xml</file>
     </scene>
 </document>

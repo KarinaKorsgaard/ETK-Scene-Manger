@@ -1,16 +1,24 @@
 <document>
     <vote>
-        <globalTime>32767</globalTime>
-        <explanation>TWO</explanation>
-        <explanation></explanation>
-        <weighed></weighed>
+        <globalTime>12</globalTime>
+        <explanation>ofDrawRectangle(0, 60*i, 60, 60);ofDrawRectangle(0, 60*i, 60, 60);ofDrawRectangle(0, 60*i, 60, 60);vvvvofDrawRectangle(0, 60*i, 60, 60);ofDrawRectangle(0, 60*i, 60, 60);vs</explanation>
+        <majority></majority>
         <headline>HEAD EDIT</headline>
         <question>
-            <secTime>0</secTime>
-            <q></q>
+            <headline>HEAD EDIT</headline>
+            <secTime>12</secTime>
+            <q>testtesttesttestvvv testtest testtesttesttesttesttest testtesttesttest testtesttesttesttesttesttesttest</q>
             <a>initial value
                 <color>2834666</color>
-                <img>3</img>
+            </a>
+            <a>second value
+                <color>14155966</color>
+            </a>
+            <a>initial value
+                <color>14286892</color>
+            </a>
+            <a>initial value
+                <color>3146184</color>
             </a>
         </question>
     </vote>

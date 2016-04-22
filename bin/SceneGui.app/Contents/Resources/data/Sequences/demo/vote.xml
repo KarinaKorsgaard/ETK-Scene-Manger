@@ -1,0 +1,29 @@
+<document>
+    <vote>
+        <globalTime>20</globalTime>
+        <explanation>The aligener panel adjust positions and fontsize. If the &quot;use global aligners&quot; box is checked the panel adjusts global aligners for all a scenes that has the box checked. If it is not checked, the panel only adjusts local aligners for this scene.</explanation>
+        <majority></majority>
+        <headline>Global/local timer is for the scene. If the subscene has the box &quot;use global timer&quot; checked it aligns with the scenes timer. Else it only adjusts timer for the individual subscene.</headline>
+        <question>
+            <headline>Global/local timer is for the scene. If the subscene has the box &quot;use global timer&quot; checked it aligns with the scenes timer. Else it only adjusts timer for the individual subscene.</headline>
+            <secTime>20</secTime>
+            <q>The images are chosen for each answer option, row 1 is the image for answer option 1...</q>
+            <a>banana
+                <color>15466589</color>
+                <img>1</img>
+            </a>
+            <a>david bowie
+                <color>1252096</color>
+                <img>2</img>
+            </a>
+            <a>spagetti
+                <color>1596593</color>
+                <img>11</img>
+            </a>
+            <a>earth
+                <color>14185768</color>
+                <img>4</img>
+            </a>
+        </question>
+    </vote>
+</document>

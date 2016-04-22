@@ -35,6 +35,11 @@ class myofApp : public ofBaseApp{
         void onColorPickerEvent(ofxDatGuiColorPickerEvent e);
     void onSliderEvent(ofxDatGuiSliderEvent e);
     
+    void secondSetup();
+    bool setupNow = false;
+    bool isSetup = false;
+    ofxDatGui* setupGui;
+
     void preview(Scene s,SubScene sub);
     void drawColumn(string s, int x, int y, int fontSize,int width);
     int height;
@@ -56,7 +61,7 @@ class myofApp : public ofBaseApp{
     void updateGlobalAligners();
     void updateLocalAligners(Scene* s);
     
-    void updateGuiToSceneAligners(Scene s);
+    void updateGuiToSceneAligners(bool g);
     
     void setSceneAlignersToXml(Scene s, ofxXmlSettings* xml); //just avoiding too much clutter in main
     void setGlobalAlignersToXml(ofxXmlSettings* xml);
@@ -113,7 +118,7 @@ class myofApp : public ofBaseApp{
     ofxDatGui* colorSelector; //there are ten, top ones  are used first. - applied for SCENE!
     ofxDatGui* sceneTextEditorGui;
     
-    ofxDatGui* imageSelector; //there are 10, top ones are used first. - applies for SUBSCENE? - only visible if useImages!
+    //ofxDatGui* imageSelector; //there are 10, top ones are used first. - applies for SUBSCENE? - only visible if useImages!
     ofxDatGui* subsceneTextEditorGui;
     ofxDatGui* DatSlider;
     vector<string>alignerStrings;
@@ -134,8 +139,22 @@ class myofApp : public ofBaseApp{
     ofxSyphonServer syphon;
     ofFbo fbo;
     
- 
-    
+    bool isNameTaken(string s){
+        bool taken = false;
+        for(int i = 0 ; i<scenes.size();i++){
+            if(scenes[i].name == s){
+                taken = true;
+            }
+        }
+        if(s == "")taken = true;
+        
+        return taken;
+    }
+    void imageSelector(int x, int y);
+    int mX,mY;
+    vector<int>preset;
+   // vector<int>preset2;
+    std::map <string, int> alignerMap;
     //subscene guis: static
     //toggle numbers:
     //toggle images:
