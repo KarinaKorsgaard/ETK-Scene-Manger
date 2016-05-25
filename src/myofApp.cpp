@@ -745,8 +745,8 @@ void myofApp::updateScene(Scene* s){
     }
     if(s->mode == 2){
         for(int i = 0; i<MAX_SUB_ANSWER;i++){
-            if(i<3)colorSelector->getColorPicker("C"+ofToString(i+1))->setVisible(true);
-            if(i>=3)colorSelector->getColorPicker("C"+ofToString(i+1))->setVisible(false);
+            if(i<2)colorSelector->getColorPicker("C"+ofToString(i+1))->setVisible(true);
+            if(i>=2)colorSelector->getColorPicker("C"+ofToString(i+1))->setVisible(false);
         }
     }
 
@@ -787,10 +787,21 @@ void myofApp::updateSubScene(SubScene* s){
 
 //--------------------------------------------------------------
 void myofApp::addNewScene(int mode, string name){
+    Scene copyFrom;
+    if(scenes.size()>0){
+        copyFrom = scenes.back();
+    }else{
+        for(int i = 0; i<MAX_SUB;i++){
+            ofColor c;
+            copyFrom.colors.push_back(c);
+        }
+    }
+    
     Scene s = *new Scene;
     scenes.push_back(s);
     
-    scenes.back().setup(mode,name);
+
+    scenes.back().setup(mode,name,copyFrom);
     for(int i = 0 ; i<alignerStrings.size();i++){
        // scenes.back().aligners.push_back(preset[i]);
         scenes.back().alignerMap[alignerStrings[i]] = preset[i];

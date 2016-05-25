@@ -80,14 +80,15 @@ class Scene{
     vector<int>aligners;
     
     
-    void setup(int _mode, string n){
+    void setup(int _mode, string n, Scene scene){
         mode = _mode;
         name = n;
         vector<string>empty;
         vector<int>image;
         for(int i = 0; i< MAX_SUB;i++){
             ofColor c;
-            colors.push_back(c);
+            
+            colors.push_back(scene.colors[i]);
             image.push_back(0);
             empty.push_back("initial value");
         }
