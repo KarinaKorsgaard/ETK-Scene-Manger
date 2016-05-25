@@ -3,18 +3,7 @@
 //--------------------------------------------------------------
 void myofApp::setup(){
     
-//    //setup from xml first. - fill subscenes after. Or setup scene with array of subscenes made in read xml.
-//    string newClipboardContent = ofSystemTextBoxDialog("type name of dataFolder, or make a new folder");
-//    ofxClipboard::copy(newClipboardContent); //<<<<<<<<<<<<<<<<<
-//    dataFolder = ofxClipboard::paste(); //<<<<<<<<<<<<<<<<<
-//    
-//    string path = dataFolder;
-//    ofDirectory dir(path);
-//    if(!dir.exists()){
-//        dir.createDirectory("Sequences/"+path);
-//    }
-//    dataFolder="Sequences/"+dataFolder;
-   // secondSetup();
+
     string path = "Sequences";
     ofDirectory dir(path); //relative dir?? -lol
     ofSetFrameRate(30);
@@ -35,9 +24,7 @@ void myofApp::setup(){
         setupGui->addButton(dropDownSize[i]);
     }
     setupGui->addBreak();
-   // setupGui->addDropdown("SELECT EXISTING SEQUENCE",dropDownSize);
     setupGui->addButton("MAKE NEW SEQUENCE");
-   // setupGui->onDropdownEvent(this, &myofApp::onDropdownEvent);
     setupGui->onButtonEvent(this, &myofApp::onButtonEvent);
     
     
@@ -68,9 +55,7 @@ void myofApp::secondSetup(){
     alignerStrings.push_back("matrixY");
     
     alignerStrings.push_back("resultFontSize");
-    
-    //alignerStrings.push_back("liveResultFontSize");
-    
+
     alignerStrings.push_back("timerSize");
     alignerStrings.push_back("timerX");
     alignerStrings.push_back("timerY");
@@ -107,20 +92,16 @@ void myofApp::secondSetup(){
     
     alignerInts.resize(alignerStrings.size());
     
+    //Color gui
     colorSelector = new ofxDatGui;
-   // imageSelector = new ofxDatGui;
-   // imageSelector->addHeader("images");
     colorSelector->addHeader("colors");
     for(int i = 0 ; i< MAX_SUB_ANSWER;i++){
-     //   imageSelector->addDropdown("I"+ofToString(i+1), dropDownSize);
         colorSelector->addColorPicker("C"+ofToString(i+1));
     }
-    
-    //imageSelector->onDropdownEvent(this, &myofApp::onDropdownEvent);
     colorSelector->onColorPickerEvent(this, &myofApp::onColorPickerEvent);
-   // imageSelector->addFooter();
     colorSelector->addFooter();
     
+    //table Gui
     tableNamesGui = new ofxDatGui;
     tableNamesGui->addHeader("tableNames");
     for (int i = 0; i<12; i++) {
@@ -132,13 +113,13 @@ void myofApp::secondSetup(){
     
     scenes.clear();
     
+    //main GUI
     ofParameterGroup main;
     main.add(addVote.set("add vote",false));
     main.add(addQuiz.set("add quiz",false));
     main.add(addAssesment.set("add assesment",false));
     main.add(save.set("SAVE",false));
     mainGui.setup(main);
-    
     loadFromXml();
     
     path = dataFolder+"/img";
@@ -155,18 +136,6 @@ void myofApp::secondSetup(){
         cout << "loaded " + dataFolder+"/img/"+s.back()<< endl;
     }
     
-    //    ofLogVerbose();
-    //    for(int i = 0 ; i<scenes.size();i++){
-    //        cout<<"scene subs" + ofToString(scenes[i].subs.size())<<endl;
-    //    }
-    
-    
-    //    for(int i = 0; i<scenes.size();i++){
-    //        ofParameter<bool> b;
-    //        b.set("scene: "+ofToString(i+1),false);
-    //        editExisting.push_back(b);
-    //        main.add(editExisting[i]);
-    //    }
     
     disabled = new ofxDatGuiThemeMidnight();
     enabled = new ofxDatGuiThemeWireframe();
@@ -175,14 +144,13 @@ void myofApp::secondSetup(){
     
     ofParameterGroup commons;
     
-    //gui1.add(addVote.set("add subscene",false)); //do need a count of amount of subs!
-    // commons.add(amountOfSubs.set("amount of subscenes",0,10,1));
     commons.add(globalTimer.set("globalTimer",0,0,60));
     commons.add(useGlobalAligners.set("Use Global Aligners", true));
    // commons.add(useNumbers.set("Use Numbers", false));
     ofParameterGroup commonsSub;
     commonsSub.setName("subscenes");
     
+    //SceneGui
     DatSub = new ofxDatGui;
     for(int i = 0; i<MAX_SUB;i++){
         ofParameter<bool> b;
@@ -196,7 +164,6 @@ void myofApp::secondSetup(){
         DatSub->addButton("subscene: "+ofToString(i+1));
     }
     DatSub->onButtonEvent(this, &myofApp::onButtonEvent);
-    
     
     ofParameterGroup mode1;
     mode1.setName("mode1");
@@ -223,6 +190,8 @@ void myofApp::secondSetup(){
     sceneGui2.setup(mode2);
     sceneGui3.setup(mode3);
     
+    
+    // subSceneGui
     ofParameterGroup subCommons;
     subCommons.setName("subsceneEditor");
     subCommons.add(amountAnswerOptions.set("Amount of Answers",4,0,MAX_SUB_ANSWER));
@@ -233,32 +202,23 @@ void myofApp::secondSetup(){
     subSceneGui.setup(subCommons);
     
     
-    
-    
-    
-    //        new ofxDatGuiThemeWireframe(),
-    //        new ofxDatGuiThemeMidnight(),
-    //        new ofxDatGuiThemeAqua(),
-    //        new ofxDatGuiThemeCharcoal(),
-    //        new ofxDatGuiThemeAutumn(),
-    //        new ofxDatGuiThemeCandy()};
-    //tIndex = 0;
-    
+    //scene
     sceneTextEditorGui = new ofxDatGui;
     sceneTextEditorGui->addHeader();
     sceneTextEditorGui->setWidth(sceneGui1.getWidth());
     sceneTextEditorGui->addTextInput("TEKST_1"," global for all subscene.");
-    sceneTextEditorGui->getTextInput("TEKST_1")->setHeight(70);
+    sceneTextEditorGui->getTextInput("TEKST_1")->setHeight(90);
     sceneTextEditorGui->onTextInputEvent(this, &myofApp::onTextInputEvent);
     sceneTextEditorGui->setVisible(false);
     
+    //subscene
     subsceneTextEditorGui = new ofxDatGui;
     subsceneTextEditorGui->addHeader();
     subsceneTextEditorGui->setWidth(mainGui.getWidth());
     subsceneTextEditorGui->addTextInput("TEKST_2","Headline: individual for each subscene.");
     subsceneTextEditorGui->addTextInput("TEKST_3","Question: individual for each subscene.");
-    subsceneTextEditorGui->getTextInput("TEKST_2")->setHeight(70);
-    subsceneTextEditorGui->getTextInput("TEKST_3")->setHeight(70);
+    subsceneTextEditorGui->getTextInput("TEKST_2")->setHeight(90);
+    subsceneTextEditorGui->getTextInput("TEKST_3")->setHeight(90);
     for(int i = 0; i<MAX_SUB_ANSWER;i++){
         subsceneTextEditorGui->addTextInput(ofToString(1+i)+"A","answer");
     }
@@ -270,6 +230,8 @@ void myofApp::secondSetup(){
     ofParameterGroup fontsizes;
     ofParameterGroup aligners;
     
+    
+    //sliders
     DatSlider = new ofxDatGui;
     DatSlider->addHeader();
     int breakCounter = breaks[0];
@@ -290,13 +252,11 @@ void myofApp::secondSetup(){
         DatSlider->getSlider(alignerStrings[i])->setPrecision(0);
     }
     DatSlider->onSliderEvent(this, &myofApp::onSliderEvent);
-
     
-    // mainGui.setWidthElements(150);
-    // globalAligners.setWidthElements(200);
-    DatSub->setWidth(sceneGui1.getWidth());
-    sceneTextEditorGui->setWidth(sceneGui1.getWidth());
-    subsceneTextEditorGui->setWidth(sceneGui1.getWidth());
+    
+    DatSub->setWidth(panelWidth);
+    sceneTextEditorGui->setWidth(panelWidth);
+    subsceneTextEditorGui->setWidth(panelWidth);
     
     //sceneGui1.loadFont("Verdana.ttf",8);
     //sceneGui1.setUseTTF(true);
@@ -305,19 +265,22 @@ void myofApp::secondSetup(){
     sceneGui2.setPosition(mainGui.getWidth()+20,mainGui.getPosition().y);
     sceneGui3.setPosition(mainGui.getWidth()+20,mainGui.getPosition().y);
     
-    subSceneGui.setPosition(mainGui.getWidth()*2+40,mainGui.getPosition().y);
+    tableNamesGui->setPosition(mainGui.getPosition().x, ofGetHeight()-(tableNamesGui->getHeight()+40));
     
     sceneTextEditorGui->setPosition(sceneGui1.getPosition().x,sceneGui1.getPosition().y+sceneGui1.getHeight()+20);
     DatSub->setPosition(sceneTextEditorGui->getPosition().x,sceneTextEditorGui->getHeight()+sceneTextEditorGui->getPosition().y+20);
-    subsceneTextEditorGui->setPosition(subSceneGui.getPosition().x,subSceneGui.getPosition().y+subSceneGui.getHeight()+30);
-    
-    DatSlider->setPosition(mainGui.getWidth()+20*3+sceneGui1.getWidth()+subSceneGui.getWidth(),mainGui.getPosition().y);
-    
     colorSelector->setPosition(DatSub->getPosition().x, DatSub->getPosition().y+DatSub->getHeight()+20);
-   // imageSelector->setPosition(subsceneTextEditorGui->getPosition().x, subsceneTextEditorGui->getPosition().y +subsceneTextEditorGui->getHeight()+20 );
-    tableNamesGui->setPosition(mainGui.getPosition().x, ofGetHeight()-(tableNamesGui->getHeight()+40));
     
-    colorSelector->setWidth(300);
+    subSceneGui.setPosition(mainGui.getWidth()+sceneTextEditorGui->getWidth()+40,mainGui.getPosition().y);
+    subsceneTextEditorGui->setPosition(mainGui.getWidth()+sceneTextEditorGui->getWidth()+40,subSceneGui.getPosition().y+subSceneGui.getHeight()+30);
+    
+    DatSlider->setPosition(mainGui.getWidth()+20*3+panelWidth*3,mainGui.getPosition().y);
+    
+
+   // imageSelector->setPosition(subsceneTextEditorGui->getPosition().x, subsceneTextEditorGui->getPosition().y +subsceneTextEditorGui->getHeight()+20 );
+
+    
+    colorSelector->setWidth(panelWidth);
    // imageSelector->setWidth(300);
     tableNamesGui->setWidth(300);
     
@@ -708,21 +671,14 @@ void myofApp::updateScene(Scene* s){
     
     if(s->useGlobalAligners){
         DatSlider->getHeader()->setName("GLOBAL ALIGNERS");
-        DatSlider->setPosition(mainGui.getWidth()+20*3+sceneGui1.getWidth()+subSceneGui.getWidth(),mainGui.getPosition().y);
-//       // DatSlider->setTheme(enabled);
-//        //globalAligners.setPosition(mainGui.getWidth()+20*3+sceneGui1.getWidth()+subSceneGui.getWidth(),mainGui.getPosition().y);
-//        //globalAligners.setFillColor(ofColor(0,50,0));
-//       // globalAligners.setPosition(mainGui.getPosition().x,mainGui.getHeight()+40);
-      //  updateGlobalAligners();
+        DatSlider->setPosition(mainGui.getWidth()+20*3+panelWidth*2,mainGui.getPosition().y);
+
     }
     else if(!s->useGlobalAligners){
-//       // DatSlider->setTheme(disabled);
+
        DatSlider->getHeader()->setName("LOCAL ALIGNERS FOR:" + s->name);
-        DatSlider->setPosition(mainGui.getWidth()+20*3+sceneGui1.getWidth()+subSceneGui.getWidth(),mainGui.getPosition().y);
-//        //globalAligners.setPosition(mainGui.getWidth()+20*3+sceneGui1.getWidth()+subSceneGui.getWidth(),mainGui.getPosition().y);
-//        //globalAligners.setFillColor(ofColor(50,0,0));
-//       // globalAligners.setPosition(sceneGui1.getPosition().x,sceneGui1.getHeight()+40);
-       // updateLocalAligners(s);
+        DatSlider->setPosition(mainGui.getWidth()+20*3+panelWidth*2,mainGui.getPosition().y);
+
     }//add headline
     
    
