@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void myofApp::setup(){
     
-
+    
     string path = "Sequences";
     ofDirectory dir(path); //relative dir?? -lol
     ofSetFrameRate(30);
@@ -55,7 +55,7 @@ void myofApp::secondSetup(){
     alignerStrings.push_back("matrixY");
     
     alignerStrings.push_back("resultFontSize");
-
+    
     alignerStrings.push_back("timerSize");
     alignerStrings.push_back("timerX");
     alignerStrings.push_back("timerY");
@@ -84,11 +84,11 @@ void myofApp::secondSetup(){
     alignerStrings.push_back("top10chartY");
     
     preset = { 1000,50,40,300,330,750, 40,50,230, 50,50,80,400, 30,200,880,400, 40,50,150,400,30,50,100};
-   // preset2 = {100,10,10,100,100,100,30,40,40,40,40,40,40,40,100,10,10,100,100,100,30,40,40,40,40,40,40,40};
+    // preset2 = {100,10,10,100,100,100,30,40,40,40,40,40,40,40,100,10,10,100,100,100,30,40,40,40,40,40,40,40};
     for(int i = 0 ; i<alignerStrings.size();i++){
         alignerMap[alignerStrings[i]] = preset[i];
     }
-//    cout<<alignerMap.size()<<endl;
+    //    cout<<alignerMap.size()<<endl;
     
     alignerInts.resize(alignerStrings.size());
     
@@ -133,7 +133,7 @@ void myofApp::secondSetup(){
         imgs.push_back(img);
         imgs[i].load(dataFolder+"/img/"+s.back());
         imageStrings.push_back(dataFolder+"/img/"+s.back());
-//        cout << "loaded " + dataFolder+"/img/"+s.back()<< endl;
+        //        cout << "loaded " + dataFolder+"/img/"+s.back()<< endl;
     }
     
     
@@ -147,7 +147,7 @@ void myofApp::secondSetup(){
     commons.add(globalTimer.set("globalTimer",0,0,60));
     commons.add(useGlobalAligners.set("Use Global Aligners", true));
     commons.add(deleteScene.set("Include this scene", true));
-   // commons.add(useNumbers.set("Use Numbers", false));
+    // commons.add(useNumbers.set("Use Numbers", false));
     ofParameterGroup commonsSub;
     commonsSub.setName("subscenes");
     
@@ -243,7 +243,7 @@ void myofApp::secondSetup(){
         if(ofIsStringInString(alignerStrings[i], "Size"))maxValue = 300;
         else if(ofIsStringInString(alignerStrings[i], "Y"))maxValue = RES_H;
         else maxValue = RES_W;
-            
+        
         DatSlider->addSlider(alignerStrings[i], 0, maxValue, preset[i]);
         if(i+1>=breakCounter){
             DatSlider->addBreak();
@@ -278,12 +278,12 @@ void myofApp::secondSetup(){
     
     DatSlider->setPosition(mainGui.getWidth()+20*3+panelWidth*3,mainGui.getPosition().y);
     
-
-   // imageSelector->setPosition(subsceneTextEditorGui->getPosition().x, subsceneTextEditorGui->getPosition().y +subsceneTextEditorGui->getHeight()+20 );
-
+    
+    // imageSelector->setPosition(subsceneTextEditorGui->getPosition().x, subsceneTextEditorGui->getPosition().y +subsceneTextEditorGui->getHeight()+20 );
+    
     
     colorSelector->setWidth(panelWidth);
-   // imageSelector->setWidth(300);
+    // imageSelector->setWidth(300);
     tableNamesGui->setWidth(300);
     
     if(scenes.size()>0){
@@ -296,8 +296,8 @@ void myofApp::secondSetup(){
         tableNamesGui->getTextInput("TAB_NAME"+ofToString(i+1))->setText(tableNames[i]);
         
     }
-   //if(scenes.size()>0)updateGuiToSceneAligners(scenes[0]);
-
+    //if(scenes.size()>0)updateGuiToSceneAligners(scenes[0]);
+    
 }
 
 //--------------------------------------------------------------
@@ -306,173 +306,173 @@ void myofApp::update(){
     if(setupNow){
         setupNow = false;
         secondSetup();
-    
-    }
-    
-    if(isSetup){
-    ofSetWindowTitle(dataFolder + " framerate:" + ofToString(ofGetFrameRate(),0));
-    // main gui controls: adding and selecting sceenes;
-    if(save){
-        saveToXml();
-        save = false;
-    }
-    if(addVote){
-        string newClipboardContent = ofSystemTextBoxDialog("Name of Vote");
-        ofxClipboard::copy(newClipboardContent); //<<<<<<<<<<<<<<<<<
-        string clipboardContent = ofxClipboard::paste(); //<<<<<<<<<<<<<<<<<
-        addVote = false;
-        if(!isNameTaken(clipboardContent)){
-            addNewScene(0,clipboardContent);
-        }else{
-            ofSystemAlertDialog("name is already taken");
-        }
-    }
-    if(addQuiz){
-        string newClipboardContent = ofSystemTextBoxDialog("Name of Quiz");
-        ofxClipboard::copy(newClipboardContent); //<<<<<<<<<<<<<<<<<
-        string clipboardContent = ofxClipboard::paste(); //<<<<<<<<<<<<<<<<<
-        addQuiz = false;
-        if(!isNameTaken(clipboardContent)){
-            addNewScene(1,clipboardContent);
-        }else{
-            ofSystemAlertDialog("name is already taken");
-        }
-    }
-    if(addAssesment){
-        string newClipboardContent = ofSystemTextBoxDialog("Name of Assesment");
-        ofxClipboard::copy(newClipboardContent); //<<<<<<<<<<<<<<<<<
-        string clipboardContent = ofxClipboard::paste(); //<<<<<<<<<<<<<<<<<
-        addAssesment = false;
-        if(!isNameTaken(clipboardContent)){
-            addNewScene(2,clipboardContent);
-        }else{
-            ofSystemAlertDialog("name is already taken");
-        }
-    }
-    
-    showSome = false;
-    int previousValue = whichScene;
-    bool somethingChanged=false;
-    int whichChanged=0;
-    for(int i = 0; i<editExisting.size();i++){
-        int tog=0;
-        if(toggleScene[i])tog=1;
-        int edi =0;
-        if(editExisting[i])edi=1;
-        if(tog!=edi && edi == 1){
-            somethingChanged=true;
-            whichChanged=i;
-        }
-    }
-    if(somethingChanged){
-        whichScene=whichChanged;
-        if(scenes[whichScene].mode == 0){
-            b_sceneGui1 = true;
-            b_sceneGui2 = false;
-            b_sceneGui3 = false;
-           // imageSelector->setVisible(true);
-            sceneTextEditorGui->setVisible(true);
-            subsceneTextEditorGui->setVisible(true);
-            
-        }
-        else if(scenes[whichScene].mode == 1){
-            b_sceneGui1 = false;
-            b_sceneGui2 = true;
-            b_sceneGui3 = false;
-           // imageSelector->setVisible(true);
-            sceneTextEditorGui->setVisible(true);
-            subsceneTextEditorGui->setVisible(true);
-            
-        }
-        else if(scenes[whichScene].mode == 2){
-            b_sceneGui1 = false;
-            b_sceneGui2 = false;
-            b_sceneGui3 = true;
-            sceneTextEditorGui->setVisible(true);
-            subsceneTextEditorGui->setVisible(true);
-        }
-
-        whichSub=0;
-        updateGuiToSceneAligners(scenes[whichScene].useGlobalAligners);
-        setGuiToSceneValues(whichScene);
-        setSubGuiToSubValues(whichSub);
-    }
-        //previousValue=whichScene;
-    
-    for(int i = 0; i<editExisting.size();i++){
-        if(i!=whichScene)editExisting[i]=false;
-        toggleScene[i]=editExisting[i];
-    }
-
-
-    if(whichScene<scenes.size())
-    {
-        updateScene(&scenes[whichScene]);
-        updateSubScene(&scenes[whichScene].subs[whichSub]);
-    }
-    
-    if(globalAlignerToggle != useGlobalAligners){
-
-        updateGuiToSceneAligners(useGlobalAligners);
-    }
-//    if(globalAlignerToggle && !useGlobalAligners){
-//
-//        updateGlobalAligners();
-//    }
-    globalAlignerToggle=useGlobalAligners;
-    
-    if(whichScene<scenes.size()){
-        if(whichSub<scenes[whichScene].subs.size() ){
-            preview(scenes[whichScene],scenes[whichScene].subs[whichSub]);
-        }
-    }
-    ofFill();
-    syphon.publishTexture(&fbo.getTexture());
         
     }
     
-//    if(deleteScene){
-//        ofFile file;
-//        
-//        file.open(ofToDataPath(scenes[whichScene].name));
-//        file.removeFile(dataFolder);
-//        
-//        for (vector<Scene>::iterator it=scenes.begin(); it!=scenes.end();)    {
-//            
-//            if(it->name==scenes[whichScene].name){
-//                
-//                it = scenes.erase(it);
-//            }
-//            else{
-//                ++it;
-//            }
-//        }
-//        ofColor col;
-//        col.set(0);
-//        mainGui.getButton("scene: " +ofToString(whichScene+1)).setTextColor(col);
-//        whichScene=0;
-//    }
-//    if(deleteSub){
-//        int count=0;
-//        for (vector<SubScene>::iterator it=scenes[whichScene].subs.begin(); it!=scenes[whichScene].subs.end();)    {
-//            
-//            if(count==whichSub){
-//                it = scenes[whichScene].subs.erase(it);
-//            }
-//            else{
-//                if(whichSub<count){
-//                    scenes[whichScene].subs[count];
-//                }
-//                if(whichSub>count && count < scenes[whichScene].subs.size()){
-//                    scenes[whichScene].subs[count]=scenes[whichScene].subs[count+1];
-//                }
-//                ++it;
-//            }
-//            count++;
-//        }
-//        DatSub->getButton("subscene: "+ofToString(whichSub+1))->setVisible(false);
-//        whichSub=0;
-//    }
+    if(isSetup){
+        ofSetWindowTitle(dataFolder + " framerate:" + ofToString(ofGetFrameRate(),0));
+        // main gui controls: adding and selecting sceenes;
+        if(save){
+            saveToXml();
+            save = false;
+        }
+        if(addVote){
+            string newClipboardContent = ofSystemTextBoxDialog("Name of Vote");
+            ofxClipboard::copy(newClipboardContent); //<<<<<<<<<<<<<<<<<
+            string clipboardContent = ofxClipboard::paste(); //<<<<<<<<<<<<<<<<<
+            addVote = false;
+            if(!isNameTaken(clipboardContent)){
+                addNewScene(0,clipboardContent);
+            }else{
+                ofSystemAlertDialog("name is already taken");
+            }
+        }
+        if(addQuiz){
+            string newClipboardContent = ofSystemTextBoxDialog("Name of Quiz");
+            ofxClipboard::copy(newClipboardContent); //<<<<<<<<<<<<<<<<<
+            string clipboardContent = ofxClipboard::paste(); //<<<<<<<<<<<<<<<<<
+            addQuiz = false;
+            if(!isNameTaken(clipboardContent)){
+                addNewScene(1,clipboardContent);
+            }else{
+                ofSystemAlertDialog("name is already taken");
+            }
+        }
+        if(addAssesment){
+            string newClipboardContent = ofSystemTextBoxDialog("Name of Assesment");
+            ofxClipboard::copy(newClipboardContent); //<<<<<<<<<<<<<<<<<
+            string clipboardContent = ofxClipboard::paste(); //<<<<<<<<<<<<<<<<<
+            addAssesment = false;
+            if(!isNameTaken(clipboardContent)){
+                addNewScene(2,clipboardContent);
+            }else{
+                ofSystemAlertDialog("name is already taken");
+            }
+        }
+        
+        showSome = false;
+        int previousValue = whichScene;
+        bool somethingChanged=false;
+        int whichChanged=0;
+        for(int i = 0; i<editExisting.size();i++){
+            int tog=0;
+            if(toggleScene[i])tog=1;
+            int edi =0;
+            if(editExisting[i])edi=1;
+            if(tog!=edi && edi == 1){
+                somethingChanged=true;
+                whichChanged=i;
+            }
+        }
+        if(somethingChanged){
+            whichScene=whichChanged;
+            if(scenes[whichScene].mode == 0){
+                b_sceneGui1 = true;
+                b_sceneGui2 = false;
+                b_sceneGui3 = false;
+                // imageSelector->setVisible(true);
+                sceneTextEditorGui->setVisible(true);
+                subsceneTextEditorGui->setVisible(true);
+                
+            }
+            else if(scenes[whichScene].mode == 1){
+                b_sceneGui1 = false;
+                b_sceneGui2 = true;
+                b_sceneGui3 = false;
+                // imageSelector->setVisible(true);
+                sceneTextEditorGui->setVisible(true);
+                subsceneTextEditorGui->setVisible(true);
+                
+            }
+            else if(scenes[whichScene].mode == 2){
+                b_sceneGui1 = false;
+                b_sceneGui2 = false;
+                b_sceneGui3 = true;
+                sceneTextEditorGui->setVisible(true);
+                subsceneTextEditorGui->setVisible(true);
+            }
+            
+            whichSub=0;
+            updateGuiToSceneAligners(scenes[whichScene].useGlobalAligners);
+            setGuiToSceneValues(whichScene);
+            setSubGuiToSubValues(whichSub);
+        }
+        //previousValue=whichScene;
+        
+        for(int i = 0; i<editExisting.size();i++){
+            if(i!=whichScene)editExisting[i]=false;
+            toggleScene[i]=editExisting[i];
+        }
+        
+        
+        if(whichScene<scenes.size())
+        {
+            updateScene(&scenes[whichScene]);
+            updateSubScene(&scenes[whichScene].subs[whichSub]);
+        }
+        
+        if(globalAlignerToggle != useGlobalAligners){
+            
+            updateGuiToSceneAligners(useGlobalAligners);
+        }
+        //    if(globalAlignerToggle && !useGlobalAligners){
+        //
+        //        updateGlobalAligners();
+        //    }
+        globalAlignerToggle=useGlobalAligners;
+        
+        if(whichScene<scenes.size()){
+            if(whichSub<scenes[whichScene].subs.size() ){
+                preview(scenes[whichScene],scenes[whichScene].subs[whichSub]);
+            }
+        }
+        ofFill();
+        syphon.publishTexture(&fbo.getTexture());
+        
+    }
+    
+    //    if(deleteScene){
+    //        ofFile file;
+    //
+    //        file.open(ofToDataPath(scenes[whichScene].name));
+    //        file.removeFile(dataFolder);
+    //
+    //        for (vector<Scene>::iterator it=scenes.begin(); it!=scenes.end();)    {
+    //
+    //            if(it->name==scenes[whichScene].name){
+    //
+    //                it = scenes.erase(it);
+    //            }
+    //            else{
+    //                ++it;
+    //            }
+    //        }
+    //        ofColor col;
+    //        col.set(0);
+    //        mainGui.getButton("scene: " +ofToString(whichScene+1)).setTextColor(col);
+    //        whichScene=0;
+    //    }
+    //    if(deleteSub){
+    //        int count=0;
+    //        for (vector<SubScene>::iterator it=scenes[whichScene].subs.begin(); it!=scenes[whichScene].subs.end();)    {
+    //
+    //            if(count==whichSub){
+    //                it = scenes[whichScene].subs.erase(it);
+    //            }
+    //            else{
+    //                if(whichSub<count){
+    //                    scenes[whichScene].subs[count];
+    //                }
+    //                if(whichSub>count && count < scenes[whichScene].subs.size()){
+    //                    scenes[whichScene].subs[count]=scenes[whichScene].subs[count+1];
+    //                }
+    //                ++it;
+    //            }
+    //            count++;
+    //        }
+    //        DatSub->getButton("subscene: "+ofToString(whichSub+1))->setVisible(false);
+    //        whichSub=0;
+    //    }
 }
 
 void myofApp::onSliderEvent(ofxDatGuiSliderEvent e){
@@ -491,58 +491,58 @@ void myofApp::onSliderEvent(ofxDatGuiSliderEvent e){
 //--------------------------------------------------------------
 void myofApp::draw(){
     if(isSetup){
-    ofBackground(0, 0, 50);
+        ofBackground(0, 0, 50);
         if(!deleteScene||!deleteSub){
             ofBackground(255,0,0);
         }
-    mainGui.draw();
-    
-    if(whichScene<scenes.size()){
-        subSceneGui.setName("sub "+ofToString(whichSub+1));
-        subSceneGui.draw();
-        globalAligners.draw();
-        if(b_sceneGui1){
-            sceneGui1.setName(scenes[whichScene].name);
-            sceneGui1.setPosition(mainGui.getWidth()+20,mainGui.getPosition().y);
-            sceneGui1.draw();
-            ofSetColor(0);
-            //float h = 18*(MAX_SUB-scenes[whichScene].amountOfSubs);
-            //ofDrawRectangle(sceneGui1.getPosition().x, 18*MAX_SUB-(sceneGui1.getPosition().y+h)+50, sceneGui1.getWidth(), h+50);
+        mainGui.draw();
+        
+        if(whichScene<scenes.size()){
+            subSceneGui.setName("sub "+ofToString(whichSub+1));
+            subSceneGui.draw();
+            globalAligners.draw();
+            if(b_sceneGui1){
+                sceneGui1.setName(scenes[whichScene].name);
+                sceneGui1.setPosition(mainGui.getWidth()+20,mainGui.getPosition().y);
+                sceneGui1.draw();
+                ofSetColor(0);
+                //float h = 18*(MAX_SUB-scenes[whichScene].amountOfSubs);
+                //ofDrawRectangle(sceneGui1.getPosition().x, 18*MAX_SUB-(sceneGui1.getPosition().y+h)+50, sceneGui1.getWidth(), h+50);
+                
+            }
+            if(b_sceneGui2){
+                sceneGui2.setName(scenes[whichScene].name);
+                sceneGui2.setPosition(mainGui.getWidth()+20,mainGui.getPosition().y);
+                sceneGui2.draw();
+            }
             
-        }
-        if(b_sceneGui2){
-            sceneGui2.setName(scenes[whichScene].name);
-            sceneGui2.setPosition(mainGui.getWidth()+20,mainGui.getPosition().y);
-            sceneGui2.draw();
-        }
-        
-        
-        
-        
-        if(b_sceneGui3){
-            sceneGui3.setName(scenes[whichScene].name);
-            sceneGui3.setPosition(mainGui.getWidth()+20,mainGui.getPosition().y);
-            sceneGui3.draw();
-        }
-        //    ofSetColor(0, 0, 50);
-        //    ofDrawRectangle(sceneGui1.getPosition().x-1, sceneGui1.getPosition().y + 18*7 +18*amountOfSubs, sceneGui1.getWidth()+2, 19*(MAX_SUB-amountOfSubs)+3);
-        //
-        ofSetColor(255);
-        ofDrawBitmapString("editing" +ofToString(whichScene+1) + " "+ofToString(whichSub+1) + " "+ofToString(scenes.size())+ " "+ofToString(scenes[whichScene].subs.size()), 10, ofGetHeight()-20);
-        
-        
-        for(int i = 0 ; i<MAX_SUB;i++){
-            if(i!=whichSub)DatSub->getButton("subscene: "+ofToString(i+1))->setTheme(disabled);
-            if(i==whichSub)DatSub->getButton("subscene: "+ofToString(i+1))->setTheme(enabled);
-        }
-    }
-    if(whichScene<scenes.size() && imgs.size()>0){
-        if(whichSub<scenes[whichScene].subs.size()){
-            if(scenes[whichScene].subs[whichSub].useImages){
-                imageSelector(mX,mY);
+            
+            
+            
+            if(b_sceneGui3){
+                sceneGui3.setName(scenes[whichScene].name);
+                sceneGui3.setPosition(mainGui.getWidth()+20,mainGui.getPosition().y);
+                sceneGui3.draw();
+            }
+            //    ofSetColor(0, 0, 50);
+            //    ofDrawRectangle(sceneGui1.getPosition().x-1, sceneGui1.getPosition().y + 18*7 +18*amountOfSubs, sceneGui1.getWidth()+2, 19*(MAX_SUB-amountOfSubs)+3);
+            //
+            ofSetColor(255);
+            ofDrawBitmapString("editing" +ofToString(whichScene+1) + " "+ofToString(whichSub+1) + " "+ofToString(scenes.size())+ " "+ofToString(scenes[whichScene].subs.size()), 10, ofGetHeight()-20);
+            
+            
+            for(int i = 0 ; i<MAX_SUB;i++){
+                if(i!=whichSub)DatSub->getButton("subscene: "+ofToString(i+1))->setTheme(disabled);
+                if(i==whichSub)DatSub->getButton("subscene: "+ofToString(i+1))->setTheme(enabled);
             }
         }
-    }
+        if(whichScene<scenes.size() && imgs.size()>0){
+            if(whichSub<scenes[whichScene].subs.size()){
+                if(scenes[whichScene].subs[whichSub].useImages){
+                    imageSelector(mX,mY);
+                }
+            }
+        }
     }
     //for(int i = 0 ; i<scenes.size();i++)cout<<scenes[i].name<<endl;
     // subsceens...
@@ -559,7 +559,7 @@ void myofApp::onTextInputEvent(ofxDatGuiTextInputEvent e)
     
     if(e.target->getLabel() == "TEKST_1")scenes[whichScene].explanation =e.target->getText();
     
-  //  cout << "onTextInputEvent: " << e.target->getLabel() << " " << e.target->getText() << endl;
+    //  cout << "onTextInputEvent: " << e.target->getLabel() << " " << e.target->getText() << endl;
     
     for(int i = 0; i<tableNames.size();i++){
         if(e.target->getLabel()=="TAB_NAME"+ofToString(i+1)){
@@ -620,8 +620,8 @@ void myofApp::onButtonEvent(ofxDatGuiButtonEvent e)
         }
         
     }
-
-
+    
+    
 }
 
 
@@ -630,7 +630,7 @@ void myofApp::onColorPickerEvent(ofxDatGuiColorPickerEvent e){
         if(e.target->getLabel()=="C"+ofToString(i+1) && whichScene<scenes.size()){
             scenes[whichScene].colors[i].set(e.target->getColor());
         }
-//        scenes[scene].colors[i].set(colorSelector->getColorPicker("C"+ofToString(i+1))->getColor());
+        //        scenes[scene].colors[i].set(colorSelector->getColorPicker("C"+ofToString(i+1))->getColor());
     }
 }
 
@@ -652,10 +652,10 @@ void myofApp::setGuiToSceneValues(int scene){
     setSubGuiToSubValues(whichSub); // setting colors
     for (int i = 0; i<MAX_SUB_ANSWER; i++) {
         colorSelector->getColorPicker("C"+ofToString(i+1))->setColor(scenes[scene].colors[i]);
-       // scenes[scene].colors[i].set(colorSelector->getColorPicker("C"+ofToString(i+1))->getColor());
+        // scenes[scene].colors[i].set(colorSelector->getColorPicker("C"+ofToString(i+1))->getColor());
     }
     
- 
+    
     // text : TEXT1 and TEXT2 - Scene: text1,text2
 }
 void myofApp::setSubGuiToSubValues(int sub){
@@ -676,12 +676,12 @@ void myofApp::setSubGuiToSubValues(int sub){
     }
     for(int i = 0 ; i<scenes[whichScene].subs[sub].images.size();i++){
         int thisSubImage = scenes[whichScene].subs[sub].images[i];
-      //  cout <<thisSubImage<<endl;
-      //  cout <<imageStrings.size()<<endl;
+        //  cout <<thisSubImage<<endl;
+        //  cout <<imageStrings.size()<<endl;
         if(imageStrings.size()>thisSubImage){
-        //cout<<imageSelector->getDropdown("I"+ofToString(i+1))->getChildAt(thisSubImage)<<endl;
-        //imageSelector->getDropdown("I"+ofToString(thisSubImage))->setLabel(imagesString[thisSubImage]);
-         //   imageSelector->getDropdown("I"+ofToString(thisSubImage+1))->setLabel(imageStrings[thisSubImage]);
+            //cout<<imageSelector->getDropdown("I"+ofToString(i+1))->getChildAt(thisSubImage)<<endl;
+            //imageSelector->getDropdown("I"+ofToString(thisSubImage))->setLabel(imagesString[thisSubImage]);
+            //   imageSelector->getDropdown("I"+ofToString(thisSubImage+1))->setLabel(imageStrings[thisSubImage]);
         }
     }
 }
@@ -698,13 +698,13 @@ void myofApp::updateScene(Scene* s){
     if(s->useGlobalAligners){
         DatSlider->getHeader()->setName("GLOBAL ALIGNERS");
         DatSlider->setPosition(mainGui.getWidth()+20*3+panelWidth*2,mainGui.getPosition().y);
-
+        
     }
     else if(!s->useGlobalAligners){
-
-       DatSlider->getHeader()->setName("LOCAL ALIGNERS FOR:" + s->name);
+        
+        DatSlider->getHeader()->setName("LOCAL ALIGNERS FOR:" + s->name);
         DatSlider->setPosition(mainGui.getWidth()+20*3+panelWidth*2,mainGui.getPosition().y);
-
+        
     }//add headline
     
     s->weighed = weighed;
@@ -732,14 +732,14 @@ void myofApp::updateScene(Scene* s){
     }
     
     s->include = deleteScene;
-
+    
 }
 
 void myofApp::updateSubScene(SubScene* s){
     if(s->mode==2){
         amountAnswerOptions=0;
         useImages = false;
-       // useNumbers = true;
+        // useNumbers = true;
     }
     if(rightAnswer>amountAnswerOptions)rightAnswer=amountAnswerOptions;
     
@@ -755,8 +755,8 @@ void myofApp::updateSubScene(SubScene* s){
         if(i<amountAnswerOptions)subsceneTextEditorGui->getTextInput(ofToString(i+1)+"A")->setVisible(true);
         if(i>=amountAnswerOptions)subsceneTextEditorGui->getTextInput(ofToString(i+1)+"A")->setVisible(false);
         
-       // if(i<amountAnswerOptions)imageSelector->getDropdown("I"+ofToString(i+1))->setVisible(true);
-       // if(i>=amountAnswerOptions)imageSelector->getDropdown("I"+ofToString(i+1))->setVisible(false);
+        // if(i<amountAnswerOptions)imageSelector->getDropdown("I"+ofToString(i+1))->setVisible(true);
+        // if(i>=amountAnswerOptions)imageSelector->getDropdown("I"+ofToString(i+1))->setVisible(false);
     }
     
     if(useGlobalTimer){
@@ -784,14 +784,14 @@ void myofApp::addNewScene(int mode, string name){
     Scene s = *new Scene;
     scenes.push_back(s);
     
-
+    
     scenes.back().setup(mode,name,copyFrom);
     for(int i = 0 ; i<alignerStrings.size();i++){
-       // scenes.back().aligners.push_back(preset[i]);
+        // scenes.back().aligners.push_back(preset[i]);
         scenes.back().alignerMap[alignerStrings[i]] = preset[i];
-      //  else scenes.back().alignerMap[alignerStrings[i]] = preset2[i];
+        //  else scenes.back().alignerMap[alignerStrings[i]] = preset2[i];
     }
-
+    
     
     ofParameter<bool> b;
     b.set("scene: "+ofToString(editExisting.size()+1),false);
@@ -803,9 +803,9 @@ void myofApp::addNewScene(int mode, string name){
 //--------------------------------------------------------------
 void myofApp::keyPressed(int key){
     if(key == OF_KEY_COMMAND){cmd=true;
-//    cout<<"cmd"<<endl;
+        //    cout<<"cmd"<<endl;
     }
-//    cout <<key<<endl;
+    //    cout <<key<<endl;
     if(key=='s' && cmd){
         saveToXml();
         cout<<"saved"<<endl;
@@ -827,9 +827,9 @@ void myofApp::imageSelector(int x,int y){
             if(x>ux+u*size && x<ux+(1+u)*size &&
                y>uy+i*size && y<uy+(1+i)*size){
                 scenes[whichScene].subs[whichSub].images[i]=u;
-               // cout<<ofToString(u)+" "+ofToString(scenes[whichScene].subs[whichSub].images[i])<<endl;
+                // cout<<ofToString(u)+" "+ofToString(scenes[whichScene].subs[whichSub].images[i])<<endl;
             }
-
+            
             ofSetColor(255);
             ofFill();
             imgs[u].draw(u*size,i*size,size,size);
@@ -942,61 +942,61 @@ void myofApp::preview(Scene s,SubScene sub){
     }
     
     
-        ofSetColor(255);
-        //headline
-        drawColumn(sub.headline, al["tekst2X"], al["tekst2Y"], al["tekst2FontSize"], al["collumWidth2"]);
+    ofSetColor(255);
+    //headline
+    drawColumn(sub.headline, al["tekst2X"], al["tekst2Y"], al["tekst2FontSize"], al["collumWidth2"]);
     
-        //explanation
-        drawColumn(s.explanation, al["tekst1X"], al["tekst1Y"], al["tekst1FontSize"], al["collumWidth1"]);
-        
-        //question
-        drawColumn(sub.question, al["tekst3X"], al["tekst3Y"], al["tekst3FontSize"], al["collumWidth3"]);
-        
-        //timer
+    //explanation
+    drawColumn(s.explanation, al["tekst1X"], al["tekst1Y"], al["tekst1FontSize"], al["collumWidth1"]);
+    
+    //question
+    drawColumn(sub.question, al["tekst3X"], al["tekst3Y"], al["tekst3FontSize"], al["collumWidth3"]);
+    
+    //timer
     int time ;
     if(sub.useGlobalTimer)time = s.globalTimer;
     else time = sub.localTimer;
-        font.draw(ofToString(time), al["timerSize"], al["timerX"], al["timerY"]);
-        
-        //legend
-        ofPushMatrix();
-        ofTranslate(al["legendX"], al["legendY"]);
-        for(int i = 0 ; i<sub.amountAnswerOptions;i++){
-            ofSetColor(255);
-            font.draw(sub.answerOptions[i], al["legendFontSize"], 70, i * 60+25);
-            ofSetColor(s.colors[i]);
-            ofDrawRectangle(0, 60*i, 60, 60);
-            ofSetColor(255);
-            ofNoFill();
-            ofDrawRectangle(0, 60*i, 70*12+40, 60);
-            ofFill();
-        }
-        ofPopMatrix();
-        
-        //result
+    font.draw(ofToString(time), al["timerSize"], al["timerX"], al["timerY"]);
+    
+    //legend
+    ofPushMatrix();
+    ofTranslate(al["legendX"], al["legendY"]);
+    for(int i = 0 ; i<sub.amountAnswerOptions;i++){
         ofSetColor(255);
-        ofRectangle rectt = font.getBBox("result - always in the middle", al["resultFontSize"], 0, 0);
-        font.draw("result - always in the middle", al["resultFontSize"], (RES_W/2)-(rectt.width/2), RES_H/2-(rectt.height/2));
-      //  font.draw("liveResult fontsize", al[7], (RES_W/2)-(rectt.width/2), RES_H/2-(rectt.height/2)+40);
-        
-        //live results;
+        font.draw(sub.answerOptions[i], al["legendFontSize"], 70, i * 60+25);
+        ofSetColor(s.colors[i]);
+        ofDrawRectangle(0, 60*i, 60, 60);
         ofSetColor(255);
-        font.draw("LIVE RESULTS", al["liveResultFontSize"], al["legendX"], al["legendY"]);
+        ofNoFill();
+        ofDrawRectangle(0, 60*i, 70*12+40, 60);
+        ofFill();
+    }
+    ofPopMatrix();
+    
+    //result
+    ofSetColor(255);
+    ofRectangle rectt = font.getBBox("result - always in the middle", al["resultFontSize"], 0, 0);
+    font.draw("result - always in the middle", al["resultFontSize"], (RES_W/2)-(rectt.width/2), RES_H/2-(rectt.height/2));
+    //  font.draw("liveResult fontsize", al[7], (RES_W/2)-(rectt.width/2), RES_H/2-(rectt.height/2)+40);
+    
+    //live results;
+    ofSetColor(255);
+    font.draw("LIVE RESULTS", al["liveResultFontSize"], al["legendX"], al["legendY"]);
+    
+    ofRectangle name = font.getBBox("CHART, RESULT", al["chartFontSize"], 0,0);
+    for(int i = 0; i <3;i++){
+        int x = al["top10chartX"];
+        int y = al["top10chartY"];
+        ofSetColor(255);
         
-        ofRectangle name = font.getBBox("CHART, RESULT", al["chartFontSize"], 0,0);
-        for(int i = 0; i <3;i++){
-            int x = al["top10chartX"];
-            int y = al["top10chartY"];
-            ofSetColor(255);
-            
-            font.draw("#"+ofToString(i+1), al["chartFontSize"], x, y+(name.height+15)*i);
-            font.draw("CHART, RESULT", al["chartFontSize"], x+200, y+(name.height+15)*i);
-            font.draw(ofToString(i+1*2), al["chartFontSize"], x+200*2+20+name.width, y+(name.height+15)*i);
-        }
-        
+        font.draw("#"+ofToString(i+1), al["chartFontSize"], x, y+(name.height+15)*i);
+        font.draw("CHART, RESULT", al["chartFontSize"], x+200, y+(name.height+15)*i);
+        font.draw(ofToString(i+1*2), al["chartFontSize"], x+200*2+20+name.width, y+(name.height+15)*i);
+    }
+    
     
     fbo.end();
-        
+    
 }
 
 void myofApp::saveToXml(){
@@ -1013,16 +1013,16 @@ void myofApp::saveToXml(){
         isDir.isDirectory();
         
         if(!isDir.isDirectory())dir.removeDirectory(dir[i].path(), true);
-
+        
     }
-
-        xml = *new ofxXmlSettings;
-        xml.loadFile(dataFolder+"/data.xml");
-        //xml.loadFile("Sequences/"+name+".xml");
     
-        xml.clear();
-        xml.addTag("document");
-        xml.pushTag("document");
+    xml = *new ofxXmlSettings;
+    xml.loadFile(dataFolder+"/data.xml");
+    //xml.loadFile("Sequences/"+name+".xml");
+    
+    xml.clear();
+    xml.addTag("document");
+    xml.pushTag("document");
     
     setGlobalAlignersToXml(&xml);
     
@@ -1037,7 +1037,7 @@ void myofApp::saveToXml(){
     
     // mising table names, images and wrong image
     
-  
+    
     for(int i = 0; i<scenes.size(); i++){
         if(scenes[i].include){
             xml.addTag("scene");
@@ -1053,156 +1053,166 @@ void myofApp::saveToXml(){
     
     for(int i = 0 ; i<scenes.size();i++){
         if(scenes[i].include){
-        xml.loadFile(dataFolder+"/"+scenes[i].name+".xml");
-        xml.clear();
-        xml.addTag("document");
-        xml.pushTag("document");
-        
-        if(scenes[i].mode == 0){
-            xml.addTag("vote");
-            xml.pushTag("vote");
-        }
-        if(scenes[i].mode == 1){
-            xml.addTag("quiz");
-            xml.pushTag("quiz");
-        }
-        if(scenes[i].mode == 2){
-            xml.addTag("assesment");
-            xml.pushTag("assesment");
-        }
-        if(!scenes[i].useGlobalAligners){
-            setSceneAlignersToXml(scenes[i],&xml);
-        }
-        if(scenes[i].globalTimer>0){
-            xml.addTag("globalTime");
-            xml.setValue("globalTime",scenes[i].globalTimer);
-        }
-        
-        xml.addTag("explanation");
-        xml.setValue("explanation",scenes[i].explanation);
-        
-       // xml.addTag("explanation");
-       // xml.setValue("explanation",scenes[i].explanation);
-        
-        //---------------vote-------------------------------------------------------------------------
-        if(scenes[i].mode == 0){
-            if(scenes[i].weighed)xml.addTag("weighed");
-            else if(scenes[i].consentual)xml.addTag("consentual");
-            else xml.addTag("majority");
             
-            xml.addTag("headline");
-            xml.setValue("headline",scenes[i].subs[0].headline);
+            xml.loadFile(dataFolder+"/"+scenes[i].name+".xml");
+            xml.clear();
+            xml.addTag("document");
+            xml.pushTag("document");
             
-            xml.addTag("question");
-            xml.pushTag("question");
-            xml.addTag("headline");
-            xml.setValue("headline",scenes[i].subs[0].headline);
-            if(!scenes[i].subs[0].useGlobalTimer){
-                xml.addTag("secTime");
-                xml.setValue("secTime",scenes[i].subs[0].localTimer);
+            if(scenes[i].mode == 0){
+                xml.addTag("vote");
+                xml.pushTag("vote");
             }
-            xml.addTag("q");
-            xml.setValue("q",scenes[i].subs[0].question);//ATTENTION
-            
-            for(int p = 0 ; p<scenes[i].subs[0].amountAnswerOptions;p++){
-                xml.addTag("a");
-                xml.setValue("a",scenes[i].subs[0].answerOptions[p],p);
-                xml.pushTag("a",p);
-                xml.addTag("color");
-                xml.setValue("color",scenes[i].colors[p].getHex()); // ATTENTION
-                if(scenes[i].subs[0].useImages){
-                    xml.addTag("img");
-                    xml.setValue("img",scenes[i].subs[0].images[p]); // ATTENTION
-                }
-                xml.popTag();//a
+            if(scenes[i].mode == 1){
+                xml.addTag("quiz");
+                xml.pushTag("quiz");
             }
-            xml.popTag();
-
-        }
-        // ---------------------quiz! -----------------------
-        if(scenes[i].mode == 1){
-            for(int u = 0 ; u<scenes[i].amountOfSubs;u++){
-                if(scenes[i].subs[u].include){
-                xml.addTag("question");
-                xml.pushTag("question",u);
+            if(scenes[i].mode == 2){
+                xml.addTag("assesment");
+                xml.pushTag("assesment");
+            }
+            //pushlevel : document/vote
+            
+            if(!scenes[i].useGlobalAligners){
+                setSceneAlignersToXml(scenes[i],&xml);
+            }
+            if(scenes[i].globalTimer>0){
+                xml.addTag("globalTime");
+                xml.setValue("globalTime",scenes[i].globalTimer);
+            }
+            
+            xml.addTag("explanation");
+            xml.setValue("explanation",scenes[i].explanation);
+            
+            // xml.addTag("explanation");
+            // xml.setValue("explanation",scenes[i].explanation);
+            
+            //---------------vote-------------------------------------------------------------------------
+            if(scenes[i].mode == 0){
+                if(scenes[i].weighed)xml.addTag("weighed");
+                else if(scenes[i].consentual)xml.addTag("consentual");
+                else xml.addTag("majority");
+                
                 xml.addTag("headline");
-                xml.setValue("headline",scenes[i].subs[u].headline);
-                if(!scenes[i].subs[u].useGlobalTimer){
+                xml.setValue("headline",scenes[i].subs[0].headline);
+                
+                xml.addTag("question");
+                xml.pushTag("question"); //pushlevel : document/vote/question
+                xml.addTag("headline");
+                xml.setValue("headline",scenes[i].subs[0].headline);
+                if(!scenes[i].subs[0].useGlobalTimer){
                     xml.addTag("secTime");
-                    xml.setValue("secTime",scenes[i].subs[u].localTimer);
+                    xml.setValue("secTime",scenes[i].subs[0].localTimer);
                 }
                 xml.addTag("q");
-                xml.setValue("q",scenes[i].subs[u].question);//ATTENTION
+                xml.setValue("q",scenes[i].subs[0].question);
                 
-                for(int p = 0 ; p<scenes[i].subs[u].amountAnswerOptions;p++){
+                for(int p = 0 ; p<scenes[i].subs[0].amountAnswerOptions;p++){
                     xml.addTag("a");
-                    xml.setValue("a",scenes[i].subs[u].answerOptions[p],p);
-                    xml.pushTag("a",p);
+                    xml.setValue("a",scenes[i].subs[0].answerOptions[p],p);
+                    xml.pushTag("a",p); //pushlevel : document/vote/question/a
                     xml.addTag("color");
-                    xml.setValue("color",scenes[i].colors[p].getHex()); // ATTENTION
-                    if(scenes[i].subs[u].useImages){
+                    xml.setValue("color",scenes[i].colors[p].getHex());
+                    if(scenes[i].subs[0].useImages){
                         xml.addTag("img");
-                        xml.setValue("img",scenes[i].subs[u].images[p]); // ATTENTION
+                        xml.setValue("img",scenes[i].subs[0].images[p]);
                     }
-//                    if(!scenes[i].subs[u].useGlobalTimer){
-//                        xml.addTag("secTime");
-//                        xml.setValue("secTime",scenes[i].subs[u].localTimer); // ATTENTION
-//                    }
-                    xml.popTag();
+                    xml.popTag();////pushlevel : document/vote/question
                 }
-                xml.popTag();
-                }
-            }
-            xml.addTag("rightAnswers");
-            xml.pushTag("rightAnswers");
-            for(int u = 0; u<scenes[i].amountOfSubs;u++){
-                xml.addTag("a");
-                xml.setValue("a",scenes[i].subs[u].rightAnswer,u);
+                xml.popTag();//pushlevel : document/vote
                 
             }
-            xml.popTag();
-        }
-        
-        
-        // ---------------------assesment! -----------------------
-        if(scenes[i].mode == 2){
 
-            if(scenes[i].substractive)xml.addTag("subtractive");
-            xml.addTag("number");
-            xml.addTag("totalPoints");
-            xml.setValue("totalPoints",scenes[i].totalPoints);
-            
-            xml.addTag("color");
-            xml.pushTag("color");
-            xml.addTag("c");
-            xml.addTag("c");
-            xml.setValue("c",scenes[i].colors[0].getHex(),0); //ATTENTION
-            xml.setValue("c",scenes[i].colors[1].getHex(),1);
-            xml.popTag(); //color
-            
-            
-            for(int u = 0 ; u<scenes[i].amountOfSubs;u++){
-                if(scenes[i].subs[u].include){
-                xml.addTag("question");
-                xml.pushTag("question",u);
-                xml.addTag("headline");
-                xml.setValue("headline",scenes[i].subs[u].headline);
-                if(!scenes[i].subs[u].useGlobalTimer){
-                    xml.addTag("secTime");
-                    xml.setValue("secTime",scenes[i].subs[u].localTimer);
+            // ---------------------quiz! -----------------------
+            if(scenes[i].mode == 1){
+                int theIndex = 0;
+                for(int u = 0 ; u<scenes[i].amountOfSubs;u++){
+                    if(scenes[i].subs[u].include){
+                        xml.addTag("question");
+                        xml.pushTag("question",theIndex); //pushlevel : document/vote/question
+                        theIndex++;
+                        xml.addTag("headline");
+                        xml.setValue("headline",scenes[i].subs[u].headline);
+                        if(!scenes[i].subs[u].useGlobalTimer){
+                            xml.addTag("secTime");
+                            xml.setValue("secTime",scenes[i].subs[u].localTimer);
+                        }
+                        xml.addTag("q");
+                        xml.setValue("q",scenes[i].subs[u].question);
+                        
+                        for(int p = 0 ; p<scenes[i].subs[u].amountAnswerOptions;p++){
+                            xml.addTag("a");
+                            xml.setValue("a",scenes[i].subs[u].answerOptions[p],p);
+                            xml.pushTag("a",p); //pushlevel : document/vote/question/a
+                            xml.addTag("color");
+                            xml.setValue("color",scenes[i].colors[p].getHex());
+                            if(scenes[i].subs[u].useImages){
+                                xml.addTag("img");
+                                xml.setValue("img",scenes[i].subs[u].images[p]);
+                            }
+
+                            xml.popTag();//pushlevel : document/vote/question
+                        }
+                        xml.popTag();//pushlevel : document/vote/
+                    }
                 }
-                xml.addTag("q");
-                xml.setValue("q",scenes[i].subs[u].question);//ATTENTION
-                //no images for assesment
-                xml.popTag();
+                
+                
+                xml.addTag("rightAnswers");
+                xml.pushTag("rightAnswers"); //pushlevel : document/vote/rightAnswer
+                theIndex = 0;
+                for(int u = 0; u<scenes[i].amountOfSubs;u++){
+                    if(scenes[i].subs[u].include){
+                        xml.addTag("a");
+                        xml.setValue("a",scenes[i].subs[u].rightAnswer,theIndex);
+                        theIndex++;
+                    }
+                    
+                }
+                xml.popTag(); //pushlevel : document/vote/
+                
+            }
+            
+            
+            // ---------------------assesment! -----------------------
+            if(scenes[i].mode == 2){
+                
+                if(scenes[i].substractive)xml.addTag("subtractive");
+                xml.addTag("number");
+                xml.addTag("totalPoints");
+                xml.setValue("totalPoints",scenes[i].totalPoints);
+                
+                xml.addTag("color");
+                xml.pushTag("color"); //pushlevel : document/vote/color
+                xml.addTag("c");
+                xml.addTag("c");
+                xml.setValue("c",scenes[i].colors[0].getHex(),0);
+                xml.setValue("c",scenes[i].colors[1].getHex(),1);
+                xml.popTag(); //pushlevel : document/vote/
+                
+                int theIndex=0;
+                for(int u = 0 ; u<scenes[i].amountOfSubs;u++){
+                    if(scenes[i].subs[u].include){
+                        xml.addTag("question");
+                        xml.pushTag("question",theIndex);//pushlevel : document/vote/question
+                        theIndex++;
+                        xml.addTag("headline");
+                        xml.setValue("headline",scenes[i].subs[u].headline);
+                        if(!scenes[i].subs[u].useGlobalTimer){
+                            xml.addTag("secTime");
+                            xml.setValue("secTime",scenes[i].subs[u].localTimer);
+                        }
+                        xml.addTag("q");
+                        xml.setValue("q",scenes[i].subs[u].question);
+                        
+                        xml.popTag();//pushlevel : document/vote/
+                    }
                 }
             }
             
-        }
-        
-        xml.popTag(); // assesment/quiz/vote
-        xml.popTag(); // document;
-        xml.saveFile(dataFolder+"/"+scenes[i].name+".xml");
+            xml.popTag(); //pushlevel : document/
+            xml.popTag(); //pushlevel :
+            xml.saveFile(dataFolder+"/"+scenes[i].name+".xml");
         }//if include this scene
     }
     
@@ -1218,117 +1228,117 @@ void myofApp::loadFromXml(){
     
     xml.pushTag("document");
     setGlobalAlignersFromXml(xml);
-        
+    
     for(int i = 0; i<xml.getNumTags("scene"); i++){
         xml.pushTag("scene",i);
         sceneNames.push_back(ofSplitString(xml.getValue("file", ""),".")[0]); //cut of .xml
-//        cout<<"scenes "+ sceneNames[i]<<endl;
+        //        cout<<"scenes "+ sceneNames[i]<<endl;
         xml.popTag();
     }
-//    for(int i = 0; i<xml.getNumTags("img"); i++){
-//        cout<<"images "+ ofToString(xml.getNumTags("img"))<<endl;
-//        imagesString.push_back(xml.getValue("img", "",i));
-//    }
+    //    for(int i = 0; i<xml.getNumTags("img"); i++){
+    //        cout<<"images "+ ofToString(xml.getNumTags("img"))<<endl;
+    //        imagesString.push_back(xml.getValue("img", "",i));
+    //    }
     
     vector<string> tab= ofSplitString(xml.getValue("tableNames", ""), "//");
     for(int i = 0; i<12;i++){
         if(i<tab.size())tableNames[i]=(ofSplitString(xml.getValue("tableNames", ""), "//")[i]);
     }
     xml.popTag();
-
+    
     xml.clear();
     
     for(int i = 0; i<sceneNames.size();i++){
         xml.clear();
         
         if(xml.loadFile(dataFolder+"/"+sceneNames[i]+".xml")){
-//            cout<<"loaded "+ dataFolder+"/"+sceneNames[i]+".xml"<<endl;
-
-        if(xml.tagExists("document")){
-         
-            xml.pushTag("document");
+            //            cout<<"loaded "+ dataFolder+"/"+sceneNames[i]+".xml"<<endl;
             
-
-            bool loadThis = false;
-            if(xml.tagExists("vote")){
-                addNewScene(0,sceneNames[i]);
-                xml.pushTag("vote");
-                loadThis=true;
-            }
-            else if(xml.tagExists("quiz")){
-                addNewScene(1,sceneNames[i]);
-                xml.pushTag("quiz");
-                loadThis=true;
+            if(xml.tagExists("document")){
                 
-            }
-            else if(xml.tagExists("assesment")){
-                addNewScene(2,sceneNames[i]);
-                xml.pushTag("assesment");
-                loadThis=true;
-            }
-            if(loadThis){
-//                cout <<"amount of scenes" + ofToString(scenes.size()) <<endl;
-                if(xml.tagExists("globalFontSize")){
-                    setSceneAlignersFromXml(&scenes[i],xml);
-                    scenes[i].useGlobalAligners = false;
+                xml.pushTag("document");
+                
+                
+                bool loadThis = false;
+                if(xml.tagExists("vote")){
+                    addNewScene(0,sceneNames[i]);
+                    xml.pushTag("vote");
+                    loadThis=true;
+                }
+                else if(xml.tagExists("quiz")){
+                    addNewScene(1,sceneNames[i]);
+                    xml.pushTag("quiz");
+                    loadThis=true;
                     
                 }
-                
-                //if(xml.tagExists("number"))scenes[i].useNumbers =true;
-                if(xml.tagExists("weighed"))scenes[i].weighed =true;
-                if(xml.tagExists("substractive"))scenes[i].substractive =true;
-                if(xml.tagExists("globalTime"))scenes[i].globalTimer =xml.getValue("globalTime", 0);
-                if(xml.tagExists("totalPoints"))scenes[i].totalPoints =xml.getValue("totalPoints", 0);
-                if(xml.tagExists("explanation"))scenes[i].explanation =xml.getValue("explanation", "",0);
-    
-                if(xml.tagExists("color")){ //colors for assesment is fucked up..
-                    xml.pushTag("color");
-                    scenes[i].colors[0].setHex(xml.getValue("c", 0,0));
-                    scenes[i].colors[1].setHex(xml.getValue("c", 0,1));
-                    xml.popTag();
+                else if(xml.tagExists("assesment")){
+                    addNewScene(2,sceneNames[i]);
+                    xml.pushTag("assesment");
+                    loadThis=true;
                 }
-                if (xml.tagExists("headline") && scenes[i].subs.size()>0)scenes[i].subs[0].headline = xml.getValue("headline", ""); //for retarded vote!!!
-                
-                if(xml.tagExists("question"))scenes[i].amountOfSubs = xml.getNumTags("question");
-                for(int u = 0 ; u<xml.getNumTags("question");u++){
-                    xml.pushTag("question",u);
-                    if (xml.tagExists("headline")&&scenes[i].subs.size()>u)scenes[i].subs[u].headline = xml.getValue("headline", "",0);
-                    if (xml.tagExists("secTime")){scenes[i].subs[u].localTimer = xml.getValue("secTime", 0);
-                        scenes[i].subs[u].useGlobalTimer = false;
-                    }else{
-                        scenes[i].subs[u].useGlobalTimer = true;
+                if(loadThis){
+                    //                cout <<"amount of scenes" + ofToString(scenes.size()) <<endl;
+                    if(xml.tagExists("globalFontSize")){
+                        setSceneAlignersFromXml(&scenes[i],xml);
+                        scenes[i].useGlobalAligners = false;
+                        
                     }
                     
-                    if (xml.tagExists("q"))scenes[i].subs[u].question = xml.getValue("q", "");
-                    for (int p = 0; p<xml.getNumTags("a"); p++) {
-                        scenes[i].subs[u].amountAnswerOptions = xml.getNumTags("a");
-                        scenes[i].subs[u].answerOptions[p] = xml.getValue("a", "",p);
-                        xml.pushTag("a",p);
-                        if (xml.tagExists("color")){
-                            scenes[i].colors[p].setHex(xml.getValue("color", 0));
-                        }
-                        if (xml.tagExists("img")){
-                            scenes[i].subs[u].images[p] = xml.getValue("img", 0);
-                            scenes[i].subs[u].useImages = true;
+                    //if(xml.tagExists("number"))scenes[i].useNumbers =true;
+                    if(xml.tagExists("weighed"))scenes[i].weighed =true;
+                    if(xml.tagExists("substractive"))scenes[i].substractive =true;
+                    if(xml.tagExists("globalTime"))scenes[i].globalTimer =xml.getValue("globalTime", 0);
+                    if(xml.tagExists("totalPoints"))scenes[i].totalPoints =xml.getValue("totalPoints", 0);
+                    if(xml.tagExists("explanation"))scenes[i].explanation =xml.getValue("explanation", "",0);
+                    
+                    if(xml.tagExists("color")){ //colors for assesment is fucked up..
+                        xml.pushTag("color");
+                        scenes[i].colors[0].setHex(xml.getValue("c", 0,0));
+                        scenes[i].colors[1].setHex(xml.getValue("c", 0,1));
+                        xml.popTag();
+                    }
+                    if (xml.tagExists("headline") && scenes[i].subs.size()>0)scenes[i].subs[0].headline = xml.getValue("headline", ""); //for retarded vote!!!
+                    
+                    if(xml.tagExists("question"))scenes[i].amountOfSubs = xml.getNumTags("question");
+                    for(int u = 0 ; u<xml.getNumTags("question");u++){
+                        xml.pushTag("question",u);
+                        if (xml.tagExists("headline")&&scenes[i].subs.size()>u)scenes[i].subs[u].headline = xml.getValue("headline", "",0);
+                        if (xml.tagExists("secTime")){scenes[i].subs[u].localTimer = xml.getValue("secTime", 0);
+                            scenes[i].subs[u].useGlobalTimer = false;
                         }else{
-                            scenes[i].subs[u].useImages = false;
+                            scenes[i].subs[u].useGlobalTimer = true;
                         }
-                        xml.popTag();
-                    }
-                    
-                    xml.popTag();
-                    if(xml.tagExists("rightAnswers")){
-                        xml.pushTag("rightAnswers");
-                        for(int u = 0; u<xml.getNumTags("a");u++){
-                            scenes[i].subs[u].rightAnswer = xml.getValue("a", 0,u);
+                        
+                        if (xml.tagExists("q"))scenes[i].subs[u].question = xml.getValue("q", "");
+                        for (int p = 0; p<xml.getNumTags("a"); p++) {
+                            scenes[i].subs[u].amountAnswerOptions = xml.getNumTags("a");
+                            scenes[i].subs[u].answerOptions[p] = xml.getValue("a", "",p);
+                            xml.pushTag("a",p);
+                            if (xml.tagExists("color")){
+                                scenes[i].colors[p].setHex(xml.getValue("color", 0));
+                            }
+                            if (xml.tagExists("img")){
+                                scenes[i].subs[u].images[p] = xml.getValue("img", 0);
+                                scenes[i].subs[u].useImages = true;
+                            }else{
+                                scenes[i].subs[u].useImages = false;
+                            }
+                            xml.popTag();
                         }
+                        
                         xml.popTag();
+                        if(xml.tagExists("rightAnswers")){
+                            xml.pushTag("rightAnswers");
+                            for(int u = 0; u<xml.getNumTags("a");u++){
+                                scenes[i].subs[u].rightAnswer = xml.getValue("a", 0,u);
+                            }
+                            xml.popTag();
+                        }
                     }
-                }
-            } //if scene added
-            xml.popTag(); //document
-        } //if doc exists
-        }// if loaded!! 
+                } //if scene added
+                xml.popTag(); //document
+            } //if doc exists
+        }// if loaded!!
     }// for scenes
     
 }
@@ -1336,18 +1346,18 @@ void myofApp::loadFromXml(){
 void myofApp::setGlobalAlignersFromXml(ofxXmlSettings xml){
     for(int i=0; i<alignerStrings.size();i++){
         if(xml.tagExists(alignerStrings[i]))alignerMap[alignerStrings[i]]=xml.getValue(alignerStrings[i], 0);
-//        cout<< alignerStrings[i] + " " + ofToString(alignerInts[i])<<endl;
+        //        cout<< alignerStrings[i] + " " + ofToString(alignerInts[i])<<endl;
     }
-
-
+    
+    
 }
 void myofApp::setSceneAlignersFromXml(Scene *s,ofxXmlSettings xml){
     for(int i = 0; i<alignerStrings.size();i++){
         if(xml.tagExists(alignerStrings[i]))s->alignerMap[alignerStrings[i]]=xml.getValue(alignerStrings[i], 0);
-      //  cout<< alignerStrings[i] + " " + ofToString(s->aligners[i])<<endl;
+        //  cout<< alignerStrings[i] + " " + ofToString(s->aligners[i])<<endl;
     }
-
-
+    
+    
     
 }
 void myofApp::setGlobalAlignersToXml(ofxXmlSettings* xml){
@@ -1359,8 +1369,8 @@ void myofApp::setGlobalAlignersToXml(ofxXmlSettings* xml){
         xml->addTag(alignerStrings[i]);
         xml->setValue(alignerStrings[i], alignerMap[alignerStrings[i]]);
     }
-
-
+    
+    
 }
 
 void myofApp::setSceneAlignersToXml(Scene s, ofxXmlSettings* xml){
@@ -1407,12 +1417,12 @@ void myofApp::drawColumn(string s, int x, int y, int fontSize,int width){
 
 //--------------------------------------------------------------
 void myofApp::mouseMoved(int x, int y ){
-
+    
 }
 
 //--------------------------------------------------------------
 void myofApp::mouseDragged(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
@@ -1423,30 +1433,30 @@ void myofApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void myofApp::mouseReleased(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void myofApp::mouseEntered(int x, int y){
-
+    
 }
 
 //--------------------------------------------------------------
 void myofApp::mouseExited(int x, int y){
-
+    
 }
 
 //--------------------------------------------------------------
 void myofApp::windowResized(int w, int h){
-
+    
 }
 
 //--------------------------------------------------------------
 void myofApp::gotMessage(ofMessage msg){
-
+    
 }
 
 //--------------------------------------------------------------
 void myofApp::dragEvent(ofDragInfo dragInfo){
-
+    
 }

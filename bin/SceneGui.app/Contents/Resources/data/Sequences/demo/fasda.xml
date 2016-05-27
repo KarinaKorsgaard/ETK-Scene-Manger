@@ -1,79 +1,18 @@
 <document>
     <quiz>
         <globalTime>30</globalTime>
-        <explanation>explanation</explanation>
+        <explanation>stay scene</explanation>
         <question>
-            <headline>headline</headline>
-            <secTime>0</secTime>
-            <q></q>
-            <a>initial value
-                <color>16777215</color>
-            </a>
-        </question>
-        <question>
-            <headline>headline</headline>
-            <secTime>0</secTime>
-            <q></q>
-            <a>initial value
-                <color>16777215</color>
-            </a>
-        </question>
-        <question>
-            <headline>headline</headline>
+            <headline>leave</headline>
+            <secTime>25</secTime>
             <q></q>
             <a>initial value
                 <color>16777215</color>
                 <img>0</img>
             </a>
         </question>
-        <question>
-            <headline>headline</headline>
-            <secTime>0</secTime>
-            <q></q>
-            <a>initial value
-                <color>16777215</color>
-            </a>
-        </question>
-        <question>
-            <headline>headline</headline>
-            <secTime>0</secTime>
-            <q></q>
-            <a>initial value
-                <color>16777215</color>
-            </a>
-        </question>
-        <question>
-            <headline>headline</headline>
-            <secTime>0</secTime>
-            <q></q>
-            <a>initial value
-                <color>16777215</color>
-            </a>
-        </question>
-        <question>
-            <headline>headline</headline>
-            <secTime>0</secTime>
-            <q></q>
-            <a>initial value
-                <color>16777215</color>
-            </a>
-        </question>
-        <question>
-            <headline>headline</headline>
-            <secTime>0</secTime>
-            <q></q>
-            <a>initial value
-                <color>16777215</color>
-            </a>
-        </question>
         <rightAnswers>
-            <a>0</a>
-            <a>0</a>
-            <a>0</a>
-            <a>0</a>
-            <a>0</a>
-            <a>0</a>
-            <a>0</a>
+            <a></a>
             <a>0</a>
         </rightAnswers>
     </quiz>
