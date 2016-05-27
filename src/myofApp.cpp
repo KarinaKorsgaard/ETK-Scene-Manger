@@ -88,7 +88,7 @@ void myofApp::secondSetup(){
     for(int i = 0 ; i<alignerStrings.size();i++){
         alignerMap[alignerStrings[i]] = preset[i];
     }
-    cout<<alignerMap.size()<<endl;
+//    cout<<alignerMap.size()<<endl;
     
     alignerInts.resize(alignerStrings.size());
     
@@ -133,7 +133,7 @@ void myofApp::secondSetup(){
         imgs.push_back(img);
         imgs[i].load(dataFolder+"/img/"+s.back());
         imageStrings.push_back(dataFolder+"/img/"+s.back());
-        cout << "loaded " + dataFolder+"/img/"+s.back()<< endl;
+//        cout << "loaded " + dataFolder+"/img/"+s.back()<< endl;
     }
     
     
@@ -146,7 +146,7 @@ void myofApp::secondSetup(){
     
     commons.add(globalTimer.set("globalTimer",0,0,60));
     commons.add(useGlobalAligners.set("Use Global Aligners", true));
-//    commons.add(deleteScene.set("delete scene", false));
+    commons.add(deleteScene.set("Include this scene", true));
    // commons.add(useNumbers.set("Use Numbers", false));
     ofParameterGroup commonsSub;
     commonsSub.setName("subscenes");
@@ -200,7 +200,7 @@ void myofApp::secondSetup(){
     subCommons.add(useGlobalTimer.set("Use Global Timer", true));
     subCommons.add(localTimer.set("Timer for This Sub", 20,0,100)); //secTime
     subCommons.add(rightAnswer.set("right A(quiz)",1,1,MAX_SUB_ANSWER+1));
-//    subCommons.add(deleteSub.set("Delete Subscene", false));
+    subCommons.add(deleteSub.set("Include this subscene", true));
     subSceneGui.setup(subCommons);
     
     
@@ -492,6 +492,9 @@ void myofApp::onSliderEvent(ofxDatGuiSliderEvent e){
 void myofApp::draw(){
     if(isSetup){
     ofBackground(0, 0, 50);
+        if(!deleteScene||!deleteSub){
+            ofBackground(255,0,0);
+        }
     mainGui.draw();
     
     if(whichScene<scenes.size()){
@@ -620,30 +623,7 @@ void myofApp::onButtonEvent(ofxDatGuiButtonEvent e)
 
 
 }
-//
-//void myofApp::onDropdownEvent(ofxDatGuiDropdownEvent e){
-//    //cout << e.target->getIndex();
-//    
-////    if(isSetup){
-////        for(int u = 0 ; u<imagesString.size();u++){
-////            if(e.target->getLabel()==imagesString[u]){
-////                
-////                scenes[whichScene].subs[whichSub].images[e.target->getIndex()-1] = u;
-////            }
-////        }
-////    }
-//    
-//    if(!isSetup){
-//        // select existing
-//        if(e.target->is("SELECT EXISTING SEQUENCE")&&!isSetup){
-//            isSetup = true;
-//            setupNow = true;
-//            dataFolder = "Sequences/"+e.target->getLabel();
-//            setupGui->setVisible(false);
-//        }
-//
-//    }
-//}
+
 
 void myofApp::onColorPickerEvent(ofxDatGuiColorPickerEvent e){
     for (int i = 0; i<MAX_SUB_ANSWER; i++) {
@@ -657,6 +637,7 @@ void myofApp::onColorPickerEvent(ofxDatGuiColorPickerEvent e){
 // for triggering when whichScene or which Sub scene is called!! - SubScene will edit my textstuff...
 void myofApp::setGuiToSceneValues(int scene){
     
+    deleteScene = scenes[scene].include;
     amountOfSubs = scenes[scene].amountOfSubs;
     globalTimer = scenes[scene].globalTimer;
     useGlobalAligners =scenes[scene].useGlobalAligners;
@@ -680,7 +661,7 @@ void myofApp::setGuiToSceneValues(int scene){
 void myofApp::setSubGuiToSubValues(int sub){
     // text : questions
     // answers : - MAX_SUB_ANSWERS
-    
+    deleteSub = scenes[whichScene].subs[sub].include;
     amountAnswerOptions = scenes[whichScene].subs[sub].amountAnswerOptions;
     useImages = scenes[whichScene].subs[sub].useImages;
     useGlobalTimer = scenes[whichScene].subs[sub].useGlobalTimer;
@@ -726,7 +707,6 @@ void myofApp::updateScene(Scene* s){
 
     }//add headline
     
-   
     s->weighed = weighed;
     s->consentual = consentual;
     
@@ -750,6 +730,8 @@ void myofApp::updateScene(Scene* s){
             if(i>=2)colorSelector->getColorPicker("C"+ofToString(i+1))->setVisible(false);
         }
     }
+    
+    s->include = deleteScene;
 
 }
 
@@ -783,6 +765,7 @@ void myofApp::updateSubScene(SubScene* s){
     }else{
         s->localTimer = localTimer;
     }
+    s->include = deleteSub;
 }
 
 
@@ -820,9 +803,9 @@ void myofApp::addNewScene(int mode, string name){
 //--------------------------------------------------------------
 void myofApp::keyPressed(int key){
     if(key == OF_KEY_COMMAND){cmd=true;
-    cout<<"cmd"<<endl;
+//    cout<<"cmd"<<endl;
     }
-    cout <<key<<endl;
+//    cout <<key<<endl;
     if(key=='s' && cmd){
         saveToXml();
         cout<<"saved"<<endl;
@@ -1017,7 +1000,22 @@ void myofApp::preview(Scene s,SubScene sub){
 }
 
 void myofApp::saveToXml(){
+    ofDirectory dir;
+    string path = dataFolder;
+    dir.listDir(path);
     
+    //swipe directory of files.
+    for(int i =0; i<dir.size();i++){
+        cout<<dir[i].path()<<endl;
+        ofDirectory isDir;
+        string isDirPath = dataFolder+"/"+dir[i].path();
+        isDir.listDir(isDirPath);
+        isDir.isDirectory();
+        
+        if(!isDir.isDirectory())dir.removeDirectory(dir[i].path(), true);
+
+    }
+
         xml = *new ofxXmlSettings;
         xml.loadFile(dataFolder+"/data.xml");
         //xml.loadFile("Sequences/"+name+".xml");
@@ -1033,25 +1031,28 @@ void myofApp::saveToXml(){
         if(i<tableNames.size()-1){table.append(tableNames[i]+"//");}
         else {table.append(tableNames[i]);}
     }
-    //cout<<table<<endl;
+    
     xml.addTag("tableNames");
     xml.setValue("tableNames", table);
     
     // mising table names, images and wrong image
     
-  //  cout << ofToString(scenes.size()) + " this many scenes"<<endl;
+  
     for(int i = 0; i<scenes.size(); i++){
+        if(scenes[i].include){
             xml.addTag("scene");
             xml.pushTag("scene",i);
             xml.addTag("file");
             xml.setValue("file",scenes[i].name+".xml");
             xml.popTag();
         }
+    }
+    
     xml.popTag();
     xml.saveFile(dataFolder+"/data.xml");
     
     for(int i = 0 ; i<scenes.size();i++){
-        
+        if(scenes[i].include){
         xml.loadFile(dataFolder+"/"+scenes[i].name+".xml");
         xml.clear();
         xml.addTag("document");
@@ -1121,6 +1122,7 @@ void myofApp::saveToXml(){
         // ---------------------quiz! -----------------------
         if(scenes[i].mode == 1){
             for(int u = 0 ; u<scenes[i].amountOfSubs;u++){
+                if(scenes[i].subs[u].include){
                 xml.addTag("question");
                 xml.pushTag("question",u);
                 xml.addTag("headline");
@@ -1149,6 +1151,7 @@ void myofApp::saveToXml(){
                     xml.popTag();
                 }
                 xml.popTag();
+                }
             }
             xml.addTag("rightAnswers");
             xml.pushTag("rightAnswers");
@@ -1179,6 +1182,7 @@ void myofApp::saveToXml(){
             
             
             for(int u = 0 ; u<scenes[i].amountOfSubs;u++){
+                if(scenes[i].subs[u].include){
                 xml.addTag("question");
                 xml.pushTag("question",u);
                 xml.addTag("headline");
@@ -1191,6 +1195,7 @@ void myofApp::saveToXml(){
                 xml.setValue("q",scenes[i].subs[u].question);//ATTENTION
                 //no images for assesment
                 xml.popTag();
+                }
             }
             
         }
@@ -1198,7 +1203,9 @@ void myofApp::saveToXml(){
         xml.popTag(); // assesment/quiz/vote
         xml.popTag(); // document;
         xml.saveFile(dataFolder+"/"+scenes[i].name+".xml");
+        }//if include this scene
     }
+    
 }
 
 void myofApp::loadFromXml(){
@@ -1215,7 +1222,7 @@ void myofApp::loadFromXml(){
     for(int i = 0; i<xml.getNumTags("scene"); i++){
         xml.pushTag("scene",i);
         sceneNames.push_back(ofSplitString(xml.getValue("file", ""),".")[0]); //cut of .xml
-        cout<<"scenes "+ sceneNames[i]<<endl;
+//        cout<<"scenes "+ sceneNames[i]<<endl;
         xml.popTag();
     }
 //    for(int i = 0; i<xml.getNumTags("img"); i++){
@@ -1235,7 +1242,7 @@ void myofApp::loadFromXml(){
         xml.clear();
         
         if(xml.loadFile(dataFolder+"/"+sceneNames[i]+".xml")){
-            cout<<"loaded "+ dataFolder+"/"+sceneNames[i]+".xml"<<endl;
+//            cout<<"loaded "+ dataFolder+"/"+sceneNames[i]+".xml"<<endl;
 
         if(xml.tagExists("document")){
          
@@ -1260,7 +1267,7 @@ void myofApp::loadFromXml(){
                 loadThis=true;
             }
             if(loadThis){
-                cout <<"amount of scenes" + ofToString(scenes.size()) <<endl;
+//                cout <<"amount of scenes" + ofToString(scenes.size()) <<endl;
                 if(xml.tagExists("globalFontSize")){
                     setSceneAlignersFromXml(&scenes[i],xml);
                     scenes[i].useGlobalAligners = false;
@@ -1329,7 +1336,7 @@ void myofApp::loadFromXml(){
 void myofApp::setGlobalAlignersFromXml(ofxXmlSettings xml){
     for(int i=0; i<alignerStrings.size();i++){
         if(xml.tagExists(alignerStrings[i]))alignerMap[alignerStrings[i]]=xml.getValue(alignerStrings[i], 0);
-        cout<< alignerStrings[i] + " " + ofToString(alignerInts[i])<<endl;
+//        cout<< alignerStrings[i] + " " + ofToString(alignerInts[i])<<endl;
     }
 
 

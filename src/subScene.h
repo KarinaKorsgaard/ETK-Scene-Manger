@@ -13,7 +13,7 @@
 class SubScene{
 public:
     int mode;
-    
+    bool include = true;
     string headline="headline";
     string question="question";
     

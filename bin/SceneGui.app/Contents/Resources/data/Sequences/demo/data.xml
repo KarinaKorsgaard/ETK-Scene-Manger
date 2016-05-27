@@ -4,37 +4,37 @@
     <matrixY>50</matrixY>
     <resultFontSize>40</resultFontSize>
     <timerSize>300</timerSize>
-    <timerX>110</timerX>
-    <timerY>872</timerY>
-    <legendFontSize>54</legendFontSize>
-    <legendX>1000</legendX>
-    <legendY>571</legendY>
+    <timerX>330</timerX>
+    <timerY>750</timerY>
+    <legendFontSize>40</legendFontSize>
+    <legendX>50</legendX>
+    <legendY>230</legendY>
     <tekst1FontSize>50</tekst1FontSize>
-    <tekst1X>549</tekst1X>
+    <tekst1X>50</tekst1X>
     <tekst1Y>80</tekst1Y>
     <collumWidth1>400</collumWidth1>
-    <tekst2FontSize>41</tekst2FontSize>
-    <tekst2X>55</tekst2X>
-    <tekst2Y>100</tekst2Y>
-    <collumWidth2>480</collumWidth2>
+    <tekst2FontSize>30</tekst2FontSize>
+    <tekst2X>200</tekst2X>
+    <tekst2Y>880</tekst2Y>
+    <collumWidth2>400</collumWidth2>
     <tekst3FontSize>40</tekst3FontSize>
-    <tekst3X>110</tekst3X>
-    <tekst3Y>386</tekst3Y>
+    <tekst3X>50</tekst3X>
+    <tekst3Y>150</tekst3Y>
     <collumWidth3>400</collumWidth3>
     <chartFontSize>30</chartFontSize>
     <top10chartX>50</top10chartX>
     <top10chartY>100</top10chartY>
-    <tableNames>Laud 1//Laud 2//Laud 3//Laud 4//Laud 5//Laud 6//Laud 7//Laud 8//Laud 9//Laud 10//Laud 11//Laud 12</tableNames>
+    <tableNames>//Laud 2//Laud 3//Laud 4//Laud 5//Laud 6//Laud 7//Laud 8//Laud 9//Laud 10//Laud 11//Laud 12</tableNames>
     <scene>
-        <file>vote.xml</file>
+        <file>quis.xml</file>
     </scene>
     <scene>
-        <file>quiz.xml</file>
+        <file>fasda.xml</file>
     </scene>
     <scene>
         <file>assesment.xml</file>
     </scene>
     <scene>
-        <file>vote2.xml</file>
+        <file>img.xml</file>
     </scene>
 </document>

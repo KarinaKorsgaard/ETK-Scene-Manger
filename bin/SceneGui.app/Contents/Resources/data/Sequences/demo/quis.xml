@@ -1,0 +1,30 @@
+<document>
+    <quiz>
+        <globalTime>30</globalTime>
+        <explanation>explanation</explanation>
+        <question>
+            <headline>headline</headline>
+            <secTime>0</secTime>
+            <q></q>
+            <a>initial value
+                <color>16777215</color>
+                <img>2</img>
+            </a>
+            <a>initial value
+                <color>16777215</color>
+                <img>3</img>
+            </a>
+            <a>initial value
+                <color>16777215</color>
+                <img>5</img>
+            </a>
+            <a>initial value
+                <color>16777215</color>
+                <img>6</img>
+            </a>
+        </question>
+        <rightAnswers>
+            <a>1</a>
+        </rightAnswers>
+    </quiz>
+</document>

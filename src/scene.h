@@ -78,7 +78,7 @@ class Scene{
 //    int collumWidth3;
     
     vector<int>aligners;
-    
+    bool include = true;
     
     void setup(int _mode, string n, Scene scene){
         mode = _mode;

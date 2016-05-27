@@ -1,91 +1,27 @@
 <document>
     <quiz>
         <globalTime>30</globalTime>
-        <explanation>This text remains the same through all subscenes.Also the Colors are the same for all subscenes.</explanation>
+        <explanation>explanation</explanation>
         <question>
-            <headline>For the quiz, it is important to specify which answer option is the right one by adjusting the slider &quot;right A(quiz).</headline>
-            <secTime>30</secTime>
-            <q>some other text</q>
+            <headline>headline</headline>
+            <secTime>0</secTime>
+            <q></q>
             <a>initial value
-                <color>11701917</color>
-            </a>
-            <a>initial value
-                <color>1048576</color>
-            </a>
-            <a>initial value
-                <color>14942433</color>
-            </a>
-        </question>
-        <question>
-            <headline>this subscene is useing local timer.</headline>
-            <secTime>8</secTime>
-            <q>The points (numbers) are not shown in the preview. It still works with the scene generator.</q>
-            <a>initial value
-                <color>11701917</color>
-            </a>
-            <a>initial value
-                <color>1048576</color>
-            </a>
-            <a>initial value
-                <color>14942433</color>
+                <color>16777215</color>
             </a>
         </question>
         <question>
             <headline>headline</headline>
-            <secTime>30</secTime>
+            <secTime>0</secTime>
             <q></q>
             <a>initial value
-                <color>11701917</color>
-            </a>
-            <a>initial value
-                <color>1048576</color>
-            </a>
-            <a>initial value
-                <color>14942433</color>
-            </a>
-        </question>
-        <question>
-            <headline>headline</headline>
-            <q></q>
-            <a>initial value
-                <color>11701917</color>
-            </a>
-            <a>initial value
-                <color>1048576</color>
-            </a>
-            <a>initial value
-                <color>14942433</color>
-            </a>
-            <a>initial value
-                <color>5243322</color>
-            </a>
-        </question>
-        <question>
-            <headline>headline</headline>
-            <secTime>30</secTime>
-            <q></q>
-            <a>initial value
-                <color>11701917</color>
-            </a>
-            <a>initial value
-                <color>1048576</color>
-            </a>
-            <a>initial value
-                <color>14942433</color>
-            </a>
-            <a>initial value
-                <color>5243322</color>
-            </a>
-            <a>initial value
-                <color>14393858</color>
+                <color>16777215</color>
+                <img>0</img>
             </a>
         </question>
         <rightAnswers>
-            <a>2</a>
-            <a>2</a>
-            <a>1</a>
-            <a>4</a>
-            <a>5</a>
+            <a>0</a>
+            <a>0</a>
         </rightAnswers>
     </quiz>
 </document>
