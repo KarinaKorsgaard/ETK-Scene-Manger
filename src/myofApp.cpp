@@ -146,6 +146,7 @@ void myofApp::secondSetup(){
     
     commons.add(globalTimer.set("globalTimer",0,0,60));
     commons.add(useGlobalAligners.set("Use Global Aligners", true));
+//    commons.add(deleteScene.set("delete scene", false));
    // commons.add(useNumbers.set("Use Numbers", false));
     ofParameterGroup commonsSub;
     commonsSub.setName("subscenes");
@@ -199,6 +200,7 @@ void myofApp::secondSetup(){
     subCommons.add(useGlobalTimer.set("Use Global Timer", true));
     subCommons.add(localTimer.set("Timer for This Sub", 20,0,100)); //secTime
     subCommons.add(rightAnswer.set("right A(quiz)",1,1,MAX_SUB_ANSWER+1));
+//    subCommons.add(deleteSub.set("Delete Subscene", false));
     subSceneGui.setup(subCommons);
     
     
@@ -428,6 +430,49 @@ void myofApp::update(){
     syphon.publishTexture(&fbo.getTexture());
         
     }
+    
+//    if(deleteScene){
+//        ofFile file;
+//        
+//        file.open(ofToDataPath(scenes[whichScene].name));
+//        file.removeFile(dataFolder);
+//        
+//        for (vector<Scene>::iterator it=scenes.begin(); it!=scenes.end();)    {
+//            
+//            if(it->name==scenes[whichScene].name){
+//                
+//                it = scenes.erase(it);
+//            }
+//            else{
+//                ++it;
+//            }
+//        }
+//        ofColor col;
+//        col.set(0);
+//        mainGui.getButton("scene: " +ofToString(whichScene+1)).setTextColor(col);
+//        whichScene=0;
+//    }
+//    if(deleteSub){
+//        int count=0;
+//        for (vector<SubScene>::iterator it=scenes[whichScene].subs.begin(); it!=scenes[whichScene].subs.end();)    {
+//            
+//            if(count==whichSub){
+//                it = scenes[whichScene].subs.erase(it);
+//            }
+//            else{
+//                if(whichSub<count){
+//                    scenes[whichScene].subs[count];
+//                }
+//                if(whichSub>count && count < scenes[whichScene].subs.size()){
+//                    scenes[whichScene].subs[count]=scenes[whichScene].subs[count+1];
+//                }
+//                ++it;
+//            }
+//            count++;
+//        }
+//        DatSub->getButton("subscene: "+ofToString(whichSub+1))->setVisible(false);
+//        whichSub=0;
+//    }
 }
 
 void myofApp::onSliderEvent(ofxDatGuiSliderEvent e){

@@ -82,6 +82,7 @@ class myofApp : public ofBaseApp{
     ofParameter<bool>addQuiz;
     ofParameter<bool>addAssesment;
     ofParameter<bool>save;
+    ofParameter<bool>deleteScene;
     vector<ofParameter<bool>>editExisting;
     
     //scene paramters
@@ -102,6 +103,7 @@ class myofApp : public ofBaseApp{
     ofParameter<bool>useGlobalTimer;
     ofParameter<int>localTimer;
     ofParameter<int>rightAnswer; 
+    ofParameter<bool> deleteSub;
     
     //guis
     ofxPanel mainGui;
